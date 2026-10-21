@@ -17,7 +17,7 @@ HEAD = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Contenidos TodoDrones · Consumer y Agro</title>
+<title>Reporte semanal · Marketing y Comercial TodoDrones</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400&display=swap" rel="stylesheet">
 <script src="d3.min.js"></script>
@@ -52,17 +52,19 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 @media (min-width: 720px) { .site-foot { padding: 0 32px 40px; } }
 </style>
 <script>
-// Minimal stand-in for the Claude dashboard `dash` API, fed by data.json.
+// Minimal stand-in for the Claude dashboard `dash` API, fed by the JSON files next to this page.
 window.dash = (() => {
   const calcs = {}, cbs = [], cache = {};
-  let rows = null, status = 'loading', params = {};
+  const FILES = { cal: 'data.json', semanal: 'semanal.json', mensual: 'mensual.json', narrativa: 'narrativa.json' };
+  const raw = {};
+  let status = 'loading', params = {};
   const run = () => cbs.forEach((fn) => { try { fn(); } catch (e) { console.error(e); } });
   const api = {
     colors: ['#2f6fd0', '#d97a22', '#2a9d8f', '#8e5bd1', '#c94f7c', '#6c8a1e', '#b08900', '#5a6b7b'],
     calc(id, o) { calcs[id] = o; },
     data(id) {
       if (status !== 'ok') return { status, data: [] };
-      if (id === 'cal') return { status: 'ok', data: rows };
+      if (id in FILES) return { status: 'ok', data: raw[id] || [] };
       const c = calcs[id];
       if (!c) return { status: 'missing', data: [] };
       if (!(id in cache)) cache[id] = c.fn(...c.inputs.map((i) => api.data(i).data));
@@ -74,9 +76,8 @@ window.dash = (() => {
     resetParams() { params = {}; run(); },
     setLink() {}, refresh() {},
   };
-  fetch('data.json', { cache: 'no-store' })
-    .then((r) => r.json())
-    .then((d) => { rows = d; status = 'ok'; run(); })
+  Promise.all(Object.entries(FILES).map(([id, f]) => fetch(f, { cache: 'no-store' }).then((r) => r.json()).then((d) => { raw[id] = d; })))
+    .then(() => { status = 'ok'; run(); })
     .catch(() => { status = 'error'; run(); });
   let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(run, 150); });
   return api;
@@ -89,13 +90,16 @@ window.dash = (() => {
 
 FOOT = """
 </div>
-<p class="site-foot">Datos de los calendarios de contenidos Consumer y Agro · corte __CORTE__. Se actualiza semanalmente.</p>
+<p class="site-foot">Fuentes: planillas Proceso Comercial 2026 (Consumer y Agro) y calendarios de contenidos · corte __CORTE__. Se actualiza semanalmente.</p>
 </body>
 </html>
 """
 
 dd = f"{corte[8:10]}/{corte[5:7]}/{corte[0:4]}" if corte else ""
 open(os.path.join(out, "index.html"), "w", encoding="utf-8").write(HEAD + page + FOOT.replace("__CORTE__", dd))
-shutil.copyfile(rows_path, os.path.join(out, "data.json"))
-shutil.copyfile(os.path.join(os.path.dirname(os.path.abspath(__file__)), "d3.min.js"), os.path.join(out, "d3.min.js"))
+if os.path.abspath(rows_path) != os.path.abspath(os.path.join(out, "data.json")):
+    shutil.copyfile(rows_path, os.path.join(out, "data.json"))
+here = os.path.dirname(os.path.abspath(__file__))
+for f in ("d3.min.js", "semanal.json", "mensual.json", "narrativa.json"):
+    shutil.copyfile(os.path.join(here, f), os.path.join(out, f))
 print("site ->", out)

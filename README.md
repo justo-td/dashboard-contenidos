@@ -8,6 +8,8 @@ Se actualiza semanalmente reemplazando `data.json` (y, si cambia el diseño, `in
 ```
 python3 tools/parse.py <consumer.txt> <agro.txt> /tmp/data_full.json <YYYY-MM-DD>
 python3 -c "import json;json.dump(json.load(open('/tmp/data_full.json'))['rows'],open('/tmp/rows.json','w'),ensure_ascii=False)"
+python3 tools/parse_comercial.py <consumer proceso comercial> <agro proceso comercial .xlsx> tools/
+# escribir el análisis de la semana en tools/narrativa.json
 python3 tools/build_site.py tools/dashboard_page.html /tmp/rows.json .
 ```
 `tools/dashboard_page.html` es la misma página que usa el dashboard de Claude.
