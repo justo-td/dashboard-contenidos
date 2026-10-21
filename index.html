@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contenidos TodoDrones · Consumer y Agro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400&display=swap" rel="stylesheet">
+<script src="d3.min.js"></script>
+<style>
+:root {
+  --font-anthropic-sans: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-anthropic-serif: "Source Serif 4", Georgia, serif;
+  --color-bg: #f7f6f3; --color-panel: #ffffff; --color-fg: #1f1e1c; --color-fg-muted: #6b6862;
+  --color-border-line: #e4e1da; --color-ok: #1f7a4d; --color-warn: #a35a00; --color-bad: #c0392b;
+  --cds-font-size-caption: 12.5px; --cds-font-size-body: 14.5px; --cds-font-size-heading: 16px; --cds-font-size-title: 26px;
+  --cds-font-weight-medium: 500;
+  --cds-gap-xs: 4px; --cds-gap-sm: 8px; --cds-gap-md: 16px; --cds-gap-lg: 24px; --cds-gap-xl: 40px;
+  --cds-pad-xs: 4px; --cds-pad-sm: 8px; --cds-pad-md: 12px; --cds-pad-lg: 20px; --cds-radius: 10px;
+  --cds-chart-muted: #d9d5cc; --cds-chart-axis: #c9c5bc; --cds-chart-grid: #ece9e2; --cds-chart-reference: #8a867e;
+  --cds-surface-popover: #ffffff; --cds-border: #e4e1da; --cds-shadow-popover: 0 4px 16px rgba(0,0,0,.12);
+  --cds-text-secondary: #6b6862; --cds-dur-slow: .3s;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #1b1a18; --color-panel: #252421; --color-fg: #f1efea; --color-fg-muted: #a8a49c;
+    --color-border-line: #3a3834; --color-ok: #5cc28c; --color-warn: #f0a845; --color-bad: #ff7b6b;
+    --cds-chart-muted: #4a4741; --cds-chart-axis: #4f4c46; --cds-chart-grid: #33312d; --cds-chart-reference: #8f8b83;
+    --cds-surface-popover: #2e2d29; --cds-border: #45423d; --cds-shadow-popover: 0 4px 16px rgba(0,0,0,.5);
+    --cds-text-secondary: #a8a49c;
+  }
+}
+html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-family: var(--font-anthropic-sans); }
+#dash-root { max-width: 1280px; margin: 0 auto; padding: 32px 16px 48px; }
+@media (min-width: 720px) { #dash-root { padding: 40px 32px 64px; } }
+.dash-skeleton { color: transparent; background: var(--cds-chart-grid); border-radius: 4px; }
+.site-foot { max-width: 1280px; margin: 0 auto; padding: 0 16px 32px; font-size: 12.5px; color: var(--color-fg-muted); }
+@media (min-width: 720px) { .site-foot { padding: 0 32px 40px; } }
+</style>
+<script>
+// Minimal stand-in for the Claude dashboard `dash` API, fed by data.json.
+window.dash = (() => {
+  const calcs = {}, cbs = [], cache = {};
+  let rows = null, status = 'loading', params = {};
+  const run = () => cbs.forEach((fn) => { try { fn(); } catch (e) { console.error(e); } });
+  const api = {
+    colors: ['#2f6fd0', '#d97a22', '#2a9d8f', '#8e5bd1', '#c94f7c', '#6c8a1e', '#b08900', '#5a6b7b'],
+    calc(id, o) { calcs[id] = o; },
+    data(id) {
+      if (status !== 'ok') return { status, data: [] };
+      if (id === 'cal') return { status: 'ok', data: rows };
+      const c = calcs[id];
+      if (!c) return { status: 'missing', data: [] };
+      if (!(id in cache)) cache[id] = c.fn(...c.inputs.map((i) => api.data(i).data));
+      return { status: 'ok', data: cache[id] };
+    },
+    onData(fn) { cbs.push(fn); fn(); },
+    params() { return params; },
+    setParams(p) { Object.assign(params, p); run(); },
+    resetParams() { params = {}; run(); },
+    setLink() {}, refresh() {},
+  };
+  fetch('data.json', { cache: 'no-store' })
+    .then((r) => r.json())
+    .then((d) => { rows = d; status = 'ok'; run(); })
+    .catch(() => { status = 'error'; run(); });
+  let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(run, 150); });
+  return api;
+})();
+</script>
+</head>
+<body>
+<div id="dash-root">
+<style>
+.td { font-family: var(--font-anthropic-sans); color: var(--color-fg); display: flex; flex-direction: column; gap: var(--cds-gap-xl); }
+.td-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--cds-gap-md); }
+.td-head h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; }
+.td-take { margin: var(--cds-gap-xs) 0 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-body); max-width: 60rem; }
+.td-take b, .td b { font-weight: 600; color: var(--color-fg); }
+.td-ctrl { display: flex; align-items: center; gap: var(--cds-gap-sm); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.td-ctrl select { font: inherit; font-size: var(--cds-font-size-body); color: var(--color-fg); background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xs) var(--cds-pad-sm); }
+.td h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0 0 var(--cds-gap-xs); }
+.td-sub { margin: 0 0 var(--cds-gap-md); color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.td-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--cds-gap-md); }
+.td-grid.wide { grid-template-columns: repeat(auto-fit, minmax(min(100%, 28rem), 1fr)); }
+.td-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; position: relative; }
+.td-card h3 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; display: flex; align-items: center; gap: var(--cds-gap-sm); }
+.td-note { margin: var(--cds-gap-xs) 0 var(--cds-gap-md); color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.td-sw { width: .625rem; height: .625rem; border-radius: 2px; display: inline-block; flex: none; }
+.td-big { display: flex; align-items: baseline; gap: var(--cds-gap-md); flex-wrap: wrap; margin: var(--cds-gap-sm) 0 var(--cds-gap-md); }
+.td-big .n { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: calc(var(--cds-font-size-title) * 1.6); line-height: 1; font-variant-numeric: tabular-nums; }
+.td-big .lbl { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.td-delta { font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.td-delta.up { color: var(--color-ok); } .td-delta.down { color: var(--color-bad); } .td-delta.flat { color: var(--color-fg-muted); }
+.td-status { display: flex; flex-direction: column; gap: var(--cds-gap-sm); }
+.td-srow { display: grid; grid-template-columns: 7.5rem 1fr 2.5rem; align-items: center; gap: var(--cds-gap-sm); font-size: var(--cds-font-size-caption); }
+.td-srow .v { text-align: right; font-variant-numeric: tabular-nums; color: var(--color-fg); }
+.td-track { height: 10px; border-radius: 4px; background: transparent; }
+.td-fill { height: 10px; border-radius: 4px; min-width: 2px; }
+.td-meta { margin-top: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
+.td-warn { color: var(--color-warn); }
+.td-chart { width: 100%; min-height: 240px; position: relative; }
+.td-chart svg { display: block; overflow: visible; }
+.td-legend { display: flex; gap: var(--cds-gap-md); flex-wrap: wrap; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-bottom: var(--cds-gap-sm); }
+.td-legend span { display: inline-flex; align-items: center; gap: var(--cds-gap-xs); }
+.td-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); white-space: nowrap; z-index: 5; display: none; }
+.td-tip .h { color: var(--cds-text-secondary); margin-bottom: 2px; }
+.td-tip .r { display: flex; align-items: center; gap: var(--cds-gap-xs); font-variant-numeric: tabular-nums; }
+.td-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: var(--cds-gap-lg); }
+.td-pair h4 { margin: 0 0 var(--cds-gap-xs); font-size: var(--cds-font-size-caption); font-weight: var(--cds-font-weight-medium); display: flex; align-items: center; gap: var(--cds-gap-xs); }
+.td-scroll { max-height: 22rem; overflow: auto; }
+.td table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.td th { text-align: left; font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-xs); border-bottom: 1px solid var(--color-border-line); position: sticky; top: 0; background: var(--color-panel); }
+.td td { padding: var(--cds-pad-xs) var(--cds-pad-xs); border-bottom: 1px solid var(--color-border-line); vertical-align: middle; }
+.td th.num, .td td.num { text-align: right; }
+.td td.lab { min-width: 7.5rem; max-width: 16rem; overflow-wrap: break-word; hyphens: auto; }
+.td-cellbar { display: flex; align-items: center; gap: var(--cds-gap-xs); justify-content: flex-end; }
+.td-cellbar .bt { width: 3.5rem; height: 8px; border-radius: 4px; position: relative; flex: none; }
+.td-cellbar .bt i { position: absolute; left: 0; top: 0; height: 8px; border-radius: 4px; }
+.td-key { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0 0 var(--cds-gap-md); display: flex; gap: var(--cds-gap-md); flex-wrap: wrap; }
+.td-key span { display: inline-flex; align-items: center; gap: var(--cds-gap-xs); }
+.td-share { display: flex; flex-direction: column; gap: var(--cds-gap-md); }
+.td-sharerow .t { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-bottom: var(--cds-gap-xs); }
+.td-sharebar { display: flex; height: 22px; gap: 2px; }
+.td-sharebar div { border-radius: 4px; min-width: 2px; }
+.td-sharelab { display: flex; justify-content: space-between; font-size: var(--cds-font-size-caption); margin-top: var(--cds-gap-xs); font-variant-numeric: tabular-nums; }
+.td-defs { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.5; }
+.td-defs p { margin: 0 0 var(--cds-gap-xs); }
+[data-dash-source-state=empty] { color: transparent; }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+.td-fail { display: flex; align-items: center; justify-content: center; gap: var(--cds-gap-xs); min-height: 120px; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.td-fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
+</style>
+
+<div class="td">
+  <header class="td-head" id="inicio">
+    <div>
+      <h1>Contenidos TodoDrones · Consumer y Agro</h1>
+      <p class="td-take" id="takeaway"><span class="dash-skeleton">—</span></p>
+    </div>
+    <label class="td-ctrl">Mes
+      <select id="td-mes" aria-label="Mes" data-source="resumen"></select>
+    </label>
+  </header>
+
+  <section id="cumplimiento">
+    <h2>Programado vs. publicado</h2>
+    <p class="td-sub" id="cumpl-sub">Cada fila del calendario cuenta como una publicación (una pieza en una plataforma).</p>
+    <div class="td-grid">
+      <div class="td-card" id="card-Consumer"></div>
+      <div class="td-card" id="card-Agro"></div>
+    </div>
+  </section>
+
+  <section id="comparativa">
+    <h2>Consumer vs. Agro</h2>
+    <p class="td-sub">¿Le estamos dando el mismo peso a cada línea?</p>
+    <div class="td-grid">
+      <div class="td-card" id="peso">
+        <h3>Peso de cada línea en el mes</h3>
+        <p class="td-note" id="peso-note">Reparto de lo programado y de lo publicado.</p>
+        <div class="td-share" id="peso-body" data-source="resumen"></div>
+      </div>
+      <div class="td-card" id="pub-mes">
+        <h3>Publicados por mes</h3>
+        <p class="td-note">Publicaciones con estado "Publicado", por línea.</p>
+        <div class="td-legend" id="leg-pub"></div>
+        <div class="td-chart" id="chart-pub" data-source="resumen"></div>
+      </div>
+      <div class="td-card" id="cumpl-mes">
+        <h3>Cumplimiento por mes</h3>
+        <p class="td-note">Publicados sobre lo programado con fecha ya cumplida.</p>
+        <div class="td-legend" id="leg-cumpl"></div>
+        <div class="td-chart" id="chart-cumpl" data-source="resumen"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mix">
+    <h2>Mix de contenido</h2>
+    <p class="td-sub">Cantidad y % sobre lo programado en el mes de cada línea.</p>
+    <p class="td-key"><span><i class="td-sw" style="background: var(--cds-chart-muted)"></i>Programados</span><span><i class="td-sw" id="key-c"></i><i class="td-sw" id="key-a"></i>Parte publicada (color de la línea)</span></p>
+    <div class="td-grid wide">
+      <div class="td-card" id="mix-formato"><h3>Formato</h3><p class="td-note">Reel, short, estática, carrusel…</p><div class="td-pair" data-dim="formato"></div></div>
+      <div class="td-card" id="mix-categoria"><h3>Categoría de contenido</h3><p class="td-note">Producto, educación, institucional…</p><div class="td-pair" data-dim="categoria"></div></div>
+      <div class="td-card" id="mix-plataforma"><h3>Plataforma</h3><p class="td-note">Dónde se programó cada pieza.</p><div class="td-pair" data-dim="plataforma"></div></div>
+    </div>
+  </section>
+
+  <section id="comunicacion">
+    <h2>Qué se comunicó</h2>
+    <p class="td-sub">"Foco" agrupa la columna Comunicación por producto o tema; debajo, el detalle tal como figura en el calendario.</p>
+    <div class="td-grid wide">
+      <div class="td-card" id="com-foco"><h3>Foco (producto o tema)</h3><p class="td-note">Agrupado a partir de Comunicación y Temática.</p><div class="td-pair" data-dim="foco"></div></div>
+      <div class="td-card" id="com-tematica"><h3>Temática</h3><p class="td-note">Columna Temática del calendario.</p><div class="td-pair" data-dim="tematica" data-scroll="1"></div></div>
+      <div class="td-card" id="com-comunicacion"><h3>Comunicación</h3><p class="td-note">Columna Comunicación del calendario.</p><div class="td-pair" data-dim="comunicacion" data-scroll="1"></div></div>
+    </div>
+  </section>
+
+  <section id="motivos">
+    <h2>Por qué no salió lo programado</h2>
+    <p class="td-sub">Motivos cargados en las filas Pendiente y No publicado.</p>
+    <div class="td-grid wide">
+      <div class="td-card" id="mot-Consumer"><h3><i class="td-sw sw-c"></i>Consumer</h3><p class="td-note">Motivo y cantidad de publicaciones afectadas.</p>
+        <table data-source="motivos" data-row-key="id"><thead><tr><th data-field="motivo">Motivo</th><th data-field="estado">Estado</th><th class="num" data-field="n">Publ.</th></tr></thead><tbody></tbody></table></div>
+      <div class="td-card" id="mot-Agro"><h3><i class="td-sw sw-a"></i>Agro</h3><p class="td-note">Motivo y cantidad de publicaciones afectadas.</p>
+        <table data-source="motivos" data-row-key="id"><thead><tr><th data-field="motivo">Motivo</th><th data-field="estado">Estado</th><th class="num" data-field="n">Publ.</th></tr></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+
+  <section id="semanas">
+    <h2>Semana a semana</h2>
+    <p class="td-sub">Para el seguimiento semanal: programados y publicados por semana del mes.</p>
+    <div class="td-card" id="sem-card">
+      <table id="sem-table" data-source="semanas" data-row-key="id">
+        <thead><tr><th data-field="inicio">Semana del</th><th class="num" data-field="consumer_prog">Consumer prog.</th><th class="num" data-field="consumer_pub">Consumer publ.</th><th class="num" data-field="agro_prog">Agro prog.</th><th class="num" data-field="agro_pub">Agro publ.</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="definiciones" class="td-card td-defs">
+    <h3>Cómo se calcula</h3>
+    <p><b>Publicación</b>: cada fila del calendario (la misma pieza en Instagram, YouTube y LinkedIn cuenta tres veces). <b>Ideas distintas</b> cuenta combinaciones únicas de Comunicación + Temática.</p>
+    <p><b>Cumplimiento</b> = publicados ÷ filas con fecha hasta el día de corte. Las filas futuras sin estado se muestran como <b>Por venir</b> y no cuentan.</p>
+    <p><b>Sin registrar</b>: filas con fecha pasada y la columna "Estado publicación orgánico" vacía. No se asume si salieron o no, así que bajan el cumplimiento hasta que se completen.</p>
+    <p>Consumer y Agro se leen de sus propios calendarios y nunca se mezclan. Las hojas de abril no tienen columna Plataforma, por eso la serie arranca en mayo.</p>
+  </section>
+</div>
+
+<script>
+dash.calc('resumen', {
+  inputs: ['cal'],
+  title: 'Resumen por línea y mes',
+  description: 'Cuenta filas por estado; cumplimiento = publicados ÷ filas con fecha hasta el corte; compara con el mes anterior y reparte el peso entre líneas.',
+  fn: (cal) => {
+    const g = new Map();
+    for (const r of cal) {
+      const id = r.linea + '|' + r.mes;
+      let o = g.get(id);
+      if (!o) { o = { id, linea: r.linea, mes: r.mes, corte: r.corte, total: 0, publicado: 0, pendiente: 0, no_publicado: 0, sin_registrar: 0, por_venir: 0, vencidos: 0, set: new Set() }; g.set(id, o); }
+      o.total++;
+      o.set.add(r.pieza);
+      if (r.vencido === true || r.vencido === 'true') o.vencidos++;
+      if (r.estado === 'Publicado') o.publicado++;
+      else if (r.estado === 'Pendiente') o.pendiente++;
+      else if (r.estado === 'No publicado') o.no_publicado++;
+      else if (r.estado === 'Sin registrar') o.sin_registrar++;
+      else o.por_venir++;
+    }
+    const out = [...g.values()].map(({ set, ...o }) => ({ ...o, piezas: set.size, cumplimiento: o.vencidos ? Math.round(o.publicado / o.vencidos * 100) : null }));
+    out.sort((a, b) => a.mes.localeCompare(b.mes));
+    for (const o of out) {
+      const prev = out.filter((p) => p.linea === o.linea && p.mes < o.mes).pop();
+      o.mes_prev = prev ? prev.mes : null;
+      o.publicado_prev = prev ? prev.publicado : null;
+      o.cumplimiento_prev = prev ? prev.cumplimiento : null;
+      o.delta_cumplimiento = prev && prev.cumplimiento != null && o.cumplimiento != null ? o.cumplimiento - prev.cumplimiento : null;
+      o.delta_publicado = prev ? o.publicado - prev.publicado : null;
+      const both = out.filter((p) => p.mes === o.mes);
+      const tp = both.reduce((s, p) => s + p.publicado, 0), tt = both.reduce((s, p) => s + p.total, 0);
+      o.share_publicado = tp ? Math.round(o.publicado / tp * 100) : null;
+      o.share_programado = tt ? Math.round(o.total / tt * 100) : null;
+    }
+    return out;
+  },
+});
+
+dash.calc('mix', {
+  inputs: ['cal'],
+  title: 'Mix por dimensión',
+  description: 'Programados y publicados por formato, categoría, plataforma, foco, temática y comunicación, con % sobre lo programado de la línea en el mes.',
+  fn: (cal) => {
+    const dims = ['formato', 'categoria', 'plataforma', 'foco', 'tematica', 'comunicacion'];
+    const tot = new Map(), g = new Map();
+    for (const r of cal) {
+      const lm = r.linea + '|' + r.mes;
+      tot.set(lm, (tot.get(lm) || 0) + 1);
+      for (const d of dims) {
+        const label = String(r[d] ?? 'Sin dato');
+        const id = lm + '|' + d + '|' + label.toLowerCase();
+        let o = g.get(id);
+        if (!o) { o = { id, linea: r.linea, mes: r.mes, dim: d, valor: label, programados: 0, publicados: 0 }; g.set(id, o); }
+        o.programados++;
+        if (r.estado === 'Publicado') o.publicados++;
+      }
+    }
+    return [...g.values()].map((o) => ({ ...o, pct: Math.round(o.programados / tot.get(o.linea + '|' + o.mes) * 100) }));
+  },
+});
+
+dash.calc('motivos', {
+  inputs: ['cal'],
+  title: 'Motivos de no publicación',
+  description: 'Filas Pendiente y No publicado agrupadas por el motivo cargado.',
+  fn: (cal) => {
+    const g = new Map();
+    for (const r of cal) {
+      if (r.estado !== 'Pendiente' && r.estado !== 'No publicado') continue;
+      const motivo = r.motivo ? String(r.motivo) : '(sin motivo cargado)';
+      const id = r.linea + '|' + r.mes + '|' + r.estado + '|' + motivo.toLowerCase();
+      let o = g.get(id);
+      if (!o) { o = { id, linea: r.linea, mes: r.mes, estado: r.estado, motivo, n: 0 }; g.set(id, o); }
+      o.n++;
+    }
+    return [...g.values()];
+  },
+});
+
+dash.calc('semanas', {
+  inputs: ['cal'],
+  title: 'Programados y publicados por semana',
+  description: 'Filas por semana (lunes a domingo) de cada mes y línea.',
+  fn: (cal) => {
+    const g = new Map();
+    for (const r of cal) {
+      const id = r.mes + '|' + String(r.semana);
+      let o = g.get(id);
+      if (!o) { o = { id, mes: r.mes, semana: Number(r.semana), inicio: r.fecha, consumer_prog: 0, consumer_pub: 0, agro_prog: 0, agro_pub: 0 }; g.set(id, o); }
+      if (r.fecha < o.inicio) o.inicio = r.fecha;
+      const k = r.linea === 'Consumer' ? 'consumer' : 'agro';
+      o[k + '_prog']++;
+      if (r.estado === 'Publicado') o[k + '_pub']++;
+    }
+    return [...g.values()].sort((a, b) => a.inicio.localeCompare(b.inicio));
+  },
+});
+
+(() => {
+  const LINES = ['Consumer', 'Agro'];
+  const color = (l) => dash.colors[l === 'Consumer' ? 0 : 1];
+  const MES = { '01': 'enero', '02': 'febrero', '03': 'marzo', '04': 'abril', '05': 'mayo', '06': 'junio', '07': 'julio', '08': 'agosto', '09': 'septiembre', '10': 'octubre', '11': 'noviembre', '12': 'diciembre' };
+  const mesLabel = (m) => m ? MES[m.slice(5, 7)] + ' ' + m.slice(0, 4) : '';
+  const mesCorto = (m) => m ? MES[m.slice(5, 7)].slice(0, 3) : '';
+  const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+  const ddmm = (iso) => iso ? iso.slice(8, 10) + '/' + iso.slice(5, 7) : '';
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  const mark = (e, src, field, where) => { e.dataset.source = src; e.dataset.field = field; e.dataset.where = where; return e; };
+  const enc = (v) => encodeURIComponent(v);
+
+  document.querySelectorAll('.sw-c, #key-c').forEach((e) => (e.style.background = color('Consumer')));
+  document.querySelectorAll('.sw-a, #key-a').forEach((e) => (e.style.background = color('Agro')));
+
+  const sel = document.getElementById('td-mes');
+  sel.addEventListener('change', () => dash.setParams({ mes: sel.value }));
+
+  const failAll = () => document.querySelectorAll('.td-chart, #peso-body').forEach((c) => { c.replaceChildren(el('div', 'td-fail', 'Failed to load')); });
+
+  // ---------- Status card per line ----------
+  function drawCard(linea, r, mes) {
+    const card = document.getElementById('card-' + linea);
+    card.replaceChildren();
+    const h = el('h3'); const sw = el('i', 'td-sw'); sw.style.background = color(linea); h.append(sw, linea); card.append(h);
+    if (!r) { card.append(el('p', 'td-note', 'Sin filas para este mes.')); return; }
+    const w = 'id=' + enc(r.id);
+    const big = el('div', 'td-big');
+    const n = el('span', 'n'); n.append(mark(el('span', null, r.cumplimiento == null ? '—' : String(r.cumplimiento)), 'resumen', 'cumplimiento', w), '%');
+    const lbl = el('span', 'lbl', 'cumplimiento');
+    big.append(n, lbl);
+    if (r.delta_cumplimiento != null) {
+      const d = r.delta_cumplimiento;
+      const de = el('span', 'td-delta ' + (d > 0 ? 'up' : d < 0 ? 'down' : 'flat'));
+      de.append(d > 0 ? '+' : d < 0 ? '−' : '±', mark(el('span', null, String(Math.abs(d))), 'resumen', 'delta_cumplimiento', w), ' pp vs ' + MES[r.mes_prev.slice(5, 7)]);
+      big.append(de);
+    }
+    card.append(big);
+
+    const sub = el('p', 'td-note');
+    sub.append(mark(el('b', null, String(r.publicado)), 'resumen', 'publicado', w), ' publicados de ', mark(el('b', null, String(r.vencidos)), 'resumen', 'vencidos', w), (r.corte.slice(0, 7) === r.mes ? ' con fecha hasta el ' + ddmm(r.corte) + '.' : ' programados en el mes.'));
+    if (r.delta_publicado != null) {
+      const d = r.delta_publicado;
+      sub.append(' ' + (d >= 0 ? '+' : '−'), mark(el('span', null, String(Math.abs(d))), 'resumen', 'delta_publicado', w), ' publicados vs ' + MES[r.mes_prev.slice(5, 7)] + (r.corte.slice(0, 7) === r.mes ? ' (mes en curso).' : '.'));
+    }
+    card.append(sub);
+
+    const st = el('div', 'td-status');
+    const rows = [['Publicado', 'publicado', color(linea)], ['Pendiente', 'pendiente'], ['No publicado', 'no_publicado'], ['Sin registrar', 'sin_registrar'], ['Por venir', 'por_venir']];
+    for (const [label, f, c] of rows) {
+      const v = r[f];
+      if (f === 'sin_registrar' && !v) continue;
+      const row = el('div', 'td-srow');
+      const lab = el('span', f === 'sin_registrar' ? 'td-warn' : null, label);
+      const tr = el('div', 'td-track');
+      const fill = el('div', 'td-fill'); fill.style.width = (r.total ? v / r.total * 100 : 0) + '%'; fill.style.background = c || 'var(--cds-chart-muted)';
+      if (!v) fill.style.minWidth = '0';
+      tr.append(fill);
+      row.append(lab, tr, mark(el('span', 'v', String(v)), 'resumen', f, w));
+      st.append(row);
+    }
+    card.append(st);
+
+    const meta = el('div', 'td-meta');
+    meta.append(mark(el('span', null, String(r.total)), 'resumen', 'total', w), ' publicaciones programadas · ', mark(el('span', null, String(r.piezas)), 'resumen', 'piezas', w), ' ideas distintas');
+    card.append(meta);
+    if (r.sin_registrar) {
+      const wn = el('p', 'td-note td-warn');
+      wn.append(mark(el('span', null, String(r.sin_registrar)), 'resumen', 'sin_registrar', w), ' filas pasadas sin estado cargado: completarlas en el calendario para que el cumplimiento sea real.');
+      card.append(wn);
+    }
+  }
+
+  // ---------- Share card ----------
+  function drawPeso(rs, mes) {
+    const body = document.getElementById('peso-body');
+    body.replaceChildren();
+    const by = Object.fromEntries(LINES.map((l) => [l, rs.find((r) => r.linea === l && r.mes === mes)]));
+    for (const [titulo, f, sf] of [['Programado', 'total', 'share_programado'], ['Publicado', 'publicado', 'share_publicado']]) {
+      const row = el('div', 'td-sharerow');
+      row.append(el('div', 't', titulo));
+      const bar = el('div', 'td-sharebar');
+      const lab = el('div', 'td-sharelab');
+      for (const l of LINES) {
+        const r = by[l];
+        const seg = el('div'); seg.style.background = color(l); seg.style.flex = String(r && r[sf] ? r[sf] : 0);
+        bar.append(seg);
+        const s = el('span');
+        if (r) s.append(l + ' ', mark(el('b', null, String(r[sf] ?? 0)), 'resumen', sf, 'id=' + enc(r.id)), '% (', mark(el('span', null, String(r[f])), 'resumen', f, 'id=' + enc(r.id)), ')');
+        else s.append(l + ' —');
+        lab.append(s);
+      }
+      row.append(bar, lab);
+      body.append(row);
+    }
+  }
+
+  // ---------- Tooltip ----------
+  function tip(box) {
+    let t = box.querySelector('.td-tip');
+    if (!t) { t = el('div', 'td-tip'); box.append(t); }
+    return {
+      show(x, y, head, lines) {
+        t.replaceChildren(el('div', 'h', head));
+        for (const [c, txt] of lines) { const r = el('div', 'r'); if (c) { const s = el('i', 'td-sw'); s.style.background = c; r.append(s); } r.append(txt); t.append(r); }
+        t.style.display = 'block';
+        const bw = box.clientWidth, tw = t.offsetWidth;
+        t.style.left = Math.max(0, Math.min(bw - tw, x + 12)) + 'px';
+        t.style.top = Math.max(0, y - 10) + 'px';
+      },
+      hide() { t.style.display = 'none'; },
+    };
+  }
+
+  function legend(id) {
+    const lg = document.getElementById(id); lg.replaceChildren();
+    for (const l of LINES) { const s = el('span'); const sw = el('i', 'td-sw'); sw.style.background = color(l); s.append(sw, l); lg.append(s); }
+  }
+
+  function axisStyle(g) {
+    g.attr('font-size', null).attr('font-family', null);
+    g.selectAll('text').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)');
+    g.selectAll('.domain').attr('stroke', 'var(--cds-chart-axis)');
+    g.selectAll('.tick line').attr('stroke', 'var(--cds-chart-grid)');
+  }
+
+  // ---------- Grouped bars: publicados per month ----------
+  function drawPub(rs, mes) {
+    const box = document.getElementById('chart-pub');
+    box.querySelectorAll('svg').forEach((s) => s.remove());
+    const W = Math.max(280, box.clientWidth), H = 240, m = { t: 12, r: 8, b: 26, l: 30 };
+    const months = [...new Set(rs.map((r) => r.mes))].sort();
+    const x = d3.scaleBand(months, [m.l, W - m.r]).paddingInner(0.25).paddingOuter(0.1);
+    const xi = d3.scaleBand(LINES, [0, x.bandwidth()]).padding(0.08);
+    const y = d3.scaleLinear([0, d3.max(rs, (r) => r.publicado) || 1], [H - m.b, m.t]).nice();
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickSize(-(W - m.l - m.r)).tickFormat(d3.format('d'))).call(axisStyle).call((g) => g.select('.domain').remove());
+    const gx = svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickFormat(mesCorto).tickSizeOuter(0)).call(axisStyle);
+    gx.selectAll('.tick text').style('font-weight', (d) => (d === mes ? 600 : null)).attr('fill', (d) => (d === mes ? 'var(--color-fg)' : 'var(--color-fg-muted)'));
+    const tt = tip(box);
+    const bw = Math.min(32, xi.bandwidth());
+    svg.append('g').selectAll('rect').data(rs).join('rect')
+      .attr('x', (r) => x(r.mes) + xi(r.linea) + (xi.bandwidth() - bw) / 2).attr('width', bw)
+      .attr('y', (r) => y(r.publicado)).attr('height', (r) => Math.max(0, y(0) - y(r.publicado)))
+      .attr('rx', 4).attr('fill', (r) => color(r.linea)).attr('opacity', (r) => (r.mes === mes ? 1 : 0.75))
+      .on('mousemove', (ev, r) => { const [px, py] = d3.pointer(ev, box); tt.show(px, py, cap(mesLabel(r.mes)), [[color(r.linea), `${r.linea}: ${r.publicado} publicados de ${r.total} programados`]]); })
+      .on('mouseleave', () => tt.hide());
+  }
+
+  // ---------- Lines: cumplimiento per month ----------
+  function drawCumpl(rs, mes) {
+    const box = document.getElementById('chart-cumpl');
+    box.querySelectorAll('svg').forEach((s) => s.remove());
+    const W = Math.max(280, box.clientWidth), H = 240, m = { t: 14, r: 74, b: 26, l: 34 };
+    const months = [...new Set(rs.map((r) => r.mes))].sort();
+    const x = d3.scalePoint(months, [m.l + 6, W - m.r]);
+    const y = d3.scaleLinear([0, 100], [H - m.b, m.t]);
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickSize(-(W - m.l - m.r)).tickFormat((v) => v + '%')).call(axisStyle).call((g) => g.select('.domain').remove());
+    const gx = svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickFormat(mesCorto).tickSizeOuter(0)).call(axisStyle);
+    gx.selectAll('.tick text').style('font-weight', (d) => (d === mes ? 600 : null)).attr('fill', (d) => (d === mes ? 'var(--color-fg)' : 'var(--color-fg-muted)'));
+    const ends = [];
+    for (const l of LINES) {
+      const pts = rs.filter((r) => r.linea === l && r.cumplimiento != null).sort((a, b) => a.mes.localeCompare(b.mes));
+      svg.append('path').datum(pts).attr('fill', 'none').attr('stroke', color(l)).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round')
+        .attr('d', d3.line((r) => x(r.mes), (r) => y(r.cumplimiento)));
+      svg.append('g').selectAll('circle').data(pts).join('circle').attr('cx', (r) => x(r.mes)).attr('cy', (r) => y(r.cumplimiento)).attr('r', 4)
+        .attr('fill', color(l)).attr('stroke', 'var(--color-panel)').attr('stroke-width', 2);
+      const last = pts[pts.length - 1];
+      if (last) ends.push({ l, y: y(last.cumplimiento), v: last.cumplimiento, x: x(last.mes) });
+    }
+    ends.sort((a, b) => a.y - b.y);
+    for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 14) ends[i].y = ends[i - 1].y + 14;
+    for (const e of ends) svg.append('text').attr('x', e.x + 8).attr('y', e.y + 4).attr('fill', 'var(--color-fg)').style('font-size', 'var(--cds-font-size-caption)').text(`${e.l} ${e.v}%`);
+    const tt = tip(box);
+    const rule = svg.append('line').attr('y1', m.t).attr('y2', H - m.b).attr('stroke', 'var(--cds-chart-reference)').attr('opacity', 0);
+    svg.append('rect').attr('x', m.l).attr('y', m.t).attr('width', W - m.l - m.r).attr('height', H - m.t - m.b).attr('fill', 'transparent')
+      .on('mousemove', (ev) => {
+        const [px] = d3.pointer(ev);
+        const mm = months.reduce((a, b) => (Math.abs(x(b) - px) < Math.abs(x(a) - px) ? b : a));
+        rule.attr('x1', x(mm)).attr('x2', x(mm)).attr('opacity', 1);
+        const [bx, by] = d3.pointer(ev, box);
+        tt.show(bx, by, cap(mesLabel(mm)), LINES.map((l) => { const r = rs.find((q) => q.linea === l && q.mes === mm); return [color(l), r && r.cumplimiento != null ? `${l}: ${r.cumplimiento}% (${r.publicado}/${r.vencidos})` : `${l}: —`]; }));
+      })
+      .on('mouseleave', () => { rule.attr('opacity', 0); tt.hide(); });
+  }
+
+  // ---------- Mix tables ----------
+  function drawMix(container, rows, mes) {
+    const dim = container.dataset.dim;
+    container.replaceChildren();
+    for (const l of LINES) {
+      const col = el('div');
+      const h = el('h4'); const sw = el('i', 'td-sw'); sw.style.background = color(l); h.append(sw, l); col.append(h);
+      const data = rows.filter((r) => r.linea === l && r.mes === mes && r.dim === dim).sort((a, b) => b.programados - a.programados || b.publicados - a.publicados || a.valor.localeCompare(b.valor));
+      const wrap = el('div', container.dataset.scroll ? 'td-scroll' : null);
+      const t = el('table'); t.dataset.source = 'mix'; t.dataset.rowKey = 'id';
+      const hr = el('tr');
+      for (const [f, txt, cls] of [['valor', 'Valor'], ['programados', 'Prog.', 'num'], ['publicados', 'Publ.', 'num'], ['pct', '% del mes', 'num']]) { const th = el('th', cls, txt); th.dataset.field = f; hr.append(th); }
+      const thead = el('thead'); thead.append(hr); t.append(thead);
+      const tb = el('tbody');
+      const max = d3.max(data, (r) => r.programados) || 1;
+      for (const r of data) {
+        const tr = el('tr'); tr.dataset.key = r.id;
+        const c1 = el('td', 'lab', r.valor);
+        const c2 = el('td', 'num'); const cb = el('div', 'td-cellbar'); const bt = el('span', 'bt'); bt.style.background = 'transparent';
+        const iP = el('i'); iP.style.width = (r.programados / max * 100) + '%'; iP.style.background = 'var(--cds-chart-muted)';
+        const iU = el('i'); iU.style.width = (r.publicados / max * 100) + '%'; iU.style.background = color(l);
+        bt.append(iP, iU); cb.append(bt, el('span', null, String(r.programados))); c2.append(cb);
+        tr.append(c1, c2, el('td', 'num', String(r.publicados)), el('td', 'num', r.pct + '%'));
+        tb.append(tr);
+      }
+      t.append(tb); wrap.append(t); col.append(wrap);
+      if (!data.length) col.append(el('p', 'td-note', 'Sin filas este mes.'));
+      container.append(col);
+    }
+  }
+
+  function drawMotivos(rows, mes) {
+    for (const l of LINES) {
+      const tb = document.querySelector('#mot-' + l + ' tbody'); tb.replaceChildren();
+      const data = rows.filter((r) => r.linea === l && r.mes === mes).sort((a, b) => b.n - a.n);
+      for (const r of data) { const tr = el('tr'); tr.dataset.key = r.id; tr.append(el('td', 'lab', r.motivo), el('td', null, r.estado), el('td', 'num', String(r.n))); tb.append(tr); }
+      if (!data.length) { const tr = el('tr'); const td = el('td', null, 'Nada pendiente ni sin publicar este mes.'); td.colSpan = 3; tr.append(td); tb.append(tr); }
+    }
+  }
+
+  function drawSemanas(rows, mes) {
+    const tb = document.querySelector('#sem-table tbody'); tb.replaceChildren();
+    for (const r of rows.filter((q) => q.mes === mes)) {
+      const tr = el('tr'); tr.dataset.key = r.id;
+      tr.append(el('td', null, r.inicio), el('td', 'num', String(r.consumer_prog)), el('td', 'num', String(r.consumer_pub)), el('td', 'num', String(r.agro_prog)), el('td', 'num', String(r.agro_pub)));
+      tb.append(tr);
+    }
+  }
+
+  function drawTake(rs, mes) {
+    const p = document.getElementById('takeaway'); p.replaceChildren();
+    const by = Object.fromEntries(LINES.map((l) => [l, rs.find((r) => r.linea === l && r.mes === mes)]));
+    const corte = (by.Consumer || by.Agro || {}).corte || '';
+    p.append(cap(mesLabel(mes)) + (corte.slice(0, 7) === mes ? ` (al ${ddmm(corte)})` : '') + ': ');
+    LINES.forEach((l, i) => {
+      const r = by[l]; if (!r) return;
+      const w = 'id=' + enc(r.id);
+      if (i) p.append('; ');
+      p.append(l + ' publicó ', mark(el('b', null, String(r.publicado)), 'resumen', 'publicado', w), ' de ', mark(el('b', null, String(r.vencidos)), 'resumen', 'vencidos', w), ' (', mark(el('b', null, String(r.cumplimiento ?? '—')), 'resumen', 'cumplimiento', w), '%)');
+    });
+    if (by.Consumer && by.Agro) {
+      const lead = by.Agro.publicado >= by.Consumer.publicado ? by.Agro : by.Consumer;
+      p.append('. ' + lead.linea + ' concentra el ', mark(el('b', null, String(lead.share_publicado)), 'resumen', 'share_publicado', 'id=' + enc(lead.id)), '% de lo publicado.');
+    }
+  }
+
+  dash.onData(() => {
+    const res = dash.data('resumen');
+    if (res.status !== 'ok') {
+      if (res.status === 'error') failAll();
+      return;
+    }
+    const rs = res.data;
+    const months = [...new Set(rs.map((r) => r.mes))].sort();
+    const corte = rs[0] ? rs[0].corte : '';
+    const def = months.filter((m) => m <= corte.slice(0, 7)).pop() || months[months.length - 1];
+    let mes = dash.params().mes;
+    if (!months.includes(mes)) mes = def;
+    if (sel.options.length !== months.length) sel.replaceChildren(...months.slice().reverse().map((m) => new Option(cap(mesLabel(m)), m)));
+    sel.value = mes;
+
+    drawTake(rs, mes);
+    LINES.forEach((l) => drawCard(l, rs.find((r) => r.linea === l && r.mes === mes), mes));
+    document.getElementById('peso-note').textContent = 'Reparto de lo programado y de lo publicado en ' + mesLabel(mes) + '.';
+    drawPeso(rs, mes);
+    legend('leg-pub'); legend('leg-cumpl');
+    drawPub(rs, mes);
+    drawCumpl(rs, mes);
+
+    const mix = dash.data('mix');
+    if (mix.status === 'ok') document.querySelectorAll('.td-pair').forEach((c) => drawMix(c, mix.data, mes));
+    const mot = dash.data('motivos');
+    if (mot.status === 'ok') drawMotivos(mot.data, mes);
+    const sem = dash.data('semanas');
+    if (sem.status === 'ok') drawSemanas(sem.data, mes);
+  });
+})();
+</script>
+
+</div>
+<p class="site-foot">Datos de los calendarios de contenidos Consumer y Agro · corte 21/10/2026. Se actualiza semanalmente.</p>
+</body>
+</html>
