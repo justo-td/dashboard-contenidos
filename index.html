@@ -4,38 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Reporte semanal · Marketing y Comercial TodoDrones</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="d3.min.js"></script>
 <style>
-:root {
-  --font-anthropic-sans: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-anthropic-serif: "Source Serif 4", Georgia, serif;
-  --color-bg: #f7f6f3; --color-panel: #ffffff; --color-fg: #1f1e1c; --color-fg-muted: #6b6862;
-  --color-border-line: #e4e1da; --color-ok: #1f7a4d; --color-warn: #a35a00; --color-bad: #c0392b;
-  --cds-font-size-caption: 12.5px; --cds-font-size-body: 14.5px; --cds-font-size-heading: 16px; --cds-font-size-title: 26px;
-  --cds-font-weight-medium: 500;
-  --cds-gap-xs: 4px; --cds-gap-sm: 8px; --cds-gap-md: 16px; --cds-gap-lg: 24px; --cds-gap-xl: 40px;
-  --cds-pad-xs: 4px; --cds-pad-sm: 8px; --cds-pad-md: 12px; --cds-pad-lg: 20px; --cds-radius: 10px;
-  --cds-chart-muted: #d9d5cc; --cds-chart-axis: #c9c5bc; --cds-chart-grid: #ece9e2; --cds-chart-reference: #8a867e;
-  --cds-surface-popover: #ffffff; --cds-border: #e4e1da; --cds-shadow-popover: 0 4px 16px rgba(0,0,0,.12);
-  --cds-text-secondary: #6b6862; --cds-dur-slow: .3s;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #1b1a18; --color-panel: #252421; --color-fg: #f1efea; --color-fg-muted: #a8a49c;
-    --color-border-line: #3a3834; --color-ok: #5cc28c; --color-warn: #f0a845; --color-bad: #ff7b6b;
-    --cds-chart-muted: #4a4741; --cds-chart-axis: #4f4c46; --cds-chart-grid: #33312d; --cds-chart-reference: #8f8b83;
-    --cds-surface-popover: #2e2d29; --cds-border: #45423d; --cds-shadow-popover: 0 4px 16px rgba(0,0,0,.5);
-    --cds-text-secondary: #a8a49c;
-  }
-}
-html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-family: var(--font-anthropic-sans); }
-#dash-root { max-width: 1280px; margin: 0 auto; padding: 32px 16px 48px; }
-@media (min-width: 720px) { #dash-root { padding: 40px 32px 64px; } }
-.dash-skeleton { color: transparent; background: var(--cds-chart-grid); border-radius: 4px; }
-.site-foot { max-width: 1280px; margin: 0 auto; padding: 0 16px 32px; font-size: 12.5px; color: var(--color-fg-muted); }
-@media (min-width: 720px) { .site-foot { padding: 0 32px 40px; } }
+:root { --font-anthropic-sans: "Geist", Inter, system-ui, -apple-system, "Segoe UI", sans-serif; color-scheme: light; }
+html, body { margin: 0; background: #ffffff; color: #0a0a0a; font-family: var(--font-anthropic-sans); -webkit-font-smoothing: antialiased; }
+#dash-root { padding: 8px clamp(16px, 3vw, 40px) 48px; }
+.dash-skeleton { color: transparent; background: #f0f0f0; border-radius: 4px; }
 </style>
 <script>
 // Minimal stand-in for the Claude dashboard `dash` API, fed by the JSON files next to this page.
@@ -60,7 +36,7 @@ window.dash = (() => {
     params() { return params; },
     setParams(p) { Object.assign(params, p); run(); },
     resetParams() { params = {}; run(); },
-    setLink() {}, refresh() {},
+    setLink(n) { try { history.replaceState(null, '', '#' + n); } catch (e) {} }, refresh() {},
   };
   Promise.all(Object.entries(FILES).map(([id, f]) => fetch(f, { cache: 'no-store' }).then((r) => r.json()).then((d) => { raw[id] = d; })))
     .then(() => { status = 'ok'; run(); })
@@ -73,218 +49,379 @@ window.dash = (() => {
 <body>
 <div id="dash-root">
 <style>
-.td { font-family: var(--font-anthropic-sans); color: var(--color-fg); display: flex; flex-direction: column; gap: var(--cds-gap-xl); }
-.td-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--cds-gap-md); }
-.td-head h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; }
-.td-take { margin: var(--cds-gap-xs) 0 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-body); max-width: 60rem; }
-.td-take b, .td b { font-weight: 600; color: var(--color-fg); }
-.td-ctrl { display: flex; align-items: center; gap: var(--cds-gap-sm); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
-.td-ctrl select { font: inherit; font-size: var(--cds-font-size-body); color: var(--color-fg); background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xs) var(--cds-pad-sm); }
-.td h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0 0 var(--cds-gap-xs); }
-.td-sub { margin: 0 0 var(--cds-gap-md); color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
-.td-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--cds-gap-md); }
-.td-grid.wide { grid-template-columns: repeat(auto-fit, minmax(min(100%, 28rem), 1fr)); }
-.td-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; position: relative; }
-.td-card h3 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; display: flex; align-items: center; gap: var(--cds-gap-sm); }
-.td-note { margin: var(--cds-gap-xs) 0 var(--cds-gap-md); color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
-.td-sw { width: .625rem; height: .625rem; border-radius: 2px; display: inline-block; flex: none; }
-.td-big { display: flex; align-items: baseline; gap: var(--cds-gap-md); flex-wrap: wrap; margin: var(--cds-gap-sm) 0 var(--cds-gap-md); }
-.td-big .n { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: calc(var(--cds-font-size-title) * 1.6); line-height: 1; font-variant-numeric: tabular-nums; }
-.td-big .lbl { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
-.td-delta { font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
-.td-delta.up { color: var(--color-ok); } .td-delta.down { color: var(--color-bad); } .td-delta.flat { color: var(--color-fg-muted); }
-.td-status { display: flex; flex-direction: column; gap: var(--cds-gap-sm); }
-.td-srow { display: grid; grid-template-columns: 7.5rem 1fr 2.5rem; align-items: center; gap: var(--cds-gap-sm); font-size: var(--cds-font-size-caption); }
-.td-srow .v { text-align: right; font-variant-numeric: tabular-nums; color: var(--color-fg); }
-.td-track { height: 10px; border-radius: 4px; background: transparent; }
-.td-fill { height: 10px; border-radius: 4px; min-width: 2px; }
-.td-meta { margin-top: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
-.td-warn { color: var(--color-warn); }
+/* Achromatic ledger: white ground, ink chrome, colour only on data (Consumer blue, Agro green).
+   One gap value (12px) horizontally and vertically; cards 8px radius, 1px #e6e6e6, no shadow. */
+#dash-root { --dash-gutter: clamp(16px, 3vw, 40px); }
+.td {
+  --td-bg: #ffffff; --td-surface: #ffffff; --td-raised: #f5f5f5; --td-active: #eeeeee;
+  --td-border: #e6e6e6; --td-rule: #f0f0f0; --td-control: #d4d4d4;
+  --td-ink: #0a0a0a; --td-muted: #5f6368; --td-faint: #6b6b6b;
+  --td-pos: #247b50; --td-neg: #c4242a; --td-warn-ink: #92400e;
+  --td-c: #1d5fbf; --td-a: #2f9e5f; --td-grey: #8a8a8a; --td-grey-2: #d9d9d9;
+  --td-gap: 12px; --td-pad: 20px; --td-r: 8px; --td-r-c: 6px;
+  --td-font: var(--font-anthropic-sans, "Geist", Inter, system-ui, sans-serif);
+  font-family: var(--td-font); color: var(--td-ink); background: var(--td-bg);
+  font-size: 14px; line-height: 20px; display: flex; flex-direction: column; gap: 0;
+  max-width: 1240px; margin-inline: auto;
+}
+.td :where(h1, h2, h3, h4, p) { margin: 0; }
+.td :is(b, strong) { font-weight: 600; color: var(--td-ink); }
+
+/* Bar: product mark, scope, freshness */
+.td-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--td-gap); padding: 14px 0 10px; flex-wrap: wrap; }
+.td-brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.td-brand svg { flex: none; }
+.td-brand-name { font-weight: 600; font-size: 15px; }
+.td-brand-scope { color: var(--td-muted); font-size: 14px; }
+.td-stamp { color: var(--td-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+
+/* Underline tabs on a full-width rule */
+.td-tabs { display: flex; gap: 28px; border-bottom: 1px solid var(--td-border); overflow-x: auto; scrollbar-width: none; }
+.td-tab { appearance: none; background: none; border: 0; padding: 12px 0 11px; margin-bottom: -1px; font: inherit; font-size: 15px; font-weight: 500;
+  color: var(--td-muted); border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; min-height: 44px;
+  transition: color .15s ease, border-color .15s ease; }
+.td-tab:hover { color: var(--td-ink); }
+.td-tab[aria-selected="true"] { color: var(--td-ink); border-bottom-color: var(--td-ink); }
+.td-tab:focus-visible, .td-ctrl select:focus-visible { outline: 2px solid var(--td-c); outline-offset: 2px; border-radius: 4px; }
+.td-panel { display: flex; flex-direction: column; gap: 40px; padding-top: 28px; }
+.td-panel[hidden] { display: none; }
+
+/* Title row */
+.td-titlerow { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--td-gap); flex-wrap: wrap; }
+.td h1 { font-size: 24px; line-height: 30px; font-weight: 600; letter-spacing: -0.01em; }
+.td-subline { color: var(--td-muted); font-size: 14px; margin-top: 4px; max-width: 60rem; }
+.td-ctrl { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--td-muted); }
+.td-ctrl select { font: inherit; font-size: 14px; color: var(--td-ink); background: var(--td-surface); border: 1px solid var(--td-control); border-radius: var(--td-r-c); height: 36px; padding: 0 10px; cursor: pointer; }
+
+/* Sections and cards */
+.td section { display: flex; flex-direction: column; gap: var(--td-gap); }
+.td h2 { font-size: 16px; line-height: 22px; font-weight: 600; }
+.td-sub { color: var(--td-muted); font-size: 13px; margin-top: -6px; }
+.td-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--td-gap); align-items: start; }
+.td-grid.wide { grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr)); }
+.td-card { background: var(--td-surface); border: 1px solid var(--td-border); border-radius: var(--td-r); padding: var(--td-pad); min-width: 0; position: relative; }
+.td-card h3 { font-size: 15px; line-height: 20px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.td-note { margin: 2px 0 14px; color: var(--td-muted); font-size: 13px; }
+.td-sw { width: 10px; height: 10px; border-radius: 2px; display: inline-block; flex: none; }
+
+/* Executive summary */
+.td-exec { display: flex; flex-direction: column; gap: 16px; }
+.td-exec-head { display: flex; flex-direction: column; gap: 6px; }
+.td-label { font-size: 13px; color: var(--td-muted); font-weight: 500; }
+.td-headline { font-size: 19px; line-height: 27px; font-weight: 500; letter-spacing: -0.005em; max-width: 58rem; text-wrap: pretty; }
+.td-exec-body { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 28px; }
+@media (max-width: 860px) { .td-exec-body { grid-template-columns: 1fr; gap: 16px; } }
+.td-body { font-size: 15px; line-height: 23px; color: var(--td-ink); text-wrap: pretty; }
+.td-colh { font-size: 13px; font-weight: 600; color: var(--td-ink); margin-bottom: 6px; }
+.td-reco ol, .td-reco ul { margin: 0; padding-left: 1.2rem; font-size: 14px; line-height: 21px; }
+.td-reco li { margin-bottom: 6px; padding-left: 2px; }
+.td-reco li::marker { color: var(--td-faint); font-variant-numeric: tabular-nums; }
+.td-alert { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 20px; color: var(--td-warn-ink);
+  background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--td-r-c); padding: 8px 12px; margin-top: 12px; }
+.td-alert:empty { display: none; }
+.td-alert svg { flex: none; margin-top: 2px; }
+
+/* KPI strip: one container split by 1px dividers */
+.td-strip { display: grid; grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); gap: 1px; background: var(--td-border); border: 1px solid var(--td-border); border-radius: var(--td-r); overflow: hidden; }
+.td-cell { padding: 12px 16px; min-width: 0; background: var(--td-surface); }
+.td-cell .l { font-size: 13px; color: var(--td-muted); }
+.td-cell .v { font-size: 26px; line-height: 32px; font-weight: 500; letter-spacing: -0.01em; margin-top: 4px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.td-cell .d { font-size: 13px; color: var(--td-muted); font-variant-numeric: tabular-nums; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.td-cell .l { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.td-com .td-strip { container-type: inline-size; }
+.td-com .td-cell { padding: 10px 14px; }
+.td-com .td-cell .v { font-size: 22px; line-height: 28px; }
+@media (max-width: 1180px) { .td-com .td-strip { grid-template-columns: 1fr 1fr; } }
+.td-good { color: var(--td-pos) !important; } .td-bad { color: var(--td-neg) !important; } .td-neu { color: var(--td-muted) !important; }
+
+/* Unit cards (commercial) */
+.td-comlist { display: flex; flex-direction: column; gap: var(--td-gap); }
+.td-com { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; }
+@media (max-width: 960px) { .td-com { grid-template-columns: 1fr; gap: 20px; } }
+.td-com-head { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px; }
+.td-com-head h2 { display: flex; align-items: center; gap: 8px; }
+.td-stack { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.td-obj .t { font-size: 13px; color: var(--td-muted); margin-bottom: 8px; font-variant-numeric: tabular-nums; }
+.td-obj .track { position: relative; height: 8px; border-radius: 4px; background: var(--td-active); }
+.td-obj .fill { position: absolute; left: 0; top: 0; height: 8px; border-radius: 4px; max-width: 100%; }
+.td-obj .now { position: absolute; top: -4px; width: 2px; height: 16px; background: var(--td-ink); border-radius: 1px; }
+.td-obj .ends { display: flex; justify-content: space-between; font-size: 12px; color: var(--td-faint); margin-top: 6px; font-variant-numeric: tabular-nums; }
+.td-mini { width: 100%; min-height: 160px; position: relative; }
+.td-mini svg { display: block; overflow: visible; }
+
+/* Tables */
+.td table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+.td th { text-align: left; font-weight: 400; color: var(--td-muted); padding: 6px 8px; border-bottom: 1px solid var(--td-border); position: sticky; top: 0; background: var(--td-surface); white-space: nowrap; }
+.td td { padding: 9px 8px; border-bottom: 1px solid var(--td-rule); vertical-align: middle; }
+.td tr > :first-child { padding-left: 0; } .td tr > :last-child { padding-right: 0; }
+.td th.num, .td td.num { text-align: right; }
+.td td.lab { min-width: 7.5rem; max-width: 16rem; overflow-wrap: break-word; }
+.td td.dl { white-space: nowrap; }
+.td tbody tr:last-child td { border-bottom: 0; }
+.td-tablewrap { overflow-x: auto; }
+.td-line { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
+
+/* Social: status card */
+.td-big { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin: 6px 0 12px; }
+.td-big .n { font-weight: 500; font-size: 30px; line-height: 1; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+.td-big .lbl { font-size: 13px; color: var(--td-muted); }
+.td-delta { font-size: 13px; font-variant-numeric: tabular-nums; }
+.td-delta.up { color: var(--td-pos); } .td-delta.down { color: var(--td-neg); } .td-delta.flat { color: var(--td-muted); }
+.td-status { display: flex; flex-direction: column; gap: 8px; }
+.td-srow { display: grid; grid-template-columns: 7.5rem 1fr 2.5rem; align-items: center; gap: 8px; font-size: 13px; }
+.td-srow .v { text-align: right; font-variant-numeric: tabular-nums; color: var(--td-ink); }
+.td-track { height: 8px; border-radius: 4px; background: transparent; }
+.td-fill { height: 8px; border-radius: 4px; min-width: 2px; }
+.td-meta { margin-top: 14px; font-size: 13px; color: var(--td-muted); font-variant-numeric: tabular-nums; }
+.td-warn { color: var(--td-warn-ink); }
 .td-chart { width: 100%; min-height: 240px; position: relative; }
 .td-chart svg { display: block; overflow: visible; }
-.td-legend { display: flex; gap: var(--cds-gap-md); flex-wrap: wrap; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-bottom: var(--cds-gap-sm); }
-.td-legend span { display: inline-flex; align-items: center; gap: var(--cds-gap-xs); }
-.td-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); white-space: nowrap; z-index: 5; display: none; }
-.td-tip .h { color: var(--cds-text-secondary); margin-bottom: 2px; }
-.td-tip .r { display: flex; align-items: center; gap: var(--cds-gap-xs); font-variant-numeric: tabular-nums; }
-.td-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: var(--cds-gap-lg); }
-.td-pair h4 { margin: 0 0 var(--cds-gap-xs); font-size: var(--cds-font-size-caption); font-weight: var(--cds-font-weight-medium); display: flex; align-items: center; gap: var(--cds-gap-xs); }
+.td-legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--td-muted); margin-bottom: 8px; }
+.td-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.td-tip { position: absolute; pointer-events: none; background: #fff; border: 1px solid var(--td-border); border-radius: var(--td-r-c); box-shadow: 0 4px 16px rgba(0,0,0,.10);
+  padding: 6px 10px; font-size: 12px; white-space: nowrap; z-index: 5; display: none; }
+.td-tip .h { color: var(--td-muted); margin-bottom: 2px; }
+.td-tip .r { display: flex; align-items: center; gap: 6px; font-variant-numeric: tabular-nums; }
+.td-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: 24px; }
+.td-pair h4 { margin: 0 0 4px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
 .td-scroll { max-height: 22rem; overflow: auto; }
-.td table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
-.td th { text-align: left; font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-xs); border-bottom: 1px solid var(--color-border-line); position: sticky; top: 0; background: var(--color-panel); }
-.td td { padding: var(--cds-pad-xs) var(--cds-pad-xs); border-bottom: 1px solid var(--color-border-line); vertical-align: middle; }
-.td th.num, .td td.num { text-align: right; }
-.td td.lab { min-width: 7.5rem; max-width: 16rem; overflow-wrap: break-word; hyphens: auto; }
-.td-cellbar { display: flex; align-items: center; gap: var(--cds-gap-xs); justify-content: flex-end; }
-.td-cellbar .bt { width: 3.5rem; height: 8px; border-radius: 4px; position: relative; flex: none; }
-.td-cellbar .bt i { position: absolute; left: 0; top: 0; height: 8px; border-radius: 4px; }
-.td-key { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0 0 var(--cds-gap-md); display: flex; gap: var(--cds-gap-md); flex-wrap: wrap; }
-.td-key span { display: inline-flex; align-items: center; gap: var(--cds-gap-xs); }
-.td-share { display: flex; flex-direction: column; gap: var(--cds-gap-md); }
-.td-sharerow .t { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-bottom: var(--cds-gap-xs); }
-.td-sharebar { display: flex; height: 22px; gap: 2px; }
-.td-sharebar div { border-radius: 4px; min-width: 2px; }
-.td-sharelab { display: flex; justify-content: space-between; font-size: var(--cds-font-size-caption); margin-top: var(--cds-gap-xs); font-variant-numeric: tabular-nums; }
-.td-defs { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.5; }
-.td-defs p { margin: 0 0 var(--cds-gap-xs); }
-[data-dash-source-state=empty] { color: transparent; }
-[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
-.td-fail { display: flex; align-items: center; justify-content: center; gap: var(--cds-gap-xs); min-height: 120px; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
-.td-fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
+.td-cellbar { display: flex; align-items: center; gap: 6px; justify-content: flex-end; }
+.td-cellbar .bt { width: 3.5rem; height: 6px; border-radius: 3px; position: relative; flex: none; }
+.td-cellbar .bt i { position: absolute; left: 0; top: 0; height: 6px; border-radius: 3px; }
+.td-key { font-size: 13px; color: var(--td-muted); display: flex; gap: 16px; flex-wrap: wrap; margin-top: -4px; }
+.td-key span { display: inline-flex; align-items: center; gap: 6px; }
+.td-share { display: flex; flex-direction: column; gap: 16px; }
+.td-sharerow .t { font-size: 13px; color: var(--td-muted); margin-bottom: 6px; }
+.td-sharebar { display: flex; height: 16px; gap: 2px; }
+.td-sharebar div { border-radius: 3px; min-width: 2px; }
+.td-sharelab { display: flex; justify-content: space-between; font-size: 13px; margin-top: 6px; font-variant-numeric: tabular-nums; }
+.td-defs { font-size: 13px; color: var(--td-muted); line-height: 20px; }
+.td-defs p { margin: 0 0 6px; }
+.td-defs h3 { color: var(--td-ink); margin-bottom: 8px; }
+.td-foot { color: var(--td-muted); font-size: 12px; padding: 32px 0 8px; }
 
-.td-top h1 { font-size: calc(var(--cds-font-size-title) * 1.15); }
-.td .td-sec { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; }
-.td-divider { border-top: 1px solid var(--color-border-line); margin: var(--cds-gap-md) 0 0; }
-.td-eyebrow { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); text-transform: uppercase; letter-spacing: .06em; display: flex; align-items: center; gap: var(--cds-gap-xs); }
-.td-headline { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: calc(var(--cds-font-size-heading) * 1.35); line-height: 1.3; margin: var(--cds-gap-xs) 0 var(--cds-gap-md); }
-.td-body { font-size: var(--cds-font-size-body); line-height: 1.55; margin: 0 0 var(--cds-gap-md); max-width: 62rem; }
-.td-reco h4, .td-colh { font-size: var(--cds-font-size-caption); font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); text-transform: uppercase; letter-spacing: .05em; margin: 0 0 var(--cds-gap-xs); }
-.td-reco ol, .td-reco ul { margin: 0 0 var(--cds-gap-md); padding-left: 1.2rem; font-size: var(--cds-font-size-body); line-height: 1.5; }
-.td-reco li { margin-bottom: var(--cds-gap-xs); }
-.td-alert { display: flex; gap: var(--cds-gap-sm); align-items: flex-start; font-size: var(--cds-font-size-body); line-height: 1.45; margin: 0; padding: var(--cds-pad-sm) var(--cds-pad-md); border-radius: var(--cds-radius); border: 1px solid var(--color-border-line); }
-.td-alert::before { content: "!"; flex: none; width: 1.1rem; height: 1.1rem; border-radius: 50%; background: var(--color-warn); color: var(--color-panel); font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; margin-top: 2px; }
-.td-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 7.5rem), 1fr)); gap: var(--cds-gap-sm); margin-bottom: var(--cds-gap-md); }
-.td-tile { border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); min-width: 0; }
-.td-tile .l { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
-.td-tile .v { font-family: var(--font-anthropic-serif); font-size: calc(var(--cds-font-size-title) * .9); line-height: 1.15; margin: 2px 0; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.td-tile .d { font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
-.td-good { color: var(--color-ok); } .td-bad { color: var(--color-bad); } .td-neu { color: var(--color-fg-muted); }
-.td-com { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); gap: var(--cds-gap-lg); }
-.td-com-head { grid-column: 1 / -1; }
-.td-com-head h3 { font-size: var(--cds-font-size-heading); }
-.td-obj { margin-bottom: var(--cds-gap-md); }
-.td-obj .t { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-bottom: var(--cds-gap-xs); font-variant-numeric: tabular-nums; }
-.td-obj .track { position: relative; height: 12px; border-radius: 6px; background: var(--cds-chart-muted); }
-.td-obj .fill { position: absolute; left: 0; top: 0; height: 12px; border-radius: 6px; max-width: 100%; }
-.td-obj .now { position: absolute; top: -4px; width: 2px; height: 20px; background: var(--color-fg); }
-.td-stack { display: flex; flex-direction: column; gap: var(--cds-gap-md); }
-.td-mini { width: 100%; min-height: 150px; position: relative; }
-.td td.dl { white-space: nowrap; }
-.td-comlist { display: flex; flex-direction: column; gap: var(--cds-gap-md); }
+[data-dash-source-state=empty] { color: transparent; }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity .3s; }
+.td-fail { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 120px; color: var(--td-muted); font-size: 12px; }
+.td-fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--td-neg); }
+
+@media (max-width: 640px) {
+  .td-brand-scope { display: none; }
+  .td-panel { gap: 32px; padding-top: 20px; }
+  .td h1 { font-size: 22px; line-height: 28px; }
+  .td-headline { font-size: 17px; line-height: 24px; }
+  .td-card { padding: 16px; }
+  .td-strip { grid-template-columns: 1fr 1fr; }
+  .td-strip .td-cell:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .td-cell .v { font-size: 22px; line-height: 28px; }
+  .td-srow { grid-template-columns: 6.5rem 1fr 2rem; }
+  .td th { white-space: normal; vertical-align: bottom; }
+  .td-tablewrap th { white-space: nowrap; }
+  .td td.lab { min-width: 0; }
+  .td-tablewrap tr > :first-child { position: sticky; left: 0; background: var(--td-surface); z-index: 1; padding-right: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { .td * { transition: none !important; } }
 </style>
 
 <div class="td">
-  <header class="td-head td-top" id="inicio">
-    <div>
-      <h1>Reporte semanal · Marketing y Comercial TodoDrones</h1>
-      <p class="td-take">Resultados comerciales de la última semana con datos y desempeño de redes sociales. Consumer y Agro siempre por separado.</p>
+  <header class="td-bar" id="inicio">
+    <div class="td-brand">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true" fill="none" stroke="#0a0a0a" stroke-width="1.6">
+        <circle cx="6" cy="6" r="3.6"/><circle cx="20" cy="6" r="3.6"/><circle cx="6" cy="20" r="3.6"/><circle cx="20" cy="20" r="3.6"/>
+        <path d="M8.6 8.6 L17.4 17.4 M17.4 8.6 L8.6 17.4" stroke-linecap="round"/><rect x="10.5" y="10.5" width="5" height="5" rx="1.2" fill="#0a0a0a" stroke="none"/>
+      </svg>
+      <span class="td-brand-name">TodoDrones</span>
+      <span class="td-brand-scope">Reporte semanal de Marketing y Comercial</span>
     </div>
+    <div class="td-stamp" id="td-stamp"></div>
   </header>
 
-  <section id="comercial">
-    <h2 class="td-sec">Resultados comerciales</h2>
-    <p class="td-sub" id="com-sub"><span class="dash-skeleton">—</span></p>
-    <div class="td-card" id="exec">
-      <div class="td-eyebrow">Resumen ejecutivo</div>
-      <p class="td-headline" id="exec-titular"><span class="dash-skeleton">—</span></p>
-      <div class="td-tiles" id="exec-tiles"></div>
-      <p class="td-body" id="exec-situacion"></p>
-      <div class="td-reco"><h4>Prioridades de la semana</h4><ol id="exec-reco" data-source="narrativa"></ol></div>
-      <p class="td-alert" id="exec-alerta"></p>
-    </div>
-    <div class="td-comlist">
-      <article class="td-card" id="com-consumer-comercial" data-bloque="Consumer|Comercial"></article>
-      <article class="td-card" id="com-consumer-ecommerce" data-bloque="Consumer|E-commerce"></article>
-      <article class="td-card" id="com-agro-comercial" data-bloque="Agro|Comercial"></article>
-    </div>
-  </section>
+  <nav class="td-tabs" role="tablist" aria-label="Secciones del reporte">
+    <button class="td-tab" role="tab" id="tab-comercial" aria-controls="comercial" aria-selected="true" data-tab="comercial">Proceso comercial</button>
+    <button class="td-tab" role="tab" id="tab-social" aria-controls="social" aria-selected="false" data-tab="social" tabindex="-1">Social Media</button>
+  </nav>
 
-  <div class="td-divider"></div>
-
-  <header class="td-head" id="rrss">
-    <div>
-      <h2 class="td-sec">Redes sociales · contenidos</h2>
-      <p class="td-take" id="takeaway"><span class="dash-skeleton">—</span></p>
-    </div>
-    <label class="td-ctrl">Mes
-      <select id="td-mes" aria-label="Mes" data-source="resumen"></select>
-    </label>
-  </header>
-
-  <section id="cumplimiento">
-    <h2>Programado vs. publicado</h2>
-    <p class="td-sub" id="cumpl-sub">Cada fila del calendario cuenta como una publicación (una pieza en una plataforma).</p>
-    <div class="td-grid">
-      <div class="td-card" id="card-Consumer"></div>
-      <div class="td-card" id="card-Agro"></div>
-    </div>
-  </section>
-
-  <section id="comparativa">
-    <h2>Consumer vs. Agro</h2>
-    <p class="td-sub">¿Le estamos dando el mismo peso a cada línea?</p>
-    <div class="td-grid">
-      <div class="td-card" id="peso">
-        <h3>Peso de cada línea en el mes</h3>
-        <p class="td-note" id="peso-note">Reparto de lo programado y de lo publicado.</p>
-        <div class="td-share" id="peso-body" data-source="resumen"></div>
-      </div>
-      <div class="td-card" id="pub-mes">
-        <h3>Publicados por mes</h3>
-        <p class="td-note">Publicaciones con estado "Publicado", por línea.</p>
-        <div class="td-legend" id="leg-pub"></div>
-        <div class="td-chart" id="chart-pub" data-source="resumen"></div>
-      </div>
-      <div class="td-card" id="cumpl-mes">
-        <h3>Cumplimiento por mes</h3>
-        <p class="td-note">Publicados sobre lo programado con fecha ya cumplida.</p>
-        <div class="td-legend" id="leg-cumpl"></div>
-        <div class="td-chart" id="chart-cumpl" data-source="resumen"></div>
+  <!-- ===================== PROCESO COMERCIAL ===================== -->
+  <div class="td-panel" id="comercial" role="tabpanel" aria-labelledby="tab-comercial">
+    <div class="td-titlerow">
+      <div>
+        <h1>Proceso comercial</h1>
+        <p class="td-subline" id="com-sub"><span class="dash-skeleton">—</span></p>
       </div>
     </div>
-  </section>
 
-  <section id="mix">
-    <h2>Mix de contenido</h2>
-    <p class="td-sub">Cantidad y % sobre lo programado en el mes de cada línea.</p>
-    <p class="td-key"><span><i class="td-sw" style="background: var(--cds-chart-muted)"></i>Programados</span><span><i class="td-sw" id="key-c"></i><i class="td-sw" id="key-a"></i>Parte publicada (color de la línea)</span></p>
-    <div class="td-grid wide">
-      <div class="td-card" id="mix-formato"><h3>Formato</h3><p class="td-note">Reel, short, estática, carrusel…</p><div class="td-pair" data-dim="formato"></div></div>
-      <div class="td-card" id="mix-categoria"><h3>Categoría de contenido</h3><p class="td-note">Producto, educación, institucional…</p><div class="td-pair" data-dim="categoria"></div></div>
-      <div class="td-card" id="mix-plataforma"><h3>Plataforma</h3><p class="td-note">Dónde se programó cada pieza.</p><div class="td-pair" data-dim="plataforma"></div></div>
+    <article class="td-card td-exec" id="exec">
+      <div class="td-exec-head">
+        <h2>Resumen ejecutivo</h2>
+        <p class="td-headline" id="exec-titular"><span class="dash-skeleton">—</span></p>
+      </div>
+      <div class="td-strip" id="exec-tiles" style="--n: 3"></div>
+      <div class="td-exec-body">
+        <div><div class="td-colh">Situación</div><p class="td-body" id="exec-situacion"></p></div>
+        <div class="td-reco"><div class="td-colh">Prioridades de la semana</div><ol id="exec-reco" data-source="narrativa"></ol><p class="td-alert" id="exec-alerta"></p></div>
+      </div>
+    </article>
+
+    <section id="unidades">
+      <h2>Por unidad de negocio</h2>
+      <p class="td-sub">Última semana con datos contra la anterior. Agro se mide en dólares; Consumer, en pesos.</p>
+      <div class="td-comlist">
+        <article class="td-card" id="com-consumer-comercial" data-bloque="Consumer|Comercial"></article>
+        <article class="td-card" id="com-consumer-ecommerce" data-bloque="Consumer|E-commerce"></article>
+        <article class="td-card" id="com-agro-comercial" data-bloque="Agro|Comercial"></article>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===================== SOCIAL MEDIA ===================== -->
+  <div class="td-panel" id="social" role="tabpanel" aria-labelledby="tab-social" hidden>
+    <div class="td-titlerow">
+      <div>
+        <h1>Social Media</h1>
+        <p class="td-subline" id="soc-sub">Calendarios de contenidos de Consumer y Agro.</p>
+      </div>
+      <label class="td-ctrl">Mes
+        <select id="td-mes" aria-label="Mes" data-source="resumen"></select>
+      </label>
     </div>
-  </section>
 
-  <section id="comunicacion">
-    <h2>Qué se comunicó</h2>
-    <p class="td-sub">"Foco" agrupa la columna Comunicación por producto o tema; debajo, el detalle tal como figura en el calendario.</p>
-    <div class="td-grid wide">
-      <div class="td-card" id="com-foco"><h3>Foco (producto o tema)</h3><p class="td-note">Agrupado a partir de Comunicación y Temática.</p><div class="td-pair" data-dim="foco"></div></div>
-      <div class="td-card" id="com-tematica"><h3>Temática</h3><p class="td-note">Columna Temática del calendario.</p><div class="td-pair" data-dim="tematica" data-scroll="1"></div></div>
-      <div class="td-card" id="com-comunicacion"><h3>Comunicación</h3><p class="td-note">Columna Comunicación del calendario.</p><div class="td-pair" data-dim="comunicacion" data-scroll="1"></div></div>
-    </div>
-  </section>
+    <article class="td-card td-exec" id="soc-exec">
+      <div class="td-exec-head">
+        <h2>Resumen ejecutivo</h2>
+        <p class="td-headline" id="takeaway"><span class="dash-skeleton">—</span></p>
+      </div>
+      <div class="td-tablewrap">
+        <table id="soc-table" data-source="resumen" data-row-key="id">
+          <thead><tr>
+            <th data-field="linea">Línea</th>
+            <th class="num" data-field="total">Programadas</th>
+            <th class="num" data-field="publicado">Publicadas</th>
+            <th class="num" data-field="pendiente">Pendientes</th>
+            <th class="num" data-field="no_publicado">No publicadas</th>
+            <th class="num" data-field="cumplimiento">Cumplimiento</th>
+            <th class="num" data-field="delta_cumplimiento">vs. mes anterior</th>
+            <th class="num" data-field="share_publicado">Peso en lo publicado</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="td-exec-body" id="soc-narr">
+        <div><div class="td-colh">Situación</div><p class="td-body" id="soc-situacion"></p></div>
+        <div class="td-reco"><div class="td-colh">Recomendaciones</div><ol id="soc-reco" data-source="narrativa"></ol><p class="td-alert" id="soc-alerta"></p></div>
+      </div>
+    </article>
 
-  <section id="motivos">
-    <h2>Por qué no salió lo programado</h2>
-    <p class="td-sub">Motivos cargados en las filas Pendiente y No publicado.</p>
-    <div class="td-grid wide">
-      <div class="td-card" id="mot-Consumer"><h3><i class="td-sw sw-c"></i>Consumer</h3><p class="td-note">Motivo y cantidad de publicaciones afectadas.</p>
-        <table data-source="motivos" data-row-key="id"><thead><tr><th data-field="motivo">Motivo</th><th data-field="estado">Estado</th><th class="num" data-field="n">Publ.</th></tr></thead><tbody></tbody></table></div>
-      <div class="td-card" id="mot-Agro"><h3><i class="td-sw sw-a"></i>Agro</h3><p class="td-note">Motivo y cantidad de publicaciones afectadas.</p>
-        <table data-source="motivos" data-row-key="id"><thead><tr><th data-field="motivo">Motivo</th><th data-field="estado">Estado</th><th class="num" data-field="n">Publ.</th></tr></thead><tbody></tbody></table></div>
-    </div>
-  </section>
+    <section id="cumplimiento">
+      <h2>Programado vs. publicado</h2>
+      <p class="td-sub" id="cumpl-sub">Cada fila del calendario cuenta como una publicación (una pieza en una plataforma).</p>
+      <div class="td-grid">
+        <div class="td-card" id="card-Consumer"></div>
+        <div class="td-card" id="card-Agro"></div>
+      </div>
+    </section>
 
-  <section id="semanas">
-    <h2>Semana a semana</h2>
-    <p class="td-sub">Para el seguimiento semanal: programados y publicados por semana del mes.</p>
-    <div class="td-card" id="sem-card">
-      <table id="sem-table" data-source="semanas" data-row-key="id">
-        <thead><tr><th data-field="inicio">Semana del</th><th class="num" data-field="consumer_prog">Consumer prog.</th><th class="num" data-field="consumer_pub">Consumer publ.</th><th class="num" data-field="agro_prog">Agro prog.</th><th class="num" data-field="agro_pub">Agro publ.</th></tr></thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </section>
+    <section id="comparativa">
+      <h2>Consumer vs. Agro</h2>
+      <p class="td-sub">¿Le estamos dando el mismo peso a cada línea?</p>
+      <div class="td-grid">
+        <div class="td-card" id="peso">
+          <h3>Peso de cada línea en el mes</h3>
+          <p class="td-note" id="peso-note">Reparto de lo programado y de lo publicado.</p>
+          <div class="td-share" id="peso-body" data-source="resumen"></div>
+        </div>
+        <div class="td-card" id="pub-mes">
+          <h3>Publicados por mes</h3>
+          <p class="td-note">Publicaciones con estado "Publicado", por línea.</p>
+          <div class="td-legend" id="leg-pub"></div>
+          <div class="td-chart" id="chart-pub" data-source="resumen"></div>
+        </div>
+        <div class="td-card" id="cumpl-mes">
+          <h3>Cumplimiento por mes</h3>
+          <p class="td-note">Publicados sobre lo programado con fecha ya cumplida.</p>
+          <div class="td-legend" id="leg-cumpl"></div>
+          <div class="td-chart" id="chart-cumpl" data-source="resumen"></div>
+        </div>
+      </div>
+    </section>
 
-  <section id="definiciones" class="td-card td-defs">
-    <h3>Cómo se calcula</h3>
-    <p><b>Publicación</b>: cada fila del calendario (la misma pieza en Instagram, YouTube y LinkedIn cuenta tres veces). <b>Ideas distintas</b> cuenta combinaciones únicas de Comunicación + Temática.</p>
-    <p><b>Cumplimiento</b> = publicados ÷ filas con fecha hasta el día de corte. Las filas futuras sin estado se muestran como <b>Por venir</b> y no cuentan.</p>
-    <p><b>Sin registrar</b>: filas con fecha pasada y la columna "Estado publicación orgánico" vacía. No se asume si salieron o no, así que bajan el cumplimiento hasta que se completen.</p>
-    <p>Consumer y Agro se leen de sus propios calendarios y nunca se mezclan. Las hojas de abril no tienen columna Plataforma, por eso la serie arranca en mayo.</p>
-  </section>
+    <section id="mix">
+      <h2>Mix de contenido</h2>
+      <p class="td-sub">Cantidad y % sobre lo programado en el mes de cada línea.</p>
+      <p class="td-key"><span><i class="td-sw" style="background: var(--td-grey-2)"></i>Programados</span><span><i class="td-sw" id="key-c"></i><i class="td-sw" id="key-a"></i>Parte publicada (color de la línea)</span></p>
+      <div class="td-grid wide">
+        <div class="td-card" id="mix-formato"><h3>Formato</h3><p class="td-note">Reel, short, estática, carrusel…</p><div class="td-pair" data-dim="formato"></div></div>
+        <div class="td-card" id="mix-categoria"><h3>Categoría de contenido</h3><p class="td-note">Producto, educación, institucional…</p><div class="td-pair" data-dim="categoria"></div></div>
+        <div class="td-card" id="mix-plataforma"><h3>Plataforma</h3><p class="td-note">Dónde se programó cada pieza.</p><div class="td-pair" data-dim="plataforma"></div></div>
+      </div>
+    </section>
+
+    <section id="comunicacion">
+      <h2>Qué se comunicó</h2>
+      <p class="td-sub">"Foco" agrupa la columna Comunicación por producto o tema; debajo, el detalle tal como figura en el calendario.</p>
+      <div class="td-grid wide">
+        <div class="td-card" id="com-foco"><h3>Foco (producto o tema)</h3><p class="td-note">Agrupado a partir de Comunicación y Temática.</p><div class="td-pair" data-dim="foco"></div></div>
+        <div class="td-card" id="com-tematica"><h3>Temática</h3><p class="td-note">Columna Temática del calendario.</p><div class="td-pair" data-dim="tematica" data-scroll="1"></div></div>
+        <div class="td-card" id="com-comunicacion"><h3>Comunicación</h3><p class="td-note">Columna Comunicación del calendario.</p><div class="td-pair" data-dim="comunicacion" data-scroll="1"></div></div>
+      </div>
+    </section>
+
+    <section id="motivos">
+      <h2>Por qué no salió lo programado</h2>
+      <p class="td-sub">Motivos cargados en las filas Pendiente y No publicado.</p>
+      <div class="td-grid wide">
+        <div class="td-card" id="mot-Consumer"><h3><i class="td-sw sw-c"></i>Consumer</h3><p class="td-note">Motivo y cantidad de publicaciones afectadas.</p>
+          <table data-source="motivos" data-row-key="id"><thead><tr><th data-field="motivo">Motivo</th><th data-field="estado">Estado</th><th class="num" data-field="n">Publ.</th></tr></thead><tbody></tbody></table></div>
+        <div class="td-card" id="mot-Agro"><h3><i class="td-sw sw-a"></i>Agro</h3><p class="td-note">Motivo y cantidad de publicaciones afectadas.</p>
+          <table data-source="motivos" data-row-key="id"><thead><tr><th data-field="motivo">Motivo</th><th data-field="estado">Estado</th><th class="num" data-field="n">Publ.</th></tr></thead><tbody></tbody></table></div>
+      </div>
+    </section>
+
+    <section id="semanas">
+      <h2>Semana a semana</h2>
+      <p class="td-sub">Programados y publicados por semana del mes.</p>
+      <div class="td-card" id="sem-card">
+        <table id="sem-table" data-source="semanas" data-row-key="id">
+          <thead><tr><th data-field="inicio">Semana del</th><th class="num" data-field="consumer_prog">Consumer prog.</th><th class="num" data-field="consumer_pub">Consumer publ.</th><th class="num" data-field="agro_prog">Agro prog.</th><th class="num" data-field="agro_pub">Agro publ.</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="definiciones" class="td-card td-defs">
+      <h3>Cómo se calcula</h3>
+      <p><b>Publicación</b>: cada fila del calendario (la misma pieza en Instagram, YouTube y LinkedIn cuenta tres veces). <b>Ideas distintas</b> cuenta combinaciones únicas de Comunicación + Temática.</p>
+      <p><b>Cumplimiento</b> = publicados ÷ filas con fecha hasta el día de corte. Las filas futuras sin estado se muestran como <b>Por venir</b> y no cuentan.</p>
+      <p><b>Sin registrar</b>: filas con fecha pasada y la columna "Estado publicación orgánico" vacía. No se asume si salieron o no, así que bajan el cumplimiento hasta que se completen.</p>
+      <p>Consumer y Agro se leen de sus propios calendarios y nunca se mezclan. Las hojas de abril no tienen columna Plataforma, por eso la serie arranca en mayo.</p>
+    </section>
+  </div>
+
+  <p class="td-foot">Fuentes: planillas Proceso Comercial 2026 (Consumer y Agro) y calendarios de contenidos. Consumer y Agro siempre se leen por separado.</p>
 </div>
+
+<script>
+// Tabs: registered first so panels are visible before the other scripts draw.
+(() => {
+  const tabs = [...document.querySelectorAll('.td-tab')];
+  const ids = tabs.map((t) => t.dataset.tab);
+  const fromHash = ids.includes(location.hash.slice(1)) ? location.hash.slice(1) : null;
+  if (fromHash && dash.params().tab !== fromHash) dash.setParams({ tab: fromHash });
+  const go = (id) => { dash.setParams({ tab: id }); dash.setLink(id); };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => go(t.dataset.tab));
+    t.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      const n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+      n.focus(); go(n.dataset.tab);
+    });
+  });
+  dash.onData(() => {
+    const cur = ids.includes(dash.params().tab) ? dash.params().tab : 'comercial';
+    tabs.forEach((t) => { const on = t.dataset.tab === cur; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; });
+    ids.forEach((id) => { document.getElementById(id).hidden = id !== cur; });
+  });
+})();
+</script>
 
 <script>
 dash.calc('resumen', {
@@ -386,7 +523,7 @@ dash.calc('semanas', {
 
 (() => {
   const LINES = ['Consumer', 'Agro'];
-  const color = (l) => (l === 'Consumer' ? dash.colors[0] : '#2f9e5f');
+  const color = (l) => (l === 'Consumer' ? '#1d5fbf' : '#2f9e5f');
   const MES = { '01': 'enero', '02': 'febrero', '03': 'marzo', '04': 'abril', '05': 'mayo', '06': 'junio', '07': 'julio', '08': 'agosto', '09': 'septiembre', '10': 'octubre', '11': 'noviembre', '12': 'diciembre' };
   const mesLabel = (m) => m ? MES[m.slice(5, 7)] + ' ' + m.slice(0, 4) : '';
   const mesCorto = (m) => m ? MES[m.slice(5, 7)].slice(0, 3) : '';
@@ -439,7 +576,7 @@ dash.calc('semanas', {
       const row = el('div', 'td-srow');
       const lab = el('span', f === 'sin_registrar' ? 'td-warn' : null, label);
       const tr = el('div', 'td-track');
-      const fill = el('div', 'td-fill'); fill.style.width = (r.total ? v / r.total * 100 : 0) + '%'; fill.style.background = c || 'var(--cds-chart-muted)';
+      const fill = el('div', 'td-fill'); fill.style.width = (r.total ? v / r.total * 100 : 0) + '%'; fill.style.background = c || '#d9d9d9';
       if (!v) fill.style.minWidth = '0';
       tr.append(fill);
       row.append(lab, tr, mark(el('span', 'v', String(v)), 'resumen', f, w));
@@ -505,9 +642,9 @@ dash.calc('semanas', {
 
   function axisStyle(g) {
     g.attr('font-size', null).attr('font-family', null);
-    g.selectAll('text').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)');
-    g.selectAll('.domain').attr('stroke', 'var(--cds-chart-axis)');
-    g.selectAll('.tick line').attr('stroke', 'var(--cds-chart-grid)');
+    g.selectAll('text').attr('fill', '#5f6368').style('font-size', '12px');
+    g.selectAll('.domain').attr('stroke', '#d4d4d4');
+    g.selectAll('.tick line').attr('stroke', '#f0f0f0');
   }
 
   // ---------- Grouped bars: publicados per month ----------
@@ -522,7 +659,7 @@ dash.calc('semanas', {
     const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
     svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickSize(-(W - m.l - m.r)).tickFormat(d3.format('d'))).call(axisStyle).call((g) => g.select('.domain').remove());
     const gx = svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickFormat(mesCorto).tickSizeOuter(0)).call(axisStyle);
-    gx.selectAll('.tick text').style('font-weight', (d) => (d === mes ? 600 : null)).attr('fill', (d) => (d === mes ? 'var(--color-fg)' : 'var(--color-fg-muted)'));
+    gx.selectAll('.tick text').style('font-weight', (d) => (d === mes ? 600 : null)).attr('fill', (d) => (d === mes ? '#0a0a0a' : '#5f6368'));
     const tt = tip(box);
     const bw = Math.min(32, xi.bandwidth());
     svg.append('g').selectAll('rect').data(rs).join('rect')
@@ -537,29 +674,29 @@ dash.calc('semanas', {
   function drawCumpl(rs, mes) {
     const box = document.getElementById('chart-cumpl');
     box.querySelectorAll('svg').forEach((s) => s.remove());
-    const W = Math.max(280, box.clientWidth), H = 240, m = { t: 14, r: 74, b: 26, l: 34 };
+    const W = Math.max(280, box.clientWidth), H = 240, m = { t: 14, r: 100, b: 26, l: 34 };
     const months = [...new Set(rs.map((r) => r.mes))].sort();
     const x = d3.scalePoint(months, [m.l + 6, W - m.r]);
     const y = d3.scaleLinear([0, 100], [H - m.b, m.t]);
     const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
     svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickSize(-(W - m.l - m.r)).tickFormat((v) => v + '%')).call(axisStyle).call((g) => g.select('.domain').remove());
     const gx = svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickFormat(mesCorto).tickSizeOuter(0)).call(axisStyle);
-    gx.selectAll('.tick text').style('font-weight', (d) => (d === mes ? 600 : null)).attr('fill', (d) => (d === mes ? 'var(--color-fg)' : 'var(--color-fg-muted)'));
+    gx.selectAll('.tick text').style('font-weight', (d) => (d === mes ? 600 : null)).attr('fill', (d) => (d === mes ? '#0a0a0a' : '#5f6368'));
     const ends = [];
     for (const l of LINES) {
       const pts = rs.filter((r) => r.linea === l && r.cumplimiento != null).sort((a, b) => a.mes.localeCompare(b.mes));
       svg.append('path').datum(pts).attr('fill', 'none').attr('stroke', color(l)).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round')
         .attr('d', d3.line((r) => x(r.mes), (r) => y(r.cumplimiento)));
       svg.append('g').selectAll('circle').data(pts).join('circle').attr('cx', (r) => x(r.mes)).attr('cy', (r) => y(r.cumplimiento)).attr('r', 4)
-        .attr('fill', color(l)).attr('stroke', 'var(--color-panel)').attr('stroke-width', 2);
+        .attr('fill', color(l)).attr('stroke', '#ffffff').attr('stroke-width', 2);
       const last = pts[pts.length - 1];
       if (last) ends.push({ l, y: y(last.cumplimiento), v: last.cumplimiento, x: x(last.mes) });
     }
     ends.sort((a, b) => a.y - b.y);
     for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 14) ends[i].y = ends[i - 1].y + 14;
-    for (const e of ends) svg.append('text').attr('x', e.x + 8).attr('y', e.y + 4).attr('fill', 'var(--color-fg)').style('font-size', 'var(--cds-font-size-caption)').text(`${e.l} ${e.v}%`);
+    for (const e of ends) svg.append('text').attr('x', e.x + 8).attr('y', e.y + 4).attr('fill', '#0a0a0a').style('font-size', '12px').text(`${e.l} ${e.v}%`);
     const tt = tip(box);
-    const rule = svg.append('line').attr('y1', m.t).attr('y2', H - m.b).attr('stroke', 'var(--cds-chart-reference)').attr('opacity', 0);
+    const rule = svg.append('line').attr('y1', m.t).attr('y2', H - m.b).attr('stroke', '#8a8a8a').attr('opacity', 0);
     svg.append('rect').attr('x', m.l).attr('y', m.t).attr('width', W - m.l - m.r).attr('height', H - m.t - m.b).attr('fill', 'transparent')
       .on('mousemove', (ev) => {
         const [px] = d3.pointer(ev);
@@ -590,7 +727,7 @@ dash.calc('semanas', {
         const tr = el('tr'); tr.dataset.key = r.id;
         const c1 = el('td', 'lab', r.valor);
         const c2 = el('td', 'num'); const cb = el('div', 'td-cellbar'); const bt = el('span', 'bt'); bt.style.background = 'transparent';
-        const iP = el('i'); iP.style.width = (r.programados / max * 100) + '%'; iP.style.background = 'var(--cds-chart-muted)';
+        const iP = el('i'); iP.style.width = (r.programados / max * 100) + '%'; iP.style.background = '#d9d9d9';
         const iU = el('i'); iU.style.width = (r.publicados / max * 100) + '%'; iU.style.background = color(l);
         bt.append(iP, iU); cb.append(bt, el('span', null, String(r.programados))); c2.append(cb);
         tr.append(c1, c2, el('td', 'num', String(r.publicados)), el('td', 'num', r.pct + '%'));
@@ -624,7 +761,7 @@ dash.calc('semanas', {
     const p = document.getElementById('takeaway'); p.replaceChildren();
     const by = Object.fromEntries(LINES.map((l) => [l, rs.find((r) => r.linea === l && r.mes === mes)]));
     const corte = (by.Consumer || by.Agro || {}).corte || '';
-    p.append(cap(mesLabel(mes)) + (corte.slice(0, 7) === mes ? ` (al ${ddmm(corte)})` : '') + ': ');
+    p.append(cap(mesLabel(mes)) + (corte.slice(0, 7) === mes ? ` al ${ddmm(corte)}` : '') + ': ');
     LINES.forEach((l, i) => {
       const r = by[l]; if (!r) return;
       const w = 'id=' + enc(r.id);
@@ -635,6 +772,33 @@ dash.calc('semanas', {
       const lead = by.Agro.publicado >= by.Consumer.publicado ? by.Agro : by.Consumer;
       p.append('. ' + lead.linea + ' concentra el ', mark(el('b', null, String(lead.share_publicado)), 'resumen', 'share_publicado', 'id=' + enc(lead.id)), '% de lo publicado.');
     }
+  }
+
+  function drawSocTable(rs, mes) {
+    const tb = document.querySelector('#soc-table tbody'); tb.replaceChildren();
+    for (const l of LINES) {
+      const r = rs.find((q) => q.linea === l && q.mes === mes);
+      if (!r) continue;
+      const tr = el('tr'); tr.dataset.key = r.id;
+      const c0 = el('td'); const s = el('span', 'td-line'); const sw = el('i', 'td-sw'); sw.style.background = color(l); s.append(sw, l); c0.append(s);
+      const d = r.delta_cumplimiento;
+      const dc = el('td', 'num ' + (d == null || d === 0 ? 'td-neu' : d > 0 ? 'td-good' : 'td-bad'), d == null ? '—' : (d > 0 ? '+' : d < 0 ? '−' : '±') + Math.abs(d) + ' pp');
+      tr.append(c0, el('td', 'num', String(r.total)), el('td', 'num', String(r.publicado)), el('td', 'num', String(r.pendiente)), el('td', 'num', String(r.no_publicado)),
+        el('td', 'num', r.cumplimiento == null ? '—' : r.cumplimiento + '%'), dc, el('td', 'num', r.share_publicado == null ? '—' : r.share_publicado + '%'));
+      tb.append(tr);
+    }
+  }
+
+  function drawSocNarr(n) {
+    const box = document.getElementById('soc-narr');
+    box.hidden = !n;
+    const sit = document.getElementById('soc-situacion'), ol = document.getElementById('soc-reco'), al = document.getElementById('soc-alerta');
+    [sit, ol, al].forEach((x) => x.replaceChildren());
+    if (!n) return;
+    const w = 'id=' + enc('social');
+    sit.append(mark(el('span', null, n.situacion), 'narrativa', 'situacion', w));
+    n.recomendaciones.split('\n').filter(Boolean).forEach((t) => ol.append(el('li', null, t)));
+    if (n.alerta) al.append(mark(el('span', null, n.alerta), 'narrativa', 'alerta', w));
   }
 
   dash.onData(() => {
@@ -653,6 +817,12 @@ dash.calc('semanas', {
     sel.value = mes;
 
     drawTake(rs, mes);
+    drawSocTable(rs, mes);
+    const N = dash.data('narrativa');
+    drawSocNarr(N.status === 'ok' ? N.data.find((n) => n.id === 'social' && n.mes === mes) : null);
+    const st = document.getElementById('td-stamp');
+    st.replaceChildren('Corte de datos ', mark(el('span', null, ddmm(corte) + '/' + corte.slice(0, 4)), 'resumen', 'corte', 'id=' + enc(rs[0].id)));
+    document.getElementById('soc-sub').textContent = 'Calendarios de contenidos de Consumer y Agro · ' + mesLabel(mes) + (corte.slice(0, 7) === mes ? ', al ' + ddmm(corte) : '') + '.';
     LINES.forEach((l) => drawCard(l, rs.find((r) => r.linea === l && r.mes === mes), mes));
     document.getElementById('peso-note').textContent = 'Reparto de lo programado y de lo publicado en ' + mesLabel(mes) + '.';
     drawPeso(rs, mes);
@@ -747,7 +917,7 @@ dash.calc('total', {
 
 (() => {
   const AGRO = '#2f9e5f';
-  const colorOf = (linea) => (linea === 'Consumer' ? dash.colors[0] : AGRO);
+  const colorOf = (linea) => (linea === 'Consumer' ? '#1d5fbf' : AGRO);
   const TITULO = { 'Consumer|Comercial': 'Consumer · Comercial (WhatsApp / CRM)', 'Consumer|E-commerce': 'Consumer · E-commerce', 'Agro|Comercial': 'Agro · Comercial' };
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
   const mark = (e, src, field, where) => { e.dataset.source = src; e.dataset.field = field; if (where != null) e.dataset.where = where; return e; };
@@ -755,11 +925,11 @@ dash.calc('total', {
   const TONO = { good: 'td-good', bad: 'td-bad', neutral: 'td-neu' };
 
   function tile(row, src) {
-    const t = el('div', 'td-tile');
+    const t = el('div', 'td-cell');
     t.append(el('div', 'l', row.etiqueta));
     t.append(mark(el('div', 'v', row.actual_fmt), src, 'actual_fmt', w(row.id)));
     const d = el('div', 'd');
-    d.append(mark(el('span', TONO[row.tono], row.delta_fmt), src, 'delta_fmt', w(row.id)), ' · ant. ', mark(el('span', null, row.anterior_fmt), src, 'anterior_fmt', w(row.id)));
+    d.append(mark(el('span', TONO[row.tono], row.delta_fmt), src, 'delta_fmt', w(row.id)), ' vs. ', mark(el('span', null, row.anterior_fmt), src, 'anterior_fmt', w(row.id)));
     t.append(d);
     return t;
   }
@@ -773,24 +943,36 @@ dash.calc('total', {
     const usd = bloque.startsWith('Agro');
     const k = usd ? 'margen_usd' : 'margen';
     const ws = semanal.filter((r) => r.linea + '|' + r.canal === bloque && Number(r.gasto) > 0).sort((a, b) => a.inicio.localeCompare(b.inicio)).slice(-10);
-    const W = Math.max(260, box.clientWidth), H = 150, m = { t: 8, r: 4, b: 22, l: 4 };
-    const x = d3.scaleBand(ws.map((r) => r.id), [m.l, W - m.r]).padding(0.25);
-    const ys = ws.map((r) => Number(r[k]) || 0);
-    const y = d3.scaleLinear([Math.min(0, d3.min(ys)), d3.max(ys) || 1], [H - m.b, m.t]);
-    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
-    svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', 'var(--cds-chart-axis)');
-    const c = colorOf(bloque.split('|')[0]);
-    const tipEl = el('div', 'td-tip'); box.append(tipEl);
     const fmtv = (v) => (usd ? 'USD ' : '$') + (Math.abs(v) >= 1e6 ? (v / 1e6).toFixed(1).replace('.', ',') + ' M' : Math.round(v / 1e3) + ' K');
+    const tickf = (v) => (v === 0 ? '0' : Math.abs(v) >= 1e6 ? (v / 1e6).toFixed(Math.abs(v) % 1e6 ? 1 : 0).replace('.', ',') + ' M' : Math.round(v / 1e3) + ' K');
+    const ys = ws.map((r) => Number(r[k]) || 0);
+    const y = d3.scaleLinear([Math.min(0, d3.min(ys)), d3.max(ys) || 1], [0, 1]).nice(4);
+    const W = Math.max(260, box.clientWidth), H = 160;
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    const ticks = y.ticks(4);
+    const probe = svg.append('g').style('font-size', '12px');
+    const lw = d3.max(ticks, (t) => probe.append('text').text(tickf(t)).node().getComputedTextLength()) || 20;
+    probe.remove();
+    const m = { t: 8, r: 0, b: 22, l: Math.ceil(lw) + 8 };
+    y.range([H - m.b, m.t]);
+    const x = d3.scaleBand(ws.map((r) => r.id), [m.l, W - m.r]).padding(0.3);
+    const g = svg.append('g');
+    ticks.forEach((t) => {
+      g.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(t)).attr('y2', y(t)).attr('stroke', t === 0 ? '#bdbdbd' : '#f0f0f0');
+      g.append('text').attr('x', m.l - 8).attr('y', y(t) + 4).attr('text-anchor', 'end').attr('fill', '#5f6368').style('font-size', '12px').style('font-variant-numeric', 'tabular-nums').text(tickf(t));
+    });
+    const c = colorOf(bloque.split('|')[0]);
+    const n = ws.length;
+    const tipEl = el('div', 'td-tip'); box.append(tipEl);
     svg.append('g').selectAll('rect').data(ws).join('rect')
       .attr('x', (r) => x(r.id)).attr('width', x.bandwidth())
       .attr('y', (r) => y(Math.max(0, Number(r[k]) || 0))).attr('height', (r) => Math.max(1, Math.abs(y(Number(r[k]) || 0) - y(0))))
-      .attr('rx', 3).attr('fill', c).attr('opacity', (r, i) => (i >= ws.length - 2 ? 1 : 0.45))
-      .on('mousemove', (ev, r) => { const [px, py] = d3.pointer(ev, box); tipEl.replaceChildren(el('div', 'h', 'Semana ' + r.semana), el('div', 'r', 'Margen: ' + fmtv(Number(r[k]) || 0))); tipEl.style.display = 'block'; tipEl.style.left = Math.max(0, Math.min(box.clientWidth - tipEl.offsetWidth, px + 10)) + 'px'; tipEl.style.top = Math.max(0, py - 40) + 'px'; })
+      .attr('fill', (r, i) => (i === n - 1 ? c : i === n - 2 ? '#8a8a8a' : '#d9d9d9'))
+      .on('mousemove', (ev, r) => { const [px, py] = d3.pointer(ev, box); tipEl.replaceChildren(el('div', 'h', 'Semana ' + r.semana), el('div', 'r', 'Margen ' + fmtv(Number(r[k]) || 0))); tipEl.style.display = 'block'; tipEl.style.left = Math.max(0, Math.min(box.clientWidth - tipEl.offsetWidth, px + 10)) + 'px'; tipEl.style.top = Math.max(0, py - 44) + 'px'; })
       .on('mouseleave', () => (tipEl.style.display = 'none'));
-    const last2 = ws.slice(-2);
-    svg.append('g').selectAll('text').data(last2).join('text').attr('x', (r) => x(r.id) + x.bandwidth() / 2).attr('y', H - 6).attr('text-anchor', 'middle')
-      .attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text((r) => r.inicio.slice(8, 10) + '/' + r.inicio.slice(5, 7));
+    const lab = [ws[0], ws[n - 2], ws[n - 1]].filter(Boolean);
+    svg.append('g').selectAll('text').data(lab).join('text').attr('x', (r) => x(r.id) + x.bandwidth() / 2).attr('y', H - 6).attr('text-anchor', 'middle')
+      .attr('fill', (r) => (r === ws[n - 1] ? '#0a0a0a' : '#5f6368')).style('font-size', '12px').text((r) => r.inicio.slice(8, 10) + '/' + r.inicio.slice(5, 7));
   }
 
   function card(art, bloque, kp, obj, nar, semanal) {
@@ -799,21 +981,24 @@ dash.calc('total', {
     const rows = kp.filter((r) => r.bloque === bloque).sort((a, b) => a.orden - b.orden);
     const wrap = el('div', 'td-com');
     const head = el('div', 'td-com-head');
-    const h = el('h3'); const sw = el('i', 'td-sw'); sw.style.background = colorOf(linea); h.append(sw, TITULO[bloque]); head.append(h);
+    const h = el('h2'); const sw = el('i', 'td-sw'); sw.style.background = colorOf(linea); h.append(sw, TITULO[bloque]); head.append(h);
     const hl = el('p', 'td-headline'); narr(hl, nar, 'titular', bloque); head.append(hl);
     wrap.append(head);
 
     const left = el('div', 'td-stack');
-    const tiles = el('div', 'td-tiles');
-    rows.filter((r) => r.hero).forEach((r) => tiles.append(tile(r, 'kpis')));
+    const tiles = el('div', 'td-strip');
+    const heroes = rows.filter((r) => r.hero);
+    tiles.style.setProperty('--n', String(heroes.length));
+    heroes.forEach((r) => tiles.append(tile(r, 'kpis')));
     left.append(tiles);
     if (obj) {
       const o = el('div', 'td-obj');
       const t = el('div', 't');
       t.append('Margen del mes: ', mark(el('b', null, obj.margen_fmt), 'objetivos', 'margen_fmt', w(bloque)), ' de ', mark(el('span', null, obj.objetivo_fmt), 'objetivos', 'objetivo_fmt', w(bloque)), ' objetivo (', mark(el('b', null, String(obj.avance)), 'objetivos', 'avance', w(bloque)), '%) · ', mark(el('span', null, String(obj.transcurrido)), 'objetivos', 'transcurrido', w(bloque)), '% del mes transcurrido');
       const tr = el('div', 'track'); const f = el('div', 'fill'); f.style.width = Math.min(100, obj.avance) + '%'; f.style.background = colorOf(linea);
-      const now = el('div', 'now'); now.style.left = obj.transcurrido + '%'; tr.append(f, now);
-      o.append(t, tr); left.append(o);
+      const now = el('div', 'now'); now.style.left = obj.transcurrido + '%'; now.title = 'Mes transcurrido'; tr.append(f, now);
+      const ends = el('div', 'ends'); ends.append(el('span', null, '0'), el('span', null, 'Objetivo ' + obj.objetivo_fmt));
+      o.append(t, tr, ends); left.append(o);
     }
     const tbl = el('table'); tbl.dataset.source = 'kpis'; tbl.dataset.rowKey = 'id';
     const hr = el('tr');
@@ -821,15 +1006,15 @@ dash.calc('total', {
     const thead = el('thead'); thead.append(hr); tbl.append(thead);
     const tb = el('tbody');
     rows.forEach((r) => { const tr = el('tr'); tr.dataset.key = r.id; tr.append(el('td', 'lab', r.etiqueta), el('td', 'num', r.anterior_fmt), el('td', 'num', r.actual_fmt), el('td', 'num dl ' + TONO[r.tono], r.delta_fmt)); tb.append(tr); });
-    tbl.append(tb); left.append(tbl);
+    tbl.append(tb); const tw = el('div', 'td-tablewrap'); tw.append(tbl); left.append(tw);
     wrap.append(left);
 
     const right = el('div', 'td-stack');
-    right.append(el('div', 'td-colh', 'Análisis'));
-    const sit = el('p', 'td-body'); narr(sit, nar, 'situacion', bloque); right.append(sit);
-    const rb = el('div', 'td-reco'); rb.append(el('h4', null, 'Recomendaciones')); const ul = el('ul'); ul.dataset.source = 'narrativa'; recos(ul, nar); rb.append(ul); right.append(rb);
+    const sb = el('div'); sb.append(el('div', 'td-colh', 'Situación'));
+    const sit = el('p', 'td-body'); narr(sit, nar, 'situacion', bloque); sb.append(sit); right.append(sb);
+    const rb = el('div', 'td-reco'); rb.append(el('div', 'td-colh', 'Recomendaciones')); const ul = el('ul'); ul.dataset.source = 'narrativa'; recos(ul, nar); rb.append(ul); right.append(rb);
     if (nar && nar.alerta) { const al = el('p', 'td-alert'); narr(al, nar, 'alerta', bloque); right.append(al); }
-    const ch = el('div'); ch.append(el('div', 'td-colh', (linea === 'Agro' ? 'Margen semanal (USD)' : 'Margen semanal') + ' · últimas 10 semanas'));
+    const ch = el('div'); ch.append(el('div', 'td-colh', (linea === 'Agro' ? 'Margen semanal en USD' : 'Margen semanal en ARS') + ', últimas 10 semanas'));
     const box = el('div', 'td-mini'); box.dataset.source = 'semanal'; ch.append(box); right.append(ch);
     wrap.append(right);
     art.append(wrap);
@@ -842,14 +1027,14 @@ dash.calc('total', {
     const kp = K.data, nar = N.data, obj = O.status === 'ok' ? O.data : [];
     const r0 = kp[0];
     const sub = document.getElementById('com-sub'); sub.replaceChildren();
-    if (r0) sub.append('Semana ', mark(el('b', null, r0.semana_actual), 'kpis', 'semana_actual', w(r0.id)), ' vs. semana ', mark(el('span', null, r0.semana_anterior), 'kpis', 'semana_anterior', w(r0.id)), ' · última semana con datos cargados en las planillas de Proceso Comercial 2026.');
+    if (r0) sub.append('Semana ', mark(el('b', null, r0.semana_actual), 'kpis', 'semana_actual', w(r0.id)), ' vs. semana ', mark(el('span', null, r0.semana_anterior), 'kpis', 'semana_anterior', w(r0.id)), ', última semana con datos cargados en las planillas de Proceso Comercial 2026.');
     const ex = nar.find((n) => n.id === 'resumen');
     narr(document.getElementById('exec-titular'), ex, 'titular', 'resumen');
     narr(document.getElementById('exec-situacion'), ex, 'situacion', 'resumen');
     narr(document.getElementById('exec-alerta'), ex, 'alerta', 'resumen');
     recos(document.getElementById('exec-reco'), ex);
     const et = document.getElementById('exec-tiles'); et.replaceChildren();
-    if (T.status === 'ok') T.data.forEach((r) => et.append(tile({ ...r, etiqueta: r.etiqueta + ' · 3 unidades' }, 'total')));
+    if (T.status === 'ok') T.data.forEach((r) => et.append(tile({ ...r, etiqueta: r.etiqueta + ', 3 unidades' }, 'total')));
     document.querySelectorAll('[data-bloque]').forEach((art) => {
       const b = art.dataset.bloque;
       card(art, b, kp, obj.find((o) => o.id === b), nar.find((n) => n.id === b), S.data);
@@ -859,6 +1044,5 @@ dash.calc('total', {
 </script>
 
 </div>
-<p class="site-foot">Fuentes: planillas Proceso Comercial 2026 (Consumer y Agro) y calendarios de contenidos · corte 21/10/2026. Se actualiza semanalmente.</p>
 </body>
 </html>

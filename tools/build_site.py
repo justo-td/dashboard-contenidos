@@ -18,38 +18,14 @@ HEAD = """<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Reporte semanal · Marketing y Comercial TodoDrones</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="d3.min.js"></script>
 <style>
-:root {
-  --font-anthropic-sans: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-anthropic-serif: "Source Serif 4", Georgia, serif;
-  --color-bg: #f7f6f3; --color-panel: #ffffff; --color-fg: #1f1e1c; --color-fg-muted: #6b6862;
-  --color-border-line: #e4e1da; --color-ok: #1f7a4d; --color-warn: #a35a00; --color-bad: #c0392b;
-  --cds-font-size-caption: 12.5px; --cds-font-size-body: 14.5px; --cds-font-size-heading: 16px; --cds-font-size-title: 26px;
-  --cds-font-weight-medium: 500;
-  --cds-gap-xs: 4px; --cds-gap-sm: 8px; --cds-gap-md: 16px; --cds-gap-lg: 24px; --cds-gap-xl: 40px;
-  --cds-pad-xs: 4px; --cds-pad-sm: 8px; --cds-pad-md: 12px; --cds-pad-lg: 20px; --cds-radius: 10px;
-  --cds-chart-muted: #d9d5cc; --cds-chart-axis: #c9c5bc; --cds-chart-grid: #ece9e2; --cds-chart-reference: #8a867e;
-  --cds-surface-popover: #ffffff; --cds-border: #e4e1da; --cds-shadow-popover: 0 4px 16px rgba(0,0,0,.12);
-  --cds-text-secondary: #6b6862; --cds-dur-slow: .3s;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #1b1a18; --color-panel: #252421; --color-fg: #f1efea; --color-fg-muted: #a8a49c;
-    --color-border-line: #3a3834; --color-ok: #5cc28c; --color-warn: #f0a845; --color-bad: #ff7b6b;
-    --cds-chart-muted: #4a4741; --cds-chart-axis: #4f4c46; --cds-chart-grid: #33312d; --cds-chart-reference: #8f8b83;
-    --cds-surface-popover: #2e2d29; --cds-border: #45423d; --cds-shadow-popover: 0 4px 16px rgba(0,0,0,.5);
-    --cds-text-secondary: #a8a49c;
-  }
-}
-html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-family: var(--font-anthropic-sans); }
-#dash-root { max-width: 1280px; margin: 0 auto; padding: 32px 16px 48px; }
-@media (min-width: 720px) { #dash-root { padding: 40px 32px 64px; } }
-.dash-skeleton { color: transparent; background: var(--cds-chart-grid); border-radius: 4px; }
-.site-foot { max-width: 1280px; margin: 0 auto; padding: 0 16px 32px; font-size: 12.5px; color: var(--color-fg-muted); }
-@media (min-width: 720px) { .site-foot { padding: 0 32px 40px; } }
+:root { --font-anthropic-sans: "Geist", Inter, system-ui, -apple-system, "Segoe UI", sans-serif; color-scheme: light; }
+html, body { margin: 0; background: #ffffff; color: #0a0a0a; font-family: var(--font-anthropic-sans); -webkit-font-smoothing: antialiased; }
+#dash-root { padding: 8px clamp(16px, 3vw, 40px) 48px; }
+.dash-skeleton { color: transparent; background: #f0f0f0; border-radius: 4px; }
 </style>
 <script>
 // Minimal stand-in for the Claude dashboard `dash` API, fed by the JSON files next to this page.
@@ -74,7 +50,7 @@ window.dash = (() => {
     params() { return params; },
     setParams(p) { Object.assign(params, p); run(); },
     resetParams() { params = {}; run(); },
-    setLink() {}, refresh() {},
+    setLink(n) { try { history.replaceState(null, '', '#' + n); } catch (e) {} }, refresh() {},
   };
   Promise.all(Object.entries(FILES).map(([id, f]) => fetch(f, { cache: 'no-store' }).then((r) => r.json()).then((d) => { raw[id] = d; })))
     .then(() => { status = 'ok'; run(); })
@@ -90,7 +66,6 @@ window.dash = (() => {
 
 FOOT = """
 </div>
-<p class="site-foot">Fuentes: planillas Proceso Comercial 2026 (Consumer y Agro) y calendarios de contenidos · corte __CORTE__. Se actualiza semanalmente.</p>
 </body>
 </html>
 """

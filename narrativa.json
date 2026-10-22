@@ -1,34 +1,43 @@
 [
-  {
-    "id": "resumen",
-    "semana": "12/10 – 18/10 vs 5/10 – 11/10",
-    "titular": "La demanda se sostiene, el cierre no: con la misma inversión, el margen semanal cae 65%.",
-    "situacion": "Con una inversión publicitaria estable ($1,01 M, +4%), las tres unidades facturaron $58,9 M (−51%) y dejaron $7,4 M de margen (−65%) frente a la semana anterior. La caída no viene de la generación de demanda: los leads de Consumer suben 8% y los de WhatsApp en Agro marcan su máximo desde marzo. El problema está en la conversión: Consumer cerró 2 ventas sobre 487 leads y Agro 1 drone sobre 85. Con el 58% de octubre transcurrido, Agro lleva el 41% de su objetivo de margen, E-commerce el 45% y el canal comercial de Consumer el 10%.",
-    "recomendaciones": "Foco comercial esta semana en cierre, no en volumen: trabajar el pipeline abierto (4 ventas pendientes en Consumer y 72 leads de WhatsApp en Agro).\nNo aumentar la pauta de Consumer hasta recuperar conversión: hoy cada $1 invertido devuelve $0,54 de margen (vs. $2,56 la semana anterior).\nAgro: pasar el incremento de Google (+31%) a Meta WhatsApp, que trae leads 40% más baratos.\nRevisar el objetivo mensual de margen de Consumer ($28 M): no se alcanzó en ningún mes de 2026 (máximo $21,4 M en julio).",
-    "alerta": "Cierre de octubre en riesgo: Agro necesita ~$38 M de margen en 13 días (entre 5 y 8 drones según el margen por unidad de las últimas dos semanas)."
-  },
-  {
-    "id": "Consumer|Comercial",
-    "semana": "12/10 – 18/10 vs 5/10 – 11/10",
-    "titular": "Más leads y más baratos, pero las ventas caen de 5 a 2: el cuello de botella es el cierre.",
-    "situacion": "Con la misma inversión ($379 K), los leads crecieron 8% (487) y el costo por lead bajó 8% ($778). La conversión, en cambio, cayó de 1,1% a 0,4% y es la tercera semana seguida de baja en ventas (10 → 5 → 2). La facturación cayó 66% ($5,7 M) y el margen 79% ($204 K): por primera vez desde mayo, el margen de la semana no cubre la inversión publicitaria. También cae el margen por unidad ($194 K → $102 K), lo que sugiere más descuento o un mix de productos de menor margen.",
-    "recomendaciones": "Auditar el seguimiento de leads: tiempo de respuesta, motivos de no compra y desempeño por vendedor (la puntuación de leads no se está cargando).\nConfirmar las 4 ventas pendientes antes del cierre de la semana.\nPriorizar en pauta y en conversación los equipos con stock y mejor margen, y revisar los descuentos otorgados.\nSostener la inversión, sin subirla, hasta que la conversión vuelva a 2% o más.",
-    "alerta": "Margen de octubre: $2,9 M sobre $28 M de objetivo (10%) con el 58% del mes transcurrido."
-  },
-  {
-    "id": "Consumer|E-commerce",
-    "semana": "12/10 – 18/10 vs 5/10 – 11/10",
-    "titular": "Menos tráfico y más caro, pero más intención de compra: el checkout no acompaña.",
-    "situacion": "Con la inversión estable ($260 K), los clics cayeron 25% y el costo por clic subió 33% ($58 → $77), sobre todo en Google (clics −30%, CPC +39%). Aun así, los agregados al carrito crecieron 17% (131) y la tasa de carrito pasó de 3,3% a 4,0%. Las ventas bajaron de 3 a 2 con un ticket menor ($1,26 M) y la facturación cayó 56% ($2,5 M). Solo 1,5% de los carritos termina en compra, y el margen de la semana ($140 K) no cubre la inversión ($260 K).",
-    "recomendaciones": "Activar la recuperación de carritos abandonados por email y WhatsApp: es la palanca más rápida, la intención ya está.\nRevisar el checkout: medios de pago, cuotas visibles y costo de envío.\nAnalizar el salto de CPC en Google Ads (pujas, términos de búsqueda, competencia) antes de sumar presupuesto.\nMedir rentabilidad por producto para concentrar la pauta en lo que deja margen.",
-    "alerta": "Margen de octubre: $0,9 M sobre $2 M de objetivo (45%) con el 58% del mes transcurrido."
-  },
-  {
-    "id": "Agro|Comercial",
-    "semana": "12/10 – 18/10 vs 5/10 – 11/10",
-    "titular": "Leads de WhatsApp en su máximo desde marzo; la venta se normaliza después de un septiembre excepcional.",
-    "situacion": "La inversión subió 10% ($372 K), impulsada por Google (+31%). Los leads totales bajaron de 105 a 85, pero la semana anterior tuvo un pico atípico del sitio web (26 leads vs. 3 a 6 habituales). En Meta WhatsApp los leads casi se duplicaron (38 → 72) con un costo por lead 40% menor ($2,7 K). Se vendió 1 drone pulverizador (vs. 4 drones) y 3 accesorios: facturación de USD 33 K (−48%) y margen de USD 4,6 K (−64%). Aun así, Agro sigue siendo la unidad más rentable: cada $1 invertido generó $19 de margen.",
-    "recomendaciones": "Acelerar el seguimiento de los 72 leads de WhatsApp: es pipeline caliente de cara a la campaña de primavera.\nPasar parte del incremento de Google a Meta: el sitio web trajo 3 leads a $51 K cada uno.\nUsar las condiciones de financiación vigentes como herramienta de cierre en los equipos de mayor ticket.\nCargar las ventas pendientes de confirmar: la planilla no tiene el dato esta semana.",
-    "alerta": "Margen de octubre: $26,9 M sobre $65 M de objetivo (41%). Septiembre cerró en 175% del objetivo."
-  }
+ {
+  "id": "resumen",
+  "semana": "12/10 – 18/10 vs 5/10 – 11/10",
+  "titular": "La demanda se sostiene, el cierre no: con la misma inversión, el margen semanal cae 65%.",
+  "situacion": "Con una inversión publicitaria estable ($1,01 M, +4%), las tres unidades facturaron $58,9 M (−51%) y dejaron $7,4 M de margen (−65%) frente a la semana anterior. La caída no viene de la generación de demanda: los leads de Consumer suben 8% y los de WhatsApp en Agro marcan su máximo desde marzo. El problema está en la conversión: Consumer cerró 2 ventas sobre 487 leads y Agro 1 drone sobre 85. Con el 58% de octubre transcurrido, Agro lleva el 41% de su objetivo de margen, E-commerce el 45% y el canal comercial de Consumer el 10%.",
+  "recomendaciones": "Foco comercial esta semana en cierre, no en volumen: trabajar el pipeline abierto (4 ventas pendientes en Consumer y 72 leads de WhatsApp en Agro).\nNo aumentar la pauta de Consumer hasta recuperar conversión: hoy cada $1 invertido devuelve $0,54 de margen (vs. $2,56 la semana anterior).\nAgro: pasar el incremento de Google (+31%) a Meta WhatsApp, que trae leads 40% más baratos.\nRevisar el objetivo mensual de margen de Consumer ($28 M): no se alcanzó en ningún mes de 2026 (máximo $21,4 M en julio).",
+  "alerta": "Cierre de octubre en riesgo: Agro necesita ~$38 M de margen en 13 días (entre 5 y 8 drones según el margen por unidad de las últimas dos semanas)."
+ },
+ {
+  "id": "Consumer|Comercial",
+  "semana": "12/10 – 18/10 vs 5/10 – 11/10",
+  "titular": "Más leads y más baratos, pero las ventas caen de 5 a 2: el cuello de botella es el cierre.",
+  "situacion": "Con la misma inversión ($379 K), los leads crecieron 8% (487) y el costo por lead bajó 8% ($778). La conversión, en cambio, cayó de 1,1% a 0,4% y es la tercera semana seguida de baja en ventas (10 → 5 → 2). La facturación cayó 66% ($5,7 M) y el margen 79% ($204 K): por primera vez desde mayo, el margen de la semana no cubre la inversión publicitaria. También cae el margen por unidad ($194 K → $102 K), lo que sugiere más descuento o un mix de productos de menor margen.",
+  "recomendaciones": "Auditar el seguimiento de leads: tiempo de respuesta, motivos de no compra y desempeño por vendedor (la puntuación de leads no se está cargando).\nConfirmar las 4 ventas pendientes antes del cierre de la semana.\nPriorizar en pauta y en conversación los equipos con stock y mejor margen, y revisar los descuentos otorgados.\nSostener la inversión, sin subirla, hasta que la conversión vuelva a 2% o más.",
+  "alerta": "Margen de octubre: $2,9 M sobre $28 M de objetivo (10%) con el 58% del mes transcurrido."
+ },
+ {
+  "id": "Consumer|E-commerce",
+  "semana": "12/10 – 18/10 vs 5/10 – 11/10",
+  "titular": "Menos tráfico y más caro, pero más intención de compra: el checkout no acompaña.",
+  "situacion": "Con la inversión estable ($260 K), los clics cayeron 25% y el costo por clic subió 33% ($58 → $77), sobre todo en Google (clics −30%, CPC +39%). Aun así, los agregados al carrito crecieron 17% (131) y la tasa de carrito pasó de 3,3% a 4,0%. Las ventas bajaron de 3 a 2 con un ticket menor ($1,26 M) y la facturación cayó 56% ($2,5 M). Solo 1,5% de los carritos termina en compra, y el margen de la semana ($140 K) no cubre la inversión ($260 K).",
+  "recomendaciones": "Activar la recuperación de carritos abandonados por email y WhatsApp: es la palanca más rápida, la intención ya está.\nRevisar el checkout: medios de pago, cuotas visibles y costo de envío.\nAnalizar el salto de CPC en Google Ads (pujas, términos de búsqueda, competencia) antes de sumar presupuesto.\nMedir rentabilidad por producto para concentrar la pauta en lo que deja margen.",
+  "alerta": "Margen de octubre: $0,9 M sobre $2 M de objetivo (45%) con el 58% del mes transcurrido."
+ },
+ {
+  "id": "Agro|Comercial",
+  "semana": "12/10 – 18/10 vs 5/10 – 11/10",
+  "titular": "Leads de WhatsApp en su máximo desde marzo; la venta se normaliza después de un septiembre excepcional.",
+  "situacion": "La inversión subió 10% ($372 K), impulsada por Google (+31%). Los leads totales bajaron de 105 a 85, pero la semana anterior tuvo un pico atípico del sitio web (26 leads vs. 3 a 6 habituales). En Meta WhatsApp los leads casi se duplicaron (38 → 72) con un costo por lead 40% menor ($2,7 K). Se vendió 1 drone pulverizador (vs. 4 drones) y 3 accesorios: facturación de USD 33 K (−48%) y margen de USD 4,6 K (−64%). Aun así, Agro sigue siendo la unidad más rentable: cada $1 invertido generó $19 de margen.",
+  "recomendaciones": "Acelerar el seguimiento de los 72 leads de WhatsApp: es pipeline caliente de cara a la campaña de primavera.\nPasar parte del incremento de Google a Meta: el sitio web trajo 3 leads a $51 K cada uno.\nUsar las condiciones de financiación vigentes como herramienta de cierre en los equipos de mayor ticket.\nCargar las ventas pendientes de confirmar: la planilla no tiene el dato esta semana.",
+  "alerta": "Margen de octubre: $26,9 M sobre $65 M de objetivo (41%). Septiembre cerró en 175% del objetivo."
+ },
+ {
+  "id": "social",
+  "mes": "2026-10",
+  "semana": "Octubre al 21/10",
+  "titular": "Agro sostiene la ejecución del calendario; Consumer publica menos de la mitad de lo programado.",
+  "situacion": "Lo programado está repartido de forma pareja (48% Consumer, 52% Agro), pero lo publicado no: Agro concentra el 62%. Agro ejecutó el 73% de lo vencido (+30 pp vs. septiembre) y Consumer el 40% (−6 pp). En Consumer el 76% del calendario es Producto y la Osmo Pocket 4/4P sola ocupa el 38%. Las 4 piezas educativas no salieron porque se priorizó la coyuntura (despedida de Messi) y dos piezas se cayeron por falta de stock. En Agro, dos tercios es Institucional y los reels son el punto débil: salieron 3 de 10, casi siempre por demoras de edición.",
+  "recomendaciones": "Consumer: reprogramar las 4 piezas de asesoramiento en las próximas dos semanas. Son las que alimentan la demanda que hoy no está convirtiendo.\nValidar con Comercial el stock antes de programar contenido de producto en Consumer.\nAgro: resolver el cuello de botella de edición de reels, sumando tiempo de producción o pasando piezas a carrusel o estática.\nCargar el estado de cada pieza el mismo día: en septiembre quedaron 32 publicaciones sin registrar y el cumplimiento no se puede medir.",
+  "alerta": "Restan 13 piezas por publicar en octubre (4 Consumer, 9 Agro), además de las 10 pendientes."
+ }
 ]
