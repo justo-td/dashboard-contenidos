@@ -182,7 +182,13 @@ window.dash = (() => {
   padding: 6px 10px; font-size: 12px; white-space: nowrap; z-index: 5; display: none; }
 .td-tip .h { color: var(--td-muted); margin-bottom: 2px; }
 .td-tip .r { display: flex; align-items: center; gap: 6px; font-variant-numeric: tabular-nums; }
-.td-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: 24px; }
+.td-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: 24px 32px; }
+.td-pair > div { min-width: 0; }
+.td-pair table { table-layout: fixed; }
+.td-pair th:nth-child(1) { width: 40%; } .td-pair th:nth-child(2) { width: 30%; } .td-pair th:nth-child(3) { width: 13%; } .td-pair th:nth-child(4) { width: 17%; }
+.td-pair td.lab { overflow-wrap: anywhere; }
+#mix .td-grid.wide, #comunicacion .td-grid.wide { grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+.td-pair td.lab { min-width: 0; max-width: none; }
 .td-pair h4 { margin: 0 0 4px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
 .td-scroll { max-height: 22rem; overflow: auto; }
 .td-cellbar { display: flex; align-items: center; gap: 6px; justify-content: flex-end; }
@@ -716,10 +722,10 @@ dash.calc('semanas', {
       const col = el('div');
       const h = el('h4'); const sw = el('i', 'td-sw'); sw.style.background = color(l); h.append(sw, l); col.append(h);
       const data = rows.filter((r) => r.linea === l && r.mes === mes && r.dim === dim).sort((a, b) => b.programados - a.programados || b.publicados - a.publicados || a.valor.localeCompare(b.valor));
-      const wrap = el('div', container.dataset.scroll ? 'td-scroll' : null);
+      const wrap = el('div', container.dataset.scroll ? 'td-scroll td-tablewrap' : 'td-tablewrap');
       const t = el('table'); t.dataset.source = 'mix'; t.dataset.rowKey = 'id';
       const hr = el('tr');
-      for (const [f, txt, cls] of [['valor', 'Valor'], ['programados', 'Prog.', 'num'], ['publicados', 'Publ.', 'num'], ['pct', '% del mes', 'num']]) { const th = el('th', cls, txt); th.dataset.field = f; hr.append(th); }
+      for (const [f, txt, cls] of [['valor', 'Valor'], ['programados', 'Prog.', 'num'], ['publicados', 'Publ.', 'num'], ['pct', '% mes', 'num']]) { const th = el('th', cls, txt); th.dataset.field = f; hr.append(th); }
       const thead = el('thead'); thead.append(hr); t.append(thead);
       const tb = el('tbody');
       const max = d3.max(data, (r) => r.programados) || 1;
