@@ -2,18 +2,18 @@
  {
   "id": "resumen",
   "semana": "19/10 – 25/10 vs 12/10 – 18/10",
-  "titular": "La demanda sube con menos inversión; el resultado de la semana todavía no está cargado y octubre cierra exigido.",
-  "situacion": "Con una inversión publicitaria 5% menor ($959 K), la generación de demanda se sostuvo o mejoró: Consumer sumó 491 leads (+1%) a un costo 7% menor, E-commerce creció 44% en sesiones y 27% en agregados al carrito, y Agro mantuvo 87 leads (+2%). Consumer registró 7 ventas (vs. 4), pero la facturación y el margen de la semana no están cargados ni en Consumer comercial ni en Agro, por lo que todavía no se puede medir el resultado. La planilla corrigió hacia arriba la semana anterior: Consumer pasó de 2 a 4 ventas y de $0,2 M a $0,8 M de margen. Con el 81% de octubre transcurrido, Agro lleva el 47% de su objetivo de margen, E-commerce el 45% y el canal comercial de Consumer el 15%.",
-  "recomendaciones": "Cargar facturación y margen de la semana 19–25/10 antes del lunes: sin ese dato no se puede evaluar el cierre de octubre.\nConfirmar las 6 ventas pendientes de Consumer: son la diferencia entre una semana de recuperación y otra de caída.\nAgro: los leads de WhatsApp cayeron 64% con la misma inversión en Meta; revisar creatividades y segmentación esta semana.\nE-commerce: el tráfico creció fuerte y más barato, pero no hubo ventas registradas; revisar checkout y recuperación de carritos antes de fin de mes.",
-  "alerta": "Cierre de octubre en riesgo: con lo cargado al 18/10, Agro necesita $34,3 M de margen más (entre 5 y 6 drones al margen por unidad reciente) y Consumer comercial $23,7 M en los últimos días del mes."
+  "titular": "Con 5% menos inversión, el margen de la semana sube 28%; octubre sigue por debajo del objetivo en Consumer.",
+  "situacion": "Con una inversión publicitaria de $959 K (−5%), las tres unidades facturaron $54,2 M (−17%) y dejaron $10,3 M de margen (+28%) frente a la semana anterior. Menos facturación pero más rentable: Consumer vendió más unidades de menor ticket y Agro colocó un drone de mayor margen. La demanda se sostuvo: Consumer sumó 491 leads (+1%) a un costo 7% menor, E-commerce creció 44% en sesiones y Agro mantuvo 87 leads. Cada $1 invertido devolvió $10,8 de margen (vs. $8,0). Con el 81% de octubre transcurrido, Agro lleva el 62% de su objetivo de margen, E-commerce el 45% y el canal comercial de Consumer el 19%.",
+  "recomendaciones": "Consumer: confirmar las 6 ventas pendientes antes del cierre de mes y priorizar equipos de mayor ticket en la conversación comercial.\nAgro: cerrar el pipeline de las semanas anteriores con la promo de octubre (vence el 31) y la Expo UNSAdA del 30 y 31/10.\nAgro: revisar la campaña de WhatsApp en Meta, que con la misma inversión pasó de 72 a 26 leads.\nE-commerce: verificar la carga de ventas de Tienda Nube y activar recuperación de carritos: hubo 167 carritos y ninguna venta registrada.",
+  "alerta": "Cierre de octubre: Agro necesita $24,8 M de margen más (3 a 4 drones al margen por unidad reciente) y Consumer comercial $22,8 M, con 6 días por delante."
  },
  {
   "id": "Consumer|Comercial",
   "semana": "19/10 – 25/10 vs 12/10 – 18/10",
-  "titular": "Las ventas suben de 4 a 7 con menos inversión y el costo por lead más bajo de octubre.",
-  "situacion": "Con una inversión 6% menor ($356 K), los clics crecieron 36% y el costo por clic bajó 31%. Los leads se mantuvieron en 491 (+1%) con un costo por lead de $724 (−7%), y los chats subieron 17% (653). Las ventas pasaron de 4 a 7 y la conversión de 0,8% a 1,4%, con 6 ventas más pendientes de confirmar. La facturación y el margen de la semana todavía no están cargados. La planilla corrigió la semana anterior: 4 ventas (no 2), $12,3 M de facturación y $824 K de margen.",
-  "recomendaciones": "Cargar facturación y margen de las 7 ventas para medir si la recuperación también es de rentabilidad.\nConfirmar las 6 ventas pendientes: si se concretan, la semana cerraría con 13 ventas, la mejor de octubre.\nSostener la inversión en el nivel actual: el costo por lead y por clic bajaron, no hace falta subir presupuesto para generar demanda.\nMantener el seguimiento comercial que mejoró la conversión y medirlo por vendedor (la puntuación de leads sigue sin cargarse).",
-  "alerta": "Margen de octubre: $4,3 M sobre $28 M de objetivo (15%) con el 81% del mes transcurrido, sin contar la semana 19–25/10."
+  "titular": "Más ventas con menos inversión: el margen sube 11% aunque el ticket promedio cae a un tercio.",
+  "situacion": "Con una inversión 6% menor ($356 K), los clics crecieron 36% y los chats 17% (653). Los leads se mantuvieron en 491 (+1%) con un costo por lead de $724 (−7%), el más bajo de octubre. Las ventas pasaron de 4 a 7 y la conversión de 0,8% a 1,4%. La facturación bajó 43% ($7,0 M) porque el ticket promedio cayó de $3,1 M a $1,0 M, pero el margen subió 11% ($912 K): cada $1 invertido devolvió $2,57 (vs. $2,17). El margen por unidad bajó de $206 K a $130 K. Quedan 6 ventas pendientes de confirmar.",
+  "recomendaciones": "Confirmar las 6 ventas pendientes: si se concretan, la semana cerraría con 13 ventas, la mejor de octubre.\nRecuperar ticket: priorizar en la conversación y en la pauta los equipos de mayor valor y margen, y revisar qué productos explican la caída del ticket.\nSostener la inversión en el nivel actual: el costo por lead y por clic bajaron, no hace falta subir presupuesto para generar demanda.\nMedir la conversión por vendedor: la puntuación de leads sigue sin cargarse.",
+  "alerta": "Margen de octubre: $5,2 M sobre $28 M de objetivo (19%) con el 81% del mes transcurrido; faltan $22,8 M."
  },
  {
   "id": "Consumer|E-commerce",
@@ -26,10 +26,10 @@
  {
   "id": "Agro|Comercial",
   "semana": "19/10 – 25/10 vs 12/10 – 18/10",
-  "titular": "Leads estables y más baratos, pero WhatsApp cae 64% y las ventas de la semana no están cargadas.",
-  "situacion": "La inversión bajó 4% ($357 K), con la misma baja en Google y en Meta. Los leads totales se mantuvieron (87, +2%) con un costo por lead de $4,1 K (−6%). Dentro de Meta, en cambio, los leads de WhatsApp cayeron de 72 a 26 con la misma inversión y su costo más que se duplicó ($2,7 K → $6,0 K). Las ventas, la facturación y el margen de la semana no están cargados. La planilla corrigió hacia arriba la semana del 5 al 11/10: margen de USD 15,4 K (antes USD 12,9 K).",
-  "recomendaciones": "Cargar las ventas de la semana: es el dato que define si octubre llega al objetivo.\nRevisar la campaña de WhatsApp en Meta (creatividades, audiencias, frecuencia): la caída de leads no viene del presupuesto.\nCerrar el pipeline caliente de las semanas anteriores (72 leads de WhatsApp del 12 al 18/10) con las condiciones de la promo de octubre, que vence el 31.\nAprovechar la Expo Campo Escuela UNSAdA (30 y 31/10) como instancia de cierre.",
-  "alerta": "Margen de octubre: $30,7 M sobre $65 M de objetivo (47%) con el 81% del mes transcurrido; faltan $34,3 M."
+  "titular": "Un drone vendido con más margen: +33% de rentabilidad semanal, aunque WhatsApp cae 64%.",
+  "situacion": "La inversión bajó 4% ($357 K), con la misma baja en Google y en Meta. Los leads totales se mantuvieron (87, +2%) con un costo por lead de $4,1 K (−6%). Se vendió 1 drone pulverizador y 3 accesorios, igual que la semana anterior: la facturación fue de USD 30,7 K (−7%) pero el margen subió a USD 6,1 K (+33%). Cada $1 invertido generó $26 de margen (vs. $19). El punto de alerta es WhatsApp: con la misma inversión en Meta, los leads cayeron de 72 a 26 y su costo más que se duplicó ($2,7 K → $6,0 K).",
+  "recomendaciones": "Revisar la campaña de WhatsApp en Meta (creatividades, audiencias, frecuencia): la caída de leads no viene del presupuesto.\nCerrar el pipeline caliente de las semanas anteriores (72 leads de WhatsApp del 12 al 18/10) con las condiciones de la promo de octubre, que vence el 31.\nAprovechar la Expo Campo Escuela UNSAdA (30 y 31/10) como instancia de cierre.\nCargar las ventas pendientes de confirmar en la planilla: el campo está vacío desde hace dos semanas.",
+  "alerta": "Margen de octubre: $40,2 M sobre $65 M de objetivo (62%) con el 81% del mes transcurrido; faltan $24,8 M (3 a 4 drones)."
  },
  {
   "id": "social",
