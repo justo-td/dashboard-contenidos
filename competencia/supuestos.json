@@ -1,0 +1,106 @@
+[
+ {
+  "clave": "inversion_t100",
+  "etiqueta": "Inversión en un DJI Agras T100",
+  "valor": 42000,
+  "unidad": "U$S + IVA",
+  "fuente": "Agroads / La Nación",
+  "tipo": "Dato de mercado"
+ },
+ {
+  "clave": "tarifa_min",
+  "etiqueta": "Tarifa de aplicación, zona núcleo (mín.)",
+  "valor": 12,
+  "unidad": "U$S/ha",
+  "fuente": "Agropix, guía de precios 2026",
+  "tipo": "Dato de mercado"
+ },
+ {
+  "clave": "tarifa_max",
+  "etiqueta": "Tarifa de aplicación, zona núcleo (máx.)",
+  "valor": 15,
+  "unidad": "U$S/ha",
+  "fuente": "Agropix, guía de precios 2026",
+  "tipo": "Dato de mercado"
+ },
+ {
+  "clave": "costo_operativo",
+  "etiqueta": "Costo operativo por hectárea",
+  "valor": 3.34,
+  "unidad": "U$S/ha",
+  "fuente": "INTA (papa, sudeste bonaerense)",
+  "tipo": "Dato técnico; no incluye amortización ni mano de obra"
+ },
+ {
+  "clave": "ha_anio",
+  "etiqueta": "Hectáreas por año de referencia",
+  "valor": 6000,
+  "unidad": "ha/año",
+  "fuente": "INTA",
+  "tipo": "Dato técnico"
+ },
+ {
+  "clave": "capacidad_hora",
+  "etiqueta": "Capacidad de trabajo T100",
+  "valor": 35,
+  "unidad": "ha/hora",
+  "fuente": "Tekron vía La Nación / Agrofy",
+  "tipo": "Dato del fabricante"
+ },
+ {
+  "clave": "vida_util",
+  "etiqueta": "Vida útil promedio",
+  "valor": 36,
+  "unidad": "meses",
+  "fuente": "G. Roatta en Bichos de Campo",
+  "tipo": "Opinión de mercado"
+ },
+ {
+  "clave": "ticket_promedio",
+  "etiqueta": "Ticket promedio por equipo",
+  "valor": 33000,
+  "unidad": "U$S",
+  "fuente": "Supuesto de este análisis (mezcla T25P, T55, T70P y T100)",
+  "tipo": "Supuesto"
+ },
+ {
+  "clave": "tekron_share",
+  "etiqueta": "Participación de Tekron",
+  "valor": 0.45,
+  "unidad": "share",
+  "fuente": "Expoagro / Infocampo (dato de la empresa, mayo 2025)",
+  "tipo": "Dato declarado"
+ },
+ {
+  "clave": "tarifa_mendoza",
+  "etiqueta": "Tarifa de aplicación en el este mendocino",
+  "valor": 37.5,
+  "unidad": "U$S/ha",
+  "fuente": "Mendoza Post (rango 35 a 40)",
+  "tipo": "Dato de mercado"
+ },
+ {
+  "clave": "lobesia_drones",
+  "etiqueta": "Hectáreas con drones en la campaña contra lobesia",
+  "valor": 10000,
+  "unidad": "ha",
+  "fuente": "AgAir Update, oct-2026",
+  "tipo": "Dato oficial"
+ },
+ {
+  "clave": "ha_tododrones",
+  "etiqueta": "Hectáreas trabajadas con drones TodoDrones en 2026",
+  "valor": 419360,
+  "unidad": "ha",
+  "fuente": "agro.tododrones.com.ar",
+  "tipo": "Dato propio"
+ },
+ {
+  "clave": "elnino_prob",
+  "etiqueta": "Probabilidad de El Niño de intensidad histórica",
+  "valor": 0.75,
+  "unidad": "share",
+  "fuente": "NOAA vía CEPAL (Ámbito, oct-2026)",
+  "tipo": "Pronóstico"
+ }
+]

@@ -1,0 +1,93 @@
+[
+ {
+  "id": "takeaway",
+  "orden": 0,
+  "seccion": "header",
+  "titulo": "Conclusión",
+  "texto": "El mercado vuela hacia unos 2.800 drones vendidos en 2026, pero todos venden el mismo DJI: la pelea ya es por postventa, capacitación, financiación y cercanía. TodoDrones tiene la marca más grande del grupo y la sub-explota en agro; el rival más directo es Alena en el corredor norte bonaerense, y el modelo a superar es Camptech."
+ },
+ {
+  "id": "h1",
+  "orden": 1,
+  "seccion": "resumen",
+  "titulo": "Mercado en explosión, con fecha de vencimiento",
+  "texto": "De unos 90 equipos en 2023 a 2.800 proyectados en 2026 (solo DJI Agras). Los especialistas ven dos o tres temporadas más de crecimiento: la ventana para ganar parque instalado y clientes recurrentes es ahora."
+ },
+ {
+  "id": "h2",
+  "orden": 2,
+  "seccion": "resumen",
+  "titulo": "Competencia intramarca: el producto no diferencia",
+  "texto": "Seis de los siete rivales venden DJI. El canal se parte entre Tekron (más de 45% declarado; Camptech y TDS) y Bidcom Agro (Azura, Alena, BLS en Pehuajó). Precios convergen: T100 entre U$S 42.000 y 45.000, T70P con descuentos de hasta 15%."
+ },
+ {
+  "id": "h3",
+  "orden": 3,
+  "seccion": "resumen",
+  "titulo": "Amenaza número uno: Alena",
+  "texto": "Cinco puntos en provincia de Buenos Aires (Salto, Balcarce, Madariaga, Chascomús, Bragado), presta servicios, forma pilotos y vende software. Salto está a unos 50 km de Areco y Bragado a unos 90 km de Junín. Su debilidad es digital: no tiene Instagram identificable."
+ },
+ {
+  "id": "h4",
+  "orden": 4,
+  "seccion": "resumen",
+  "titulo": "Benchmark operativo: Camptech",
+  "texto": "Taller y laboratorio en Río Cuarto, academia de operadores con prácticas para el carnet fitosanitario de Córdoba, servicios agronómicos y presencia constante en ferias y medios. Es el modelo integral que TodoDrones debería igualar en Buenos Aires."
+ },
+ {
+  "id": "h5",
+  "orden": 5,
+  "seccion": "resumen",
+  "titulo": "Benchmark digital: Nico Marcucci",
+  "texto": "NFM Agrosoluciones suma unos 16.000 seguidores con 1 a 10 empleados: marca personal del fundador y mensaje de retorno de inversión. @tododronesagro (1.543) está por debajo incluso de Azura (2.845), aunque la cuenta madre tiene unos 15.000."
+ },
+ {
+  "id": "h6",
+  "orden": 6,
+  "seccion": "resumen",
+  "titulo": "El activo que nadie más tiene",
+  "texto": "TodoDrones declara 419.360 hectáreas trabajadas con sus drones en 2026. Ningún competidor publica una cifra de prueba social comparable: hay que convertirla en el eje de la comunicación."
+ },
+ {
+  "id": "h7",
+  "orden": 7,
+  "seccion": "resumen",
+  "titulo": "Dos ventanas inmediatas",
+  "texto": "El Niño 2026/27 (75% de probabilidad de episodio fuerte) va a anegar la Cuenca del Salado y el oeste bonaerense: el dron entra donde la pulverizadora no puede. Y en Cuyo no aparece distribuidor oficial DJI visible, con tarifas de servicio de U$S 35 a 40 por hectárea."
+ },
+ {
+  "id": "h8",
+  "orden": 8,
+  "seccion": "resumen",
+  "titulo": "Riesgo: más marcas y precios a la baja",
+  "texto": "Entran XAG (Agrometal), GTEEX (Villa Nueva), Vector AGR (Cele, octubre 2026) y EAVision (Next Siembra). La reforma ANAC 2026 habilita al productor a volar su propio T100: crece el mercado, pero también la presión sobre el margen."
+ },
+ {
+  "id": "m1",
+  "orden": 1,
+  "seccion": "marketing",
+  "titulo": "La audiencia está, pero en la cuenta equivocada",
+  "texto": "Los ~15.000 seguidores de @tododrones.arg son en su mayoría público consumer. Migrar parte de esa audiencia al agro con contenido cruzado es más barato que construir desde cero."
+ },
+ {
+  "id": "m2",
+  "orden": 2,
+  "seccion": "marketing",
+  "titulo": "Los rivales comunican eventos, no resultados",
+  "texto": "Azura, Camptech y TDS publican demos, ferias y entregas. Nadie publica casos con hectáreas, ahorro y repago. Ese espacio de contenido de retorno de inversión está libre (solo NFM lo insinúa en prensa)."
+ },
+ {
+  "id": "m3",
+  "orden": 3,
+  "seccion": "marketing",
+  "titulo": "Prensa agro: TodoDrones casi ausente",
+  "texto": "Camptech aparece en Valor Agregado Agro, La Voz de San Justo, El Periódico y Difusión Empresarial; TDS en la prensa de Saladillo y Bolívar. TodoDrones aparece en una nota nacional. Un vocero estable y notas trimestrales cierran esa brecha."
+ },
+ {
+  "id": "m4",
+  "orden": 4,
+  "seccion": "marketing",
+  "titulo": "Los marketplaces son vidriera de precio",
+  "texto": "Agrofy y Agroads concentran avisos de T100, T70P y T55 con precio y financiación. Camptech y BLS publican; TodoDrones no aparece en los avisos relevados."
+ }
+]

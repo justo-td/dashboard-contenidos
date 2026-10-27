@@ -32,6 +32,9 @@ html, body { margin: 0; background: #ffffff; color: #0a0a0a; font-family: var(--
 window.dash = (() => {
   const calcs = {}, cbs = [], cache = {};
   const FILES = { cal: 'data.json', semanal: 'semanal.json', mensual: 'mensual.json', narrativa: 'narrativa.json' };
+  // Competencia: relevamiento fijo, un archivo por dataset `cx_<nombre>`.
+  ['competidores', 'mercado', 'precios', 'redes', 'canal', 'normativa', 'supuestos', 'hallazgos', 'foda', 'plan', 'fuentes']
+    .forEach((n) => { FILES['cx_' + n] = 'competencia/' + n + '.json'; });
   const raw = {};
   let status = 'loading', params = {};
   const run = () => cbs.forEach((fn) => { try { fn(); } catch (e) { console.error(e); } });
@@ -77,4 +80,7 @@ if os.path.abspath(rows_path) != os.path.abspath(os.path.join(out, "data.json"))
 here = os.path.dirname(os.path.abspath(__file__))
 for f in ("d3.min.js", "semanal.json", "mensual.json", "narrativa.json"):
     shutil.copyfile(os.path.join(here, f), os.path.join(out, f))
+comp_src, comp_out = os.path.join(here, "competencia"), os.path.join(out, "competencia")
+if os.path.abspath(comp_src) != os.path.abspath(comp_out):
+    shutil.copytree(comp_src, comp_out, dirs_exist_ok=True)
 print("site ->", out)

@@ -178,6 +178,96 @@
 }
 @media (prefers-reduced-motion: reduce) { .td * { transition: none !important; } }
 </style>
+<style>
+/* Competencia: same white ledger as the report; TodoDrones Agro in the Agro green. */
+.cx {
+  --color-fg: #0a0a0a; --color-fg-muted: #5f6368; --color-bg: #ffffff; --color-panel: #ffffff; --color-border-line: #e6e6e6;
+  --color-ok: #247b50; --color-warn: #92400e; --color-bad: #c4242a;
+  --cds-chart-status-critical: #c4242a; --cds-chart-muted: #c9c9c9; --cds-chart-grid: #f0f0f0; --cds-chart-axis: #d4d4d4;
+  --cds-surface-popover: #ffffff; --cds-border: #e6e6e6; --cds-shadow-popover: 0 4px 16px rgba(0,0,0,.10); --cds-text-secondary: #5f6368;
+  --cds-radius: 8px; --cds-pad-xs: 6px; --cds-pad-sm: 10px; --cds-pad-md: 16px; --cds-pad-lg: 20px;
+  --cds-gap-xs: 6px; --cds-gap-sm: 8px; --cds-gap-md: 12px; --cds-gap-lg: 24px;
+  --cds-font-size-caption: 12px; --cds-font-size-body: 14px; --cds-font-size-heading: 15px; --cds-font-size-title: 24px;
+  --cds-font-weight-medium: 600; --cds-dur-slow: .3s; --cds-ease-out: ease-out;
+  display: flex; flex-direction: column; gap: 24px; font-family: var(--td-font); color: var(--color-fg); background: var(--color-bg);
+}
+.cx .rc-page[hidden] { display: none; }
+.rc-head { display: flex; flex-direction: column; gap: var(--cds-gap-xs); }
+.rc-eyebrow { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); letter-spacing: .04em; text-transform: uppercase; }
+.rc-head h1 { margin: 0; font-family: var(--td-font); font-weight: 400; font-size: var(--cds-font-size-title); text-wrap: balance; }
+.rc-take { margin: 0; max-width: 72ch; font-size: var(--cds-font-size-body); line-height: 1.55; color: var(--color-fg); }
+.rc-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.rc-tab { font: inherit; font-size: 13px; background: #ffffff; border: 1px solid var(--color-border-line); border-radius: 999px; padding: 6px 14px; color: var(--color-fg-muted); cursor: pointer; min-height: 34px; }
+.rc-tab:hover { color: var(--color-fg); border-color: #d4d4d4; }
+.rc-tab[aria-selected="true"] { color: #ffffff; background: var(--color-fg); border-color: var(--color-fg); font-weight: 600; }
+.rc-tab:focus-visible, .rc-chip:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.cx .rc-page { display: flex; flex-direction: column; gap: var(--cds-gap-lg); }
+.rc-h2 { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); text-wrap: balance; }
+.rc-lede { margin: 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-body); max-width: 75ch; line-height: 1.5; }
+.rc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--cds-gap-md); }
+.rc-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-sm); min-width: 0; }
+.rc-card h3 { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
+.rc-note { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.45; }
+.rc-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: var(--cds-gap-md); }
+.rc-kpi { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md); display: flex; flex-direction: column; gap: var(--cds-gap-xs); min-width: 0; }
+.rc-kpi-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.rc-kpi-val { font-family: var(--td-font); font-weight: 600; letter-spacing: -0.01em; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; line-height: 1.15; }
+.rc-kpi-sub { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
+.rc-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--cds-gap-md); }
+.rc-list li { display: flex; flex-direction: column; gap: 2px; padding-left: var(--cds-pad-sm); border-left: 2px solid var(--color-border-line); }
+.rc-list b { font-weight: var(--cds-font-weight-medium); }
+.rc-list span { color: var(--color-fg-muted); line-height: 1.5; font-size: var(--cds-font-size-body); }
+.rc-chart { position: relative; min-height: 260px; }
+.rc-chart svg { display: block; overflow: visible; }
+.rc-chart text { font-family: var(--td-font); }
+.rc-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); max-width: 260px; line-height: 1.4; z-index: 2; }
+.rc-tip .k { color: var(--cds-text-secondary); display: block; }
+.rc-scroll { overflow-x: auto; min-width: 0; }
+.rc-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-body); font-variant-numeric: tabular-nums; }
+.rc-table th { text-align: left; font-weight: var(--cds-font-weight-medium); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; vertical-align: bottom; }
+.rc-table td { padding: var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: top; line-height: 1.45; }
+.rc-table tr.rc-own td { background: color-mix(in srgb, var(--color-fg) 5%, transparent); }
+.rc-table td.num, .rc-table th.num { text-align: right; }
+.rc-table td.wide { min-width: 16rem; }
+.rc-table td.mid { min-width: 10rem; }
+.rc-table a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.rc-heat td.sc { text-align: center; font-weight: var(--cds-font-weight-medium); min-width: 3.2rem; }
+.rc-pill { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: var(--cds-font-size-caption); border: 1px solid var(--color-border-line); white-space: nowrap; }
+.rc-pill.alta { color: var(--color-bad); border-color: currentColor; }
+.rc-pill.media { color: var(--color-warn); border-color: currentColor; }
+.rc-pill.baja { color: var(--color-fg-muted); }
+.rc-pill.propia { color: var(--color-ok); border-color: currentColor; }
+.rc-yes, .rc-part, .rc-no { white-space: nowrap; font-size: var(--cds-font-size-caption); }
+.rc-yes { color: var(--color-ok); }
+.rc-part { color: var(--color-warn); }
+.rc-no { color: var(--color-fg-muted); opacity: .75; }
+.rc-chips { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); }
+.rc-chip { font: inherit; font-size: var(--cds-font-size-caption); padding: 4px 12px; border-radius: 999px; border: 1px solid var(--color-border-line); background: var(--color-panel); color: var(--color-fg); cursor: pointer; }
+.rc-chip[aria-pressed="true"] { background: var(--color-fg); color: var(--color-bg); border-color: var(--color-fg); }
+.rc-profile { display: grid; grid-template-columns: minmax(9rem, 13rem) 1fr; gap: var(--cds-gap-sm) var(--cds-gap-md); margin: 0; }
+.rc-profile dt { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); padding-top: 2px; }
+.rc-profile dd { margin: 0; line-height: 1.5; min-width: 0; }
+@media (max-width: 560px) { .rc-profile { grid-template-columns: 1fr; gap: 2px; } .rc-profile dd { margin-bottom: var(--cds-gap-sm); } }
+.rc-callout { border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md); display: flex; flex-direction: column; gap: var(--cds-gap-xs); background: var(--color-bg); }
+.rc-callout b { font-weight: var(--cds-font-weight-medium); }
+.rc-badges { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm); align-items: center; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.rc-foda { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: var(--cds-gap-md); }
+.rc-q { border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md); background: var(--color-panel); display: flex; flex-direction: column; gap: var(--cds-gap-sm); min-height: 8rem; }
+.rc-q h4 { margin: 0; font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); display: flex; gap: var(--cds-gap-xs); align-items: center; }
+.rc-q h4::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; background: currentColor; }
+.rc-q.f h4 { color: var(--color-ok); } .rc-q.d h4 { color: var(--color-warn); } .rc-q.o h4 { color: var(--color-fg); } .rc-q.a h4 { color: var(--color-bad); }
+.rc-q ul { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: var(--cds-gap-xs); line-height: 1.5; }
+.rc-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); align-items: center; }
+.rc-sw { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; border: 2px solid currentColor; }
+.rc-fail { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: inherit; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.rc-fail i { width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); display: inline-block; }
+.cx [data-dash-source-state=empty] { color: transparent; }
+.cx [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+@media (prefers-reduced-motion: no-preference) {
+  .cx .rc-page:not([hidden]) { animation: rc-in var(--cds-dur-slow) var(--cds-ease-out); }
+  @keyframes rc-in { from { opacity: .4; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+}
+</style>
 
 <div class="td">
   <header class="td-bar" id="inicio">
@@ -195,6 +285,7 @@
   <nav class="td-tabs" role="tablist" aria-label="Secciones del reporte">
     <button class="td-tab" role="tab" id="tab-comercial" aria-controls="comercial" aria-selected="true" data-tab="comercial">Proceso comercial</button>
     <button class="td-tab" role="tab" id="tab-social" aria-controls="social" aria-selected="false" data-tab="social" tabindex="-1">Social Media</button>
+    <button class="td-tab" role="tab" id="tab-competencia" aria-controls="competencia" aria-selected="false" data-tab="competencia" tabindex="-1">Competencia</button>
   </nav>
 
   <!-- ===================== PROCESO COMERCIAL ===================== -->
@@ -350,6 +441,352 @@
       <p><b>Sin registrar</b>: filas con fecha pasada y la columna "Estado publicación orgánico" vacía. No se asume si salieron o no, así que bajan el cumplimiento hasta que se completen.</p>
       <p>Consumer y Agro se leen de sus propios calendarios y nunca se mezclan. Las hojas de abril no tienen columna Plataforma, por eso la serie arranca en mayo.</p>
     </section>
+  </div>
+
+
+  <!-- ===================== COMPETENCIA ===================== -->
+  <div class="td-panel" id="competencia" role="tabpanel" aria-labelledby="tab-competencia" hidden>
+    <div class="td-titlerow">
+      <div>
+        <h1>Competencia</h1>
+        <p class="td-subline rc-take dash-skeleton" data-source="cx_hallazgos" data-field="texto" data-where="id=takeaway">—</p>
+      </div>
+    </div>
+    <div class="cx">
+
+
+  <nav class="rc-tabs" role="tablist" aria-label="Secciones de competencia">
+    <button class="rc-tab" role="tab" id="cx-tab-resumen" data-page="cx-resumen" aria-controls="cx-resumen" type="button">Resumen</button>
+    <button class="rc-tab" role="tab" id="cx-tab-mercado" data-page="cx-mercado" aria-controls="cx-mercado" type="button">Mercado y canal</button>
+    <button class="rc-tab" role="tab" id="cx-tab-competidores" data-page="cx-competidores" aria-controls="cx-competidores" type="button">Competidores</button>
+    <button class="rc-tab" role="tab" id="cx-tab-marketing" data-page="cx-marketing" aria-controls="cx-marketing" type="button">Marketing y redes</button>
+    <button class="rc-tab" role="tab" id="cx-tab-foda" data-page="cx-foda" aria-controls="cx-foda" type="button">FODA</button>
+    <button class="rc-tab" role="tab" id="cx-tab-plan" data-page="cx-plan" aria-controls="cx-plan" type="button">Plan de acción</button>
+    <button class="rc-tab" role="tab" id="cx-tab-fuentes" data-page="cx-fuentes" aria-controls="cx-fuentes" type="button">Fuentes y método</button>
+  </nav>
+
+  <!-- RESUMEN -->
+  <div class="rc-page" id="cx-resumen" role="tabpanel" aria-labelledby="cx-tab-resumen">
+    <div class="rc-kpis" id="kpis">
+      <div class="rc-kpi">
+        <span class="rc-kpi-label">Drones agro vendidos, proyección del año</span>
+        <span class="rc-kpi-val dash-skeleton" id="k-ventas" data-source="cx_mercado" data-field="ventas_unidades" data-where="anio=2026">—</span>
+        <span class="rc-kpi-sub" id="k-ventas-sub" data-source="cx_mercado" data-field="ventas_unidades" data-where="anio=2023">—</span>
+      </div>
+      <div class="rc-kpi">
+        <span class="rc-kpi-label">Parque instalado estimado</span>
+        <span class="rc-kpi-val dash-skeleton" id="k-parque" data-source="cx_mercado" data-field="parque_unidades" data-where="anio=2026">—</span>
+        <span class="rc-kpi-sub">Drones agrícolas operando en el país</span>
+      </div>
+      <div class="rc-kpi">
+        <span class="rc-kpi-label">Cuota declarada de Tekron</span>
+        <span class="rc-kpi-val dash-skeleton" id="k-tekron" data-source="cx_supuestos" data-field="valor" data-where="clave=tekron_share">—</span>
+        <span class="rc-kpi-sub">Master dealer DJI; dato de la propia empresa</span>
+      </div>
+      <div class="rc-kpi">
+        <span class="rc-kpi-label">DJI Agras T100 nuevo</span>
+        <span class="rc-kpi-val"><span class="dash-skeleton" id="k-t100a" data-source="cx_precios" data-field="precio_min" data-where="modelo=DJI%20Agras%20T100">—</span><span id="k-t100sep"></span><span id="k-t100b" data-source="cx_precios" data-field="precio_max" data-where="modelo=DJI%20Agras%20T100"></span></span>
+        <span class="rc-kpi-sub">Miles de dólares, más IVA, según avisos</span>
+      </div>
+      <div class="rc-kpi">
+        <span class="rc-kpi-label">Tarifa de aplicación, zona núcleo</span>
+        <span class="rc-kpi-val"><span class="dash-skeleton" id="k-tarifa-a" data-source="cx_supuestos" data-field="valor" data-where="clave=tarifa_min">—</span><span id="k-tarifa-sep"></span><span id="k-tarifa-b" data-source="cx_supuestos" data-field="valor" data-where="clave=tarifa_max"></span></span>
+        <span class="rc-kpi-sub">Dólares por hectárea</span>
+      </div>
+      <div class="rc-kpi">
+        <span class="rc-kpi-label">Valor del mercado del año, estimado</span>
+        <span class="rc-kpi-val dash-skeleton" id="k-valor" data-source="cx_valor_mercado" data-field="valor" data-where="metrica=valor_mercado">—</span>
+        <span class="rc-kpi-sub">Unidades proyectadas × ticket promedio supuesto</span>
+      </div>
+    </div>
+
+    <div class="rc-grid">
+      <article class="rc-card" id="card-hallazgos">
+        <h3>Lo que hay que saber</h3>
+        <p class="rc-note">Síntesis del relevamiento. El detalle y la evidencia están en cada pestaña.</p>
+        <ul class="rc-list dash-skeleton" id="list-hallazgos" data-source="cx_hallazgos"></ul>
+      </article>
+      <article class="rc-card" id="card-amenaza">
+        <h3>Mapa de amenaza</h3>
+        <p class="rc-note">Horizontal: cuánto se superpone cada rival con la zona de TodoDrones (norte y noroeste bonaerense). Vertical: fuerza competitiva, promedio de ocho capacidades puntuadas de 1 a 5. Arriba a la derecha está el riesgo mayor.</p>
+        <div class="rc-chart" id="chart-amenaza" data-source="cx_competidores cx_fuerza"></div>
+        <div class="rc-legend" id="legend-amenaza">
+          <span style="color: var(--cds-chart-status-critical)"><i class="rc-sw"></i>Amenaza alta</span>
+          <span style="color: var(--color-warn)"><i class="rc-sw"></i>Media</span>
+          <span style="color: var(--cds-chart-muted)"><i class="rc-sw"></i>Baja</span>
+        </div>
+        <p class="rc-note" id="note-amenaza"></p>
+      </article>
+    </div>
+
+    <article class="rc-card" id="card-ranking">
+      <h3>Ranking de amenaza y qué implica para TodoDrones</h3>
+      <div class="rc-scroll">
+        <table class="rc-table" id="tbl-ranking" data-source="cx_competidores" data-row-key="id">
+          <thead><tr>
+            <th data-field="empresa">Empresa</th>
+            <th data-field="provincia">Provincia</th>
+            <th data-field="canal_master">Canal</th>
+            <th data-field="nivel_amenaza">Amenaza</th>
+            <th data-field="implicancia">Implicancia</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </article>
+  </div>
+
+  <!-- MERCADO -->
+  <div class="rc-page" id="cx-mercado" role="tabpanel" aria-labelledby="cx-tab-mercado" hidden>
+    <div class="rc-grid">
+      <article class="rc-card" id="card-ventas">
+        <h3>Drones agrícolas vendidos por año</h3>
+        <p class="rc-note">Estimaciones de prensa y de los propios distribuidores; el último año es proyección solo de DJI Agras. Pasá el cursor por cada barra para ver la fuente.</p>
+        <div class="rc-chart" id="chart-ventas" data-source="cx_mercado"></div>
+      </article>
+      <article class="rc-card" id="card-precios">
+        <h3>Precios publicados por modelo</h3>
+        <p class="rc-note">Rango mínimo a máximo en dólares, de avisos en Agroads, Agrofy y sitios de distribuidores. Mayormente más IVA.</p>
+        <div class="rc-chart" id="chart-precios" data-source="cx_precios"></div>
+      </article>
+    </div>
+
+    <article class="rc-card" id="card-canal">
+      <h3>Estructura del canal: quién abastece a quién</h3>
+      <p class="rc-note">Seis de los siete rivales venden DJI. La pelea real es entre las redes de Tekron y Bidcom Agro, y empiezan a entrar marcas alternativas por fabricantes de maquinaria.</p>
+      <div class="rc-scroll">
+        <table class="rc-table" id="tbl-canal" data-source="cx_canal" data-row-key="id">
+          <thead><tr>
+            <th data-field="actor">Actor</th>
+            <th data-field="marca">Marca</th>
+            <th data-field="rol">Rol</th>
+            <th data-field="red">Red</th>
+            <th data-field="dato">Dato clave</th>
+            <th data-field="competidores">Competidores en su red</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </article>
+
+    <div class="rc-grid">
+      <article class="rc-card" id="card-economia">
+        <h3>Economía del contratista con un T100</h3>
+        <p class="rc-note">El argumento de venta: margen por hectárea con la tarifa media de la zona núcleo y el costo operativo del INTA, y cuánto tarda en pagarse el equipo al ritmo de referencia. No incluye amortización, mano de obra ni impuestos.</p>
+        <div class="rc-kpis">
+          <div class="rc-kpi"><span class="rc-kpi-label">Margen operativo por hectárea</span><span class="rc-kpi-val dash-skeleton" id="e-margen" data-source="cx_economia" data-field="valor" data-where="metrica=margen_ha">—</span><span class="rc-kpi-sub">Dólares</span></div>
+          <div class="rc-kpi"><span class="rc-kpi-label">Hectáreas para repagar el equipo</span><span class="rc-kpi-val dash-skeleton" id="e-ha" data-source="cx_economia" data-field="valor" data-where="metrica=ha_repago">—</span><span class="rc-kpi-sub">Hectáreas aplicadas</span></div>
+          <div class="rc-kpi"><span class="rc-kpi-label">Meses de repago</span><span class="rc-kpi-val dash-skeleton" id="e-meses" data-source="cx_economia" data-field="valor" data-where="metrica=meses_repago">—</span><span class="rc-kpi-sub">Al ritmo anual de referencia del INTA</span></div>
+          <div class="rc-kpi"><span class="rc-kpi-label">Facturación anual de servicio</span><span class="rc-kpi-val dash-skeleton" id="e-ingreso" data-source="cx_economia" data-field="valor" data-where="metrica=ingreso_anual">—</span><span class="rc-kpi-sub">Dólares por equipo</span></div>
+        </div>
+      </article>
+      <article class="rc-card" id="card-supuestos">
+        <h3>Datos y supuestos usados</h3>
+        <div class="rc-scroll">
+          <table class="rc-table" id="tbl-supuestos" data-source="cx_supuestos" data-row-key="clave">
+            <thead><tr>
+              <th data-field="etiqueta">Dato</th>
+              <th data-field="valor" class="num">Valor</th>
+              <th data-field="unidad">Unidad</th>
+              <th data-field="tipo">Tipo</th>
+              <th data-field="fuente">Fuente</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </article>
+    </div>
+
+    <article class="rc-card" id="card-normativa">
+      <h3>Normativa que mueve el mercado</h3>
+      <div class="rc-scroll">
+        <table class="rc-table" id="tbl-normativa" data-source="cx_normativa" data-row-key="id">
+          <thead><tr>
+            <th data-field="anio">Año</th>
+            <th data-field="ambito">Ámbito</th>
+            <th data-field="norma">Norma</th>
+            <th data-field="cambio">Qué cambia</th>
+            <th data-field="impacto">Impacto comercial</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </article>
+  </div>
+
+  <!-- COMPETIDORES -->
+  <div class="rc-page" id="cx-competidores" role="tabpanel" aria-labelledby="cx-tab-competidores" hidden>
+    <article class="rc-card" id="card-perfil">
+      <h3>Ficha por empresa</h3>
+      <p class="rc-note">Elegí una empresa. Dos nombres se corrigieron con la evidencia: “Azul” es Azura Drones y “Cantech” es Camptech.</p>
+      <div class="rc-chips" id="chips-perfil" role="group" aria-label="Empresa"></div>
+      <div class="rc-badges" id="perfil-badges"></div>
+      <dl class="rc-profile dash-skeleton" id="perfil" data-source="cx_competidores"></dl>
+      <div class="rc-callout" id="perfil-impl"></div>
+    </article>
+
+    <article class="rc-card" id="card-heat">
+      <h3>Matriz de capacidades</h3>
+      <p class="rc-note">Puntaje de 1 (débil) a 5 (fuerte) asignado en este análisis a partir de la evidencia pública de cada empresa. Es una estimación para comparar, no una medición. Agroband queda sin puntaje por falta de datos.</p>
+      <div class="rc-scroll">
+        <table class="rc-table rc-heat" id="tbl-heat" data-source="cx_competidores" data-row-key="id">
+          <thead><tr>
+            <th data-field="empresa">Empresa</th>
+            <th data-field="s_cobertura">Cobertura</th>
+            <th data-field="s_postventa">Postventa</th>
+            <th data-field="s_capacitacion">Capacitación</th>
+            <th data-field="s_digital">Digital</th>
+            <th data-field="s_prensa">Prensa y ferias</th>
+            <th data-field="s_servicios">Servicios a campo</th>
+            <th data-field="s_canal">Respaldo de canal</th>
+            <th data-field="s_portafolio">Portafolio</th>
+            <th data-source="cx_fuerza" data-field="fuerza">Fuerza</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </article>
+
+    <article class="rc-card" id="card-comparativo">
+      <h3>Comparativo general</h3>
+      <div class="rc-scroll">
+        <table class="rc-table" id="tbl-comp" data-source="cx_competidores" data-row-key="id">
+          <thead><tr>
+            <th data-field="empresa">Empresa</th>
+            <th data-field="ciudad">Base</th>
+            <th data-field="canal_master">Master dealer</th>
+            <th data-field="estatus_dji">Estatus DJI</th>
+            <th data-field="puntos_fisicos" class="num">Puntos físicos</th>
+            <th data-field="modelo">Modelo de negocio</th>
+            <th data-field="confianza">Confianza del dato</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </article>
+  </div>
+
+  <!-- MARKETING -->
+  <div class="rc-page" id="cx-marketing" role="tabpanel" aria-labelledby="cx-tab-marketing" hidden>
+    <div class="rc-grid">
+      <article class="rc-card" id="card-ig">
+        <h3>Seguidores en Instagram</h3>
+        <p class="rc-note">Instantánea de los perfiles indexados por buscadores; puede diferir del número actual. En color, las cuentas de TodoDrones.</p>
+        <div class="rc-chart" id="chart-ig" data-source="cx_redes"></div>
+        <ul class="rc-list" id="list-sinredes" data-source="cx_redes"></ul>
+      </article>
+      <article class="rc-card" id="card-mkt">
+        <h3>Lecturas de marketing</h3>
+        <ul class="rc-list dash-skeleton" id="list-mkt" data-source="cx_hallazgos"></ul>
+      </article>
+    </div>
+    <article class="rc-card" id="card-presencia">
+      <h3>Presencia por canal</h3>
+      <p class="rc-note">“No encontrado” significa que el relevamiento no lo halló, no que no exista.</p>
+      <div class="rc-scroll">
+        <table class="rc-table" id="tbl-presencia" data-source="cx_competidores" data-row-key="id">
+          <thead><tr>
+            <th data-field="empresa">Empresa</th>
+            <th data-field="p_web">Web</th>
+            <th data-field="p_instagram">Instagram</th>
+            <th data-field="p_facebook">Facebook</th>
+            <th data-field="p_youtube">YouTube</th>
+            <th data-field="p_tiktok">TikTok</th>
+            <th data-field="p_linkedin">LinkedIn</th>
+            <th data-field="p_prensa">Prensa</th>
+            <th data-field="p_ferias">Ferias</th>
+            <th data-field="p_marketplaces">Marketplaces</th>
+            <th data-field="p_listado_dji">Listado DJI</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </article>
+  </div>
+
+  <!-- FODA -->
+  <div class="rc-page" id="cx-foda" role="tabpanel" aria-labelledby="cx-tab-foda" hidden>
+    <article class="rc-card" id="card-foda">
+      <h3>FODA por empresa</h3>
+      <p class="rc-note">Empezá por TodoDrones y después compará con cada rival.</p>
+      <div class="rc-chips" id="chips-foda" role="group" aria-label="Empresa"></div>
+      <div class="rc-foda dash-skeleton" id="foda-grid" data-source="cx_foda"></div>
+      <div class="rc-callout" id="foda-impl"></div>
+    </article>
+  </div>
+
+  <!-- PLAN -->
+  <div class="rc-page" id="cx-plan" role="tabpanel" aria-labelledby="cx-tab-plan" hidden>
+    <div class="rc-grid">
+      <article class="rc-card" id="card-matriz">
+        <h3>Impacto contra esfuerzo</h3>
+        <p class="rc-note">Cada círculo es una iniciativa del plan. La zona sombreada, arriba a la izquierda, reúne las ganancias rápidas: mucho impacto con poco esfuerzo.</p>
+        <div class="rc-chart" id="chart-plan" data-source="cx_plan"></div>
+        <div class="rc-legend">
+          <span id="lg-p1"><i class="rc-sw"></i>Prioridad 1</span>
+          <span id="lg-p2"><i class="rc-sw"></i>Prioridad 2</span>
+          <span style="color: var(--cds-chart-muted)"><i class="rc-sw"></i>Prioridad 3</span>
+        </div>
+      </article>
+      <article class="rc-card" id="card-plan-p1">
+        <h3>Para arrancar ya</h3>
+        <ul class="rc-list" id="list-p1" data-source="cx_plan"></ul>
+      </article>
+    </div>
+    <article class="rc-card" id="card-plan">
+      <h3>Plan de acción completo</h3>
+      <div class="rc-scroll">
+        <table class="rc-table" id="tbl-plan" data-source="cx_plan" data-row-key="id">
+          <thead><tr>
+            <th data-field="id">Id</th>
+            <th data-field="prioridad">Prioridad</th>
+            <th data-field="frente">Frente</th>
+            <th data-field="titulo">Iniciativa</th>
+            <th data-field="frente_a">Frente a</th>
+            <th data-field="accion">Acción concreta</th>
+            <th data-field="plazo">Plazo</th>
+            <th data-field="kpi">Cómo medirlo</th>
+            <th data-field="impacto" class="num">Impacto</th>
+            <th data-field="esfuerzo" class="num">Esfuerzo</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </article>
+  </div>
+
+  <!-- FUENTES -->
+  <div class="rc-page" id="cx-fuentes" role="tabpanel" aria-labelledby="cx-tab-fuentes" hidden>
+    <article class="rc-card" id="card-metodo">
+      <h3>Cómo se hizo y qué tan firme es cada dato</h3>
+      <p class="rc-lede">El relevamiento usó buscadores sobre prensa agro, directorios de distribuidores, marketplaces e índices de redes. Los sitios de los competidores no pudieron abrirse en forma directa, así que todo dato viene de una fuente citada abajo. Las cifras de seguidores son instantáneas indexadas. La matriz de capacidades, la fuerza competitiva, el nivel de amenaza y el ticket promedio son juicio analítico. No hay datos públicos de facturación de ninguna de estas empresas: son PyMEs que no publican balances.</p>
+      <div class="rc-scroll">
+        <table class="rc-table" id="tbl-confianza" data-source="cx_competidores" data-row-key="id">
+          <thead><tr>
+            <th data-field="empresa">Empresa</th>
+            <th data-field="confianza">Confianza</th>
+            <th data-field="relevar">Qué falta relevar en campo</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </article>
+    <article class="rc-card" id="card-fuentes">
+      <h3>Fuentes</h3>
+      <div class="rc-scroll">
+        <table class="rc-table" id="tbl-fuentes" data-source="cx_fuentes" data-row-key="id">
+          <thead><tr>
+            <th data-field="id">Id</th>
+            <th data-field="titulo">Fuente</th>
+            <th data-field="usado_para">Usada para</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </article>
+  </div>
+
+    </div>
   </div>
 
   <p class="td-foot">Fuentes: planillas Proceso Comercial 2026 (Consumer y Agro) y calendarios de contenidos. Consumer y Agro siempre se leen por separado.</p>
@@ -996,5 +1433,528 @@ dash.calc('total', {
       card(art, b, kp, obj.find((o) => o.id === b), nar.find((n) => n.id === b), S.data);
     });
   });
+})();
+</script>
+
+<script>
+(() => {
+  const CX_A = '#2f9e5f';
+  const CX_C = '#1d5fbf';
+  const SC = ['s_cobertura','s_postventa','s_capacitacion','s_digital','s_prensa','s_servicios','s_canal','s_portafolio'];
+  const isNum = (v) => v !== null && v !== undefined && v !== '' && !Number.isNaN(Number(v));
+
+  dash.calc('cx_fuerza', {
+    inputs: ['cx_competidores'],
+    title: 'Fuerza competitiva',
+    description: 'Promedio de las ocho capacidades puntuadas de 1 a 5 de cada empresa; vacío si no tiene puntajes.',
+    fn: (competidores) => competidores.map((c) => {
+      const keys = ['s_cobertura','s_postventa','s_capacitacion','s_digital','s_prensa','s_servicios','s_canal','s_portafolio'];
+      const v = keys.map((k) => c[k]).filter((x) => x !== null && x !== undefined && x !== '').map(Number);
+      return { id: c.id, empresa: c.empresa, fuerza: v.length ? Math.round(v.reduce((a, b) => a + b, 0) / v.length * 10) / 10 : null };
+    }),
+  });
+
+  dash.calc('cx_economia', {
+    inputs: ['cx_supuestos'],
+    title: 'Economía del contratista',
+    description: 'Tarifa media de zona núcleo menos costo operativo INTA; hectáreas y meses para repagar un T100 a 6.000 ha por año; facturación anual.',
+    fn: (supuestos) => {
+      const v = (k) => Number((supuestos.find((r) => r.clave === k) || {}).valor);
+      const tarifa = (v('tarifa_min') + v('tarifa_max')) / 2;
+      const margen = tarifa - v('costo_operativo');
+      const ha = v('inversion_t100') / margen;
+      const meses = ha / (v('ha_anio') / 12);
+      return [
+        { metrica: 'tarifa_media', valor: tarifa },
+        { metrica: 'margen_ha', valor: Math.round(margen * 100) / 100 },
+        { metrica: 'ha_repago', valor: Math.round(ha) },
+        { metrica: 'meses_repago', valor: Math.round(meses * 10) / 10 },
+        { metrica: 'ingreso_anual', valor: Math.round(tarifa * v('ha_anio')) },
+      ];
+    },
+  });
+
+  dash.calc('cx_valor_mercado', {
+    inputs: ['cx_mercado', 'cx_supuestos'],
+    title: 'Valor de mercado estimado',
+    description: 'Unidades proyectadas del último año por el ticket promedio supuesto por equipo.',
+    fn: (mercado, supuestos) => {
+      const last = mercado.reduce((a, r) => (Number(r.anio) > Number(a.anio) ? r : a), mercado[0]);
+      const ticket = Number((supuestos.find((r) => r.clave === 'ticket_promedio') || {}).valor);
+      return [{ metrica: 'valor_mercado', anio: Number(last.anio), valor: Number(last.ventas_unidades) * ticket }];
+    },
+  });
+
+  const ES = d3.formatLocale({ decimal: ',', thousands: '.', grouping: [3], currency: ['U$S ', ''] });
+  const fInt = ES.format(',.0f');
+  const f1 = ES.format(',.1f');
+  const f2 = ES.format(',.2f');
+  const fPct = ES.format('.0%');
+  const fK = (v) => ES.format(',.1f')(v / 1000).replace(/,0$/, '');
+  const fUsd = (v) => 'U$S ' + fInt(v);
+  const fNumCell = (v) => (Number.isInteger(Number(v)) ? fInt(v) : f2(v));
+
+  const $ = (s) => document.querySelector(s);
+  const mk = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined && text !== null) e.textContent = String(text); return e; };
+  const setMark = (el, src, field, where) => { el.dataset.source = src; if (field) el.dataset.field = field; if (where) el.dataset.where = where; };
+  const enc = (v) => encodeURIComponent(String(v));
+
+  const ok = (id) => { const d = dash.data(id); return d.status === 'ok' && Array.isArray(d.data) ? d.data : null; };
+  const failed = (id) => ['error', 'connect', 'declined', 'missing'].includes(dash.data(id).status);
+  function prep(el, ids) {
+    const all = ids.map(ok);
+    if (all.every(Boolean)) { el.classList.remove('dash-skeleton'); return all; }
+    if (ids.some(failed)) {
+      el.classList.remove('dash-skeleton');
+      const p = mk('div', 'rc-fail'); p.append(mk('i'), mk('span', null, 'No se pudo cargar'));
+      el.replaceChildren(p);
+    } else {
+      el.classList.add('dash-skeleton');
+      if (el.tagName !== 'TABLE') el.replaceChildren();
+    }
+    return null;
+  }
+  const textFill = (el, ids, fn) => { const r = prep(el, ids); if (r) fn(...r); else if (!ids.some(failed)) el.textContent = '—'; };
+
+  function tipFor(box) {
+    let t = box.querySelector('.rc-tip');
+    if (!t) { t = mk('div', 'rc-tip'); t.hidden = true; box.append(t); }
+    return {
+      show(ev, lines) {
+        t.replaceChildren(...lines.map((l, i) => mk('span', i === 0 ? 'k' : null, l)).flatMap((s, i) => (i ? [mk('br'), s] : [s])));
+        t.hidden = false;
+        const b = box.getBoundingClientRect();
+        let x = ev.clientX - b.left + 12, y = ev.clientY - b.top + 12;
+        const tw = t.offsetWidth, th = t.offsetHeight;
+        if (x + tw > b.width) x = Math.max(0, ev.clientX - b.left - tw - 12);
+        if (y + th > b.height + 40) y = Math.max(0, ev.clientY - b.top - th - 12);
+        t.style.left = x + 'px'; t.style.top = y + 'px';
+      },
+      hide() { t.hidden = true; },
+    };
+  }
+  function newSvg(box, W, H) {
+    box.querySelectorAll('svg').forEach((s) => s.remove());
+    return d3.select(box).insert('svg', ':first-child').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img');
+  }
+
+  const AMENAZA_COLOR = { Alta: 'var(--cds-chart-status-critical)', Media: 'var(--color-warn)', Baja: 'var(--cds-chart-muted)' };
+  const pillClass = (v) => ({ Alta: 'alta', Media: 'media', Baja: 'baja', Propia: 'propia' }[v] || 'baja');
+
+  /* ---------- tables ---------- */
+  function fillTable(id, src, rows, cols, opts = {}) {
+    const tbl = document.getElementById(id);
+    const tb = tbl.querySelector('tbody');
+    const all = prep(tbl, [src, ...(opts.extra || [])]);
+    if (!all) { tb.replaceChildren(); return; }
+    const data = rows(all);
+    tb.replaceChildren(...data.map((r) => {
+      const tr = mk('tr');
+      tr.dataset.key = r[opts.key || 'id'];
+      if (r.propia === true) tr.classList.add('rc-own');
+      cols.forEach((c) => {
+        const td = mk('td', c.cls || null);
+        if (c.render) c.render(td, r); else td.textContent = r[c.f] === null || r[c.f] === undefined ? '' : String(r[c.f]);
+        tr.append(td);
+      });
+      return tr;
+    }));
+  }
+
+  /* ---------- header ---------- */
+  function drawHeader() {
+    const el = $('#competencia .rc-take');
+    textFill(el, ['cx_hallazgos'], (h) => { const r = h.find((x) => x.id === 'takeaway'); el.textContent = r ? r.texto : '—'; });
+  }
+
+  /* ---------- resumen ---------- */
+  function drawResumen() {
+    const kv = $('#k-ventas');
+    textFill(kv, ['cx_mercado'], (m) => {
+      const s = [...m].sort((a, b) => Number(a.anio) - Number(b.anio));
+      const last = s[s.length - 1];
+      const prevIdx = s.findIndex((r) => Number(r.ventas_unidades) > 0 && Number(r.anio) >= Number(last.anio) - 3);
+      const prev = s[prevIdx];
+      kv.textContent = fInt(last.ventas_unidades);
+      kv.dataset.where = 'anio=' + last.anio;
+      const sub = $('#k-ventas-sub');
+      sub.dataset.where = 'anio=' + prev.anio;
+      sub.textContent = `${fInt(prev.ventas_unidades)} en ${prev.anio} · ${f1(Number(last.ventas_unidades) / Number(prev.ventas_unidades))} veces más`;
+    });
+    const kp = $('#k-parque');
+    textFill(kp, ['cx_mercado'], (m) => {
+      const last = m.reduce((a, r) => (Number(r.anio) > Number(a.anio) ? r : a), m[0]);
+      kp.dataset.where = 'anio=' + last.anio;
+      kp.textContent = isNum(last.parque_unidades) ? fInt(last.parque_unidades) : '—';
+    });
+    const kt = $('#k-tekron');
+    textFill(kt, ['cx_supuestos'], (s) => { const r = s.find((x) => x.clave === 'tekron_share'); kt.textContent = r ? '+' + fPct(r.valor) : '—'; });
+    const t1 = $('#k-t100a'), t2 = $('#k-t100b'), tsep = $('#k-t100sep');
+    textFill(t1, ['cx_precios'], (p) => {
+      const r = p.find((x) => x.modelo === 'DJI Agras T100');
+      t1.textContent = r ? 'U$S ' + fK(r.precio_min) + 'k' : '—';
+      tsep.textContent = r ? '–' : '';
+      t2.textContent = r ? fK(r.precio_max) + 'k' : '';
+    });
+    const ta1 = $('#k-tarifa-a'), ta2 = $('#k-tarifa-b');
+    textFill(ta1, ['cx_supuestos'], (s) => {
+      const a = s.find((x) => x.clave === 'tarifa_min'), b = s.find((x) => x.clave === 'tarifa_max');
+      ta1.textContent = a ? 'U$S ' + fInt(a.valor) : '—';
+      $('#k-tarifa-sep').textContent = b ? '–' : '';
+      ta2.textContent = b ? fInt(b.valor) : '';
+    });
+    const kvm = $('#k-valor');
+    textFill(kvm, ['cx_valor_mercado'], (v) => { kvm.textContent = 'U$S ' + f1(v[0].valor / 1e6) + ' M'; });
+
+    const ul = $('#list-hallazgos');
+    const h = prep(ul, ['cx_hallazgos']);
+    if (h) {
+      const rows = h[0].filter((r) => r.seccion === 'resumen').sort((a, b) => a.orden - b.orden);
+      ul.replaceChildren(...rows.map((r) => { const li = mk('li'); li.append(mk('b', null, r.titulo), mk('span', null, r.texto)); return li; }));
+    }
+
+    drawAmenaza();
+
+    fillTable('tbl-ranking', 'cx_competidores', ([c]) => c.filter((r) => !r.propia).sort((a, b) => Number(b.amenaza || 0) - Number(a.amenaza || 0)), [
+      { f: 'empresa' }, { f: 'provincia' }, { f: 'canal_master' },
+      { f: 'nivel_amenaza', render: (td, r) => td.append(mk('span', 'rc-pill ' + pillClass(r.nivel_amenaza), r.nivel_amenaza)) },
+      { f: 'implicancia', cls: 'wide' },
+    ]);
+  }
+
+  function placeLabels(items, W, H) {
+    const placed = [];
+    const pts = items.map((i) => ({ x0: i.x - i.r, y0: i.y - i.r, x1: i.x + i.r, y1: i.y + i.r }));
+    const ov = (a, b) => !(a.x1 < b.x0 || a.x0 > b.x1 || a.y1 < b.y0 || a.y0 > b.y1);
+    const box = (c, it) => {
+      const w = it.w, h = 13;
+      const x0 = c[2] === 'start' ? c[0] : c[2] === 'end' ? c[0] - w : c[0] - w / 2;
+      return { x0, x1: x0 + w, y0: c[1] - h + 3, y1: c[1] + 3 };
+    };
+    items.forEach((it) => {
+      const cands = [[it.x + it.r + 5, it.y + 4, 'start'], [it.x - it.r - 5, it.y + 4, 'end'], [it.x, it.y - it.r - 6, 'middle'], [it.x, it.y + it.r + 15, 'middle'],
+        [it.x + it.r + 5, it.y - 10, 'start'], [it.x - it.r - 5, it.y - 10, 'end'], [it.x + it.r + 5, it.y + 18, 'start'], [it.x - it.r - 5, it.y + 18, 'end']];
+      const inside = (b) => b.x0 >= 0 && b.x1 <= W && b.y0 >= 0 && b.y1 <= H;
+      let best = cands.find((c) => { const b = box(c, it); return inside(b) && !placed.some((p) => ov(p, b)) && !pts.some((p) => ov(p, b)); })
+        || cands.find((c) => inside(box(c, it))) || cands[0];
+      placed.push(box(best, it));
+      [it.lx, it.ly, it.anchor] = best;
+    });
+  }
+
+  function axesGrid(svg, x, y, W, H, m, ticks, xTitle, yTitle) {
+    const g = svg.append('g');
+    ticks.forEach((t) => {
+      g.append('line').attr('x1', x(t)).attr('x2', x(t)).attr('y1', m.t).attr('y2', H - m.b).attr('stroke', 'var(--cds-chart-grid)').attr('stroke-width', 1);
+      g.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(t)).attr('y2', y(t)).attr('stroke', 'var(--cds-chart-grid)').attr('stroke-width', 1);
+      g.append('text').attr('x', x(t)).attr('y', H - m.b + 14).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text(t);
+      g.append('text').attr('x', m.l - 8).attr('y', y(t) + 4).attr('text-anchor', 'end').attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text(t);
+    });
+    g.append('text').attr('x', W - m.r).attr('y', H - 2).attr('text-anchor', 'end').attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text(xTitle);
+    g.append('text').attr('x', m.l).attr('y', m.t - 10).attr('text-anchor', 'start').attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text(yTitle);
+  }
+
+  function drawAmenaza() {
+    const box = $('#chart-amenaza');
+    const r = prep(box, ['cx_competidores', 'cx_fuerza']);
+    if (!r) return;
+    const [comp, fz] = r;
+    const F = new Map(fz.map((x) => [x.id, x.fuerza]));
+    const pts = comp.filter((c) => !c.propia && isNum(F.get(c.id)) && Number(c.solapamiento) > 0)
+      .map((c) => ({ ...c, sx: Number(c.solapamiento), fy: Number(F.get(c.id)) }));
+    const left = comp.filter((c) => !c.propia && !pts.find((p) => p.id === c.id)).map((c) => c.empresa);
+    $('#note-amenaza').textContent = left.length ? 'Fuera del mapa por falta de datos: ' + left.join(', ') + '.' : '';
+    const W = Math.max(280, box.clientWidth), H = 280, m = { t: 26, r: 10, b: 32, l: 30 };
+    const x = d3.scaleLinear([0.5, 5.5], [m.l, W - m.r]);
+    const y = d3.scaleLinear([0.5, 5.5], [H - m.b, m.t]);
+    const svg = newSvg(box, W, H);
+    svg.append('rect').attr('x', x(3)).attr('y', y(5.5)).attr('width', x(5.5) - x(3)).attr('height', y(3) - y(5.5)).attr('fill', 'var(--cds-chart-status-critical)').attr('opacity', 0.06);
+    axesGrid(svg, x, y, W, H, m, [1, 2, 3, 4, 5], 'Solapamiento territorial →', 'Fuerza competitiva ↑');
+    const tip = tipFor(box);
+    const items = pts.map((p) => ({ ...p, x: x(p.sx), y: y(p.fy), r: 5 + Number(p.amenaza || 1) * 1.6 }));
+    const g = svg.append('g');
+    g.selectAll('circle').data(items).join('circle')
+      .attr('cx', (d) => d.x).attr('cy', (d) => d.y).attr('r', (d) => d.r)
+      .attr('fill', (d) => AMENAZA_COLOR[d.nivel_amenaza] || 'var(--cds-chart-muted)').attr('fill-opacity', 0.85)
+      .attr('stroke', 'var(--color-panel)').attr('stroke-width', 1.5)
+      .on('mousemove', (ev, d) => tip.show(ev, [d.empresa, `Fuerza ${f1(d.fy)} · solapamiento ${d.sx}`, d.implicancia]))
+      .on('mouseleave', () => tip.hide());
+    const labels = g.selectAll('text.lb').data(items).join('text').attr('class', 'lb').attr('font-size', 12).attr('fill', 'var(--color-fg)').text((d) => d.empresa);
+    labels.each(function (d) { d.w = this.getComputedTextLength(); });
+    placeLabels(items, W, H);
+    labels.attr('x', (d) => d.lx).attr('y', (d) => d.ly).attr('text-anchor', (d) => d.anchor);
+  }
+
+  /* ---------- mercado ---------- */
+  function drawVentas() {
+    const box = $('#chart-ventas');
+    const r = prep(box, ['cx_mercado']);
+    if (!r) return;
+    const rows = [...r[0]].map((d) => ({ ...d, anio: Number(d.anio), v: Number(d.ventas_unidades) })).sort((a, b) => a.anio - b.anio);
+    const W = Math.max(260, box.clientWidth), H = 260, m = { t: 24, r: 4, b: 40, l: 4 };
+    const x = d3.scaleBand(rows.map((d) => String(d.anio)), [m.l, W - m.r]).padding(0.3);
+    const y = d3.scaleLinear([0, d3.max(rows, (d) => d.v) * 1.08], [H - m.b, m.t]);
+    const svg = newSvg(box, W, H);
+    const tip = tipFor(box);
+    svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', 'var(--cds-chart-axis)');
+    const bw = Math.min(x.bandwidth(), 56);
+    const g = svg.selectAll('g.b').data(rows).join('g').attr('class', 'b');
+    g.append('rect')
+      .attr('x', (d) => x(String(d.anio)) + (x.bandwidth() - bw) / 2).attr('width', bw)
+      .attr('y', (d) => y(d.v)).attr('height', (d) => y(0) - y(d.v)).attr('rx', 4)
+      .attr('fill', CX_A).attr('fill-opacity', (d) => (d.tipo === 'Proyección' ? 0.4 : 0.9))
+      .attr('stroke', (d) => (d.tipo === 'Proyección' ? CX_A : 'none')).attr('stroke-dasharray', '4 3')
+      .on('mousemove', (ev, d) => tip.show(ev, [`${d.anio} · ${d.tipo}`, `${fInt(d.v)} unidades`, d.nota, 'Fuente: ' + d.fuente]))
+      .on('mouseleave', () => tip.hide());
+    g.append('text').attr('x', (d) => x(String(d.anio)) + x.bandwidth() / 2).attr('y', (d) => y(d.v) - 6).attr('text-anchor', 'middle')
+      .attr('font-size', 12).attr('fill', 'var(--color-fg)').style('font-variant-numeric', 'tabular-nums').text((d) => fInt(d.v));
+    g.append('text').attr('x', (d) => x(String(d.anio)) + x.bandwidth() / 2).attr('y', H - m.b + 16).attr('text-anchor', 'middle')
+      .attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text((d) => d.anio);
+    g.filter((d) => d.tipo === 'Proyección').append('text').attr('x', (d) => x(String(d.anio)) + x.bandwidth() / 2).attr('y', H - m.b + 30).attr('text-anchor', 'middle')
+      .attr('font-size', 10).attr('fill', 'var(--color-fg-muted)').text('proyección');
+  }
+
+  function drawPrecios() {
+    const box = $('#chart-precios');
+    const r = prep(box, ['cx_precios']);
+    if (!r) return;
+    const rows = [...r[0]].sort((a, b) => Number(b.precio_max) - Number(a.precio_max));
+    const rowH = 38, m = { t: 6, r: 8, b: 22, l: 6 };
+    const W = Math.max(260, box.clientWidth), H = m.t + rows.length * rowH + m.b;
+    const lo = Math.floor(d3.min(rows, (d) => Number(d.precio_min)) / 5000) * 5000;
+    const hi = Math.ceil(d3.max(rows, (d) => Number(d.precio_max)) / 5000) * 5000;
+    const x = d3.scaleLinear([lo, hi], [m.l + 6, W - m.r - 6]);
+    const svg = newSvg(box, W, H);
+    const tip = tipFor(box);
+    x.ticks(4).forEach((t) => {
+      svg.append('line').attr('x1', x(t)).attr('x2', x(t)).attr('y1', m.t).attr('y2', H - m.b).attr('stroke', 'var(--cds-chart-grid)');
+      svg.append('text').attr('x', x(t)).attr('y', H - 6).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(fK(t) + 'k');
+    });
+    rows.forEach((d, i) => {
+      const y0 = m.t + i * rowH;
+      const used = d.condicion === 'Usado';
+      const col = used ? 'var(--cds-chart-muted)' : CX_A;
+      const g = svg.append('g').on('mousemove', (ev) => tip.show(ev, [d.modelo, d.condicion + ' · ' + d.carga, d.nota, 'Fuente: ' + d.fuente])).on('mouseleave', () => tip.hide());
+      g.append('rect').attr('x', 0).attr('y', y0).attr('width', W).attr('height', rowH).attr('fill', 'transparent');
+      g.append('text').attr('x', m.l).attr('y', y0 + 13).attr('font-size', 12).attr('fill', 'var(--color-fg)').text(d.modelo);
+      const val = Number(d.precio_min) === Number(d.precio_max) ? fUsd(d.precio_min) : `${fUsd(d.precio_min)}–${fInt(d.precio_max)}`;
+      g.append('text').attr('x', W - m.r).attr('y', y0 + 13).attr('text-anchor', 'end').attr('font-size', 12).attr('fill', 'var(--color-fg-muted)').style('font-variant-numeric', 'tabular-nums').text(val);
+      const yy = y0 + 26;
+      g.append('line').attr('x1', x(d.precio_min)).attr('x2', x(d.precio_max)).attr('y1', yy).attr('y2', yy).attr('stroke', col).attr('stroke-width', 6).attr('stroke-linecap', 'round');
+      g.append('circle').attr('cx', x(d.precio_min)).attr('cy', yy).attr('r', 5).attr('fill', col);
+      g.append('circle').attr('cx', x(d.precio_max)).attr('cy', yy).attr('r', 5).attr('fill', col);
+    });
+  }
+
+  function drawMercado() {
+    drawVentas();
+    drawPrecios();
+    fillTable('tbl-canal', 'cx_canal', ([c]) => c, [
+      { f: 'actor' }, { f: 'marca' }, { f: 'rol', cls: 'mid' }, { f: 'red', cls: 'mid' }, { f: 'dato', cls: 'wide' }, { f: 'competidores' },
+    ]);
+    const E = { 'e-margen': ['margen_ha', (v) => 'U$S ' + f2(v)], 'e-ha': ['ha_repago', fInt], 'e-meses': ['meses_repago', f1], 'e-ingreso': ['ingreso_anual', (v) => 'U$S ' + fInt(v)] };
+    Object.entries(E).forEach(([id, [k, fmt]]) => {
+      const el = document.getElementById(id);
+      textFill(el, ['cx_economia'], (e) => { const r = e.find((x) => x.metrica === k); el.textContent = r ? fmt(r.valor) : '—'; });
+    });
+    fillTable('tbl-supuestos', 'cx_supuestos', ([s]) => s, [
+      { f: 'etiqueta', cls: 'mid' },
+      { f: 'valor', cls: 'num', render: (td, r) => { td.textContent = r.unidad === 'share' ? fPct(r.valor) : fNumCell(r.valor); } },
+      { f: 'unidad' }, { f: 'tipo' }, { f: 'fuente', cls: 'mid' },
+    ], { key: 'clave' });
+    fillTable('tbl-normativa', 'cx_normativa', ([n]) => [...n].sort((a, b) => a.anio - b.anio), [
+      { f: 'anio' }, { f: 'ambito' }, { f: 'norma', cls: 'mid' }, { f: 'cambio', cls: 'wide' }, { f: 'impacto', cls: 'mid' },
+    ]);
+  }
+
+  /* ---------- competidores ---------- */
+  let selPerfil = 'alena';
+  let selFoda = 'tododrones';
+  function chips(container, rows, selected, onPick) {
+    container.replaceChildren(...rows.map((r) => {
+      const b = mk('button', 'rc-chip', r.empresa);
+      b.type = 'button';
+      b.setAttribute('aria-pressed', String(r.id === selected));
+      b.addEventListener('click', () => onPick(r.id));
+      return b;
+    }));
+  }
+  const PERFIL = [
+    ['nombre_identificado', 'Nombre identificado'], ['ciudad', 'Base'], ['region', 'Zona de influencia'], ['canal_master', 'Master dealer'],
+    ['estatus_dji', 'Estatus DJI'], ['modelo', 'Modelo de negocio'], ['antiguedad', 'Antigüedad'], ['personas', 'Personas clave'],
+    ['sucursales', 'Puntos físicos'], ['servicios', 'Oferta'], ['hitos', 'Hitos y señales'], ['relevar', 'Falta relevar'],
+  ];
+  function drawPerfil() {
+    const dl = $('#perfil');
+    const r = prep(dl, ['cx_competidores']);
+    if (!r) { $('#chips-perfil').replaceChildren(); $('#perfil-badges').replaceChildren(); $('#perfil-impl').replaceChildren(); return; }
+    const comp = r[0];
+    if (!comp.find((c) => c.id === selPerfil)) selPerfil = comp[0].id;
+    chips($('#chips-perfil'), comp, selPerfil, (id) => { selPerfil = id; drawPerfil(); });
+    const c = comp.find((x) => x.id === selPerfil);
+    const w = 'id=' + enc(c.id);
+    dl.replaceChildren(...PERFIL.flatMap(([f, label]) => { const dd = mk('dd', null, c[f] ?? '—'); setMark(dd, 'cx_competidores', f, w); return [mk('dt', null, label), dd]; }));
+    const bd = $('#perfil-badges');
+    const p1 = mk('span', 'rc-pill ' + pillClass(c.nivel_amenaza), c.nivel_amenaza); setMark(p1, 'cx_competidores', 'nivel_amenaza', w);
+    const p2 = mk('span', null, c.confianza); setMark(p2, 'cx_competidores', 'confianza', w);
+    const ig = mk('span', null, isNum(c.ig_seguidores) ? fInt(c.ig_seguidores) : 'sin dato'); setMark(ig, 'cx_competidores', 'ig_seguidores', w);
+    const pf = mk('span', null, isNum(c.puntos_fisicos) ? fInt(c.puntos_fisicos) : 'sin dato'); setMark(pf, 'cx_competidores', 'puntos_fisicos', w);
+    bd.replaceChildren(mk('span', null, 'Amenaza'), p1, mk('span', null, '· Confianza del dato:'), p2, mk('span', null, '· Seguidores IG:'), ig, mk('span', null, '· Puntos físicos:'), pf);
+    const im = $('#perfil-impl');
+    const t = mk('span', null, c.implicancia); setMark(t, 'cx_competidores', 'implicancia', w);
+    im.replaceChildren(mk('b', null, c.propia ? 'Lectura' : 'Qué significa para TodoDrones'), t);
+  }
+  function heatBg(v) {
+    if (!isNum(v)) return '';
+    return `color-mix(in srgb, ${CX_A} ${Math.round(Number(v) * 15)}%, transparent)`;
+  }
+  function drawCompetidores() {
+    drawPerfil();
+    const scoreCol = (f) => ({ f, cls: 'sc', render: (td, r) => { td.textContent = isNum(r[f]) ? r[f] : '—'; td.style.background = heatBg(r[f]); } });
+    fillTable('tbl-heat', 'cx_competidores', ([c, fz]) => { const F = new Map(fz.map((x) => [x.id, x.fuerza])); return c.map((r) => ({ ...r, fuerza: F.get(r.id) })); }, [
+      { f: 'empresa' }, ...SC.map(scoreCol),
+      { f: 'fuerza', cls: 'sc', render: (td, r) => { td.textContent = isNum(r.fuerza) ? f1(r.fuerza) : '—'; td.style.background = heatBg(r.fuerza); } },
+    ], { extra: ['cx_fuerza'] });
+    fillTable('tbl-comp', 'cx_competidores', ([c]) => c, [
+      { f: 'empresa' }, { f: 'ciudad', cls: 'mid' }, { f: 'canal_master' }, { f: 'estatus_dji', cls: 'wide' },
+      { f: 'puntos_fisicos', cls: 'num', render: (td, r) => { td.textContent = isNum(r.puntos_fisicos) ? fInt(r.puntos_fisicos) : ''; } },
+      { f: 'modelo', cls: 'wide' }, { f: 'confianza' },
+    ]);
+  }
+
+  /* ---------- marketing ---------- */
+  function drawIG() {
+    const box = $('#chart-ig');
+    const r = prep(box, ['cx_redes']);
+    const ul = $('#list-sinredes');
+    if (!r) { ul.replaceChildren(); return; }
+    const rows = r[0].filter((d) => isNum(d.seguidores)).sort((a, b) => Number(b.seguidores) - Number(a.seguidores));
+    const rowH = 36, m = { t: 4, r: 6, b: 4, l: 2 };
+    const W = Math.max(260, box.clientWidth), H = m.t + rows.length * rowH + m.b;
+    const x = d3.scaleLinear([0, d3.max(rows, (d) => Number(d.seguidores))], [m.l, W - m.r]);
+    const svg = newSvg(box, W, H);
+    const tip = tipFor(box);
+    rows.forEach((d, i) => {
+      const y0 = m.t + i * rowH;
+      const own = d.empresa_id === 'tododrones';
+      const g = svg.append('g').on('mousemove', (ev) => tip.show(ev, [d.empresa, `${fInt(d.seguidores)} seguidores` + (isNum(d.posts) ? ` · ${fInt(d.posts)} posts` : ''), d.nota])).on('mouseleave', () => tip.hide());
+      g.append('rect').attr('x', 0).attr('y', y0).attr('width', W).attr('height', rowH).attr('fill', 'transparent');
+      g.append('text').attr('x', m.l).attr('y', y0 + 12).attr('font-size', 12).attr('fill', 'var(--color-fg)').text(`${d.cuenta} · ${d.empresa}`);
+      g.append('text').attr('x', W - m.r).attr('y', y0 + 12).attr('text-anchor', 'end').attr('font-size', 12).attr('fill', 'var(--color-fg)').style('font-variant-numeric', 'tabular-nums').text(fInt(d.seguidores));
+      g.append('rect').attr('x', m.l).attr('y', y0 + 18).attr('height', 10).attr('rx', 4)
+        .attr('width', Math.max(4, x(Number(d.seguidores)) - m.l)).attr('fill', own ? CX_A : 'var(--cds-chart-muted)');
+    });
+    const miss = r[0].filter((d) => !isNum(d.seguidores));
+    ul.replaceChildren(...miss.map((d) => { const li = mk('li'); li.append(mk('b', null, `${d.empresa} · ${d.red}`), mk('span', null, d.nota)); return li; }));
+  }
+  const presCell = (f) => ({ f, render: (td, r) => { const v = r[f]; td.append(mk('span', v === 'Sí' ? 'rc-yes' : v === 'Parcial' ? 'rc-part' : 'rc-no', v)); } });
+  function drawMarketing() {
+    drawIG();
+    const ul = $('#list-mkt');
+    const h = prep(ul, ['cx_hallazgos']);
+    if (h) ul.replaceChildren(...h[0].filter((r) => r.seccion === 'marketing').sort((a, b) => a.orden - b.orden).map((r) => { const li = mk('li'); li.append(mk('b', null, r.titulo), mk('span', null, r.texto)); return li; }));
+    fillTable('tbl-presencia', 'cx_competidores', ([c]) => c, [
+      { f: 'empresa' }, ...['p_web', 'p_instagram', 'p_facebook', 'p_youtube', 'p_tiktok', 'p_linkedin', 'p_prensa', 'p_ferias', 'p_marketplaces', 'p_listado_dji'].map(presCell),
+    ]);
+  }
+
+  /* ---------- foda ---------- */
+  const Q = [['Fortaleza', 'Fortalezas', 'f'], ['Debilidad', 'Debilidades', 'd'], ['Oportunidad', 'Oportunidades', 'o'], ['Amenaza', 'Amenazas', 'a']];
+  function drawFoda() {
+    const grid = $('#foda-grid');
+    const r = prep(grid, ['cx_foda', 'cx_competidores']);
+    if (!r) { $('#chips-foda').replaceChildren(); $('#foda-impl').replaceChildren(); return; }
+    const [foda, comp] = r;
+    if (!comp.find((c) => c.id === selFoda)) selFoda = comp[0].id;
+    chips($('#chips-foda'), comp, selFoda, (id) => { selFoda = id; drawFoda(); });
+    grid.replaceChildren(...Q.map(([tipo, label, cls]) => {
+      const q = mk('div', 'rc-q ' + cls);
+      const ul = mk('ul');
+      foda.filter((x) => x.empresa_id === selFoda && x.tipo === tipo).forEach((x) => { const li = mk('li', null, x.texto); setMark(li, 'cx_foda', 'texto', 'id=' + enc(x.id)); ul.append(li); });
+      q.append(mk('h4', null, label), ul);
+      return q;
+    }));
+    const c = comp.find((x) => x.id === selFoda);
+    const t = mk('span', null, c.implicancia); setMark(t, 'cx_competidores', 'implicancia', 'id=' + enc(c.id));
+    $('#foda-impl').replaceChildren(mk('b', null, c.propia ? 'Lectura' : 'Qué significa para TodoDrones'), t);
+  }
+
+  /* ---------- plan ---------- */
+  function drawPlanChart() {
+    const box = $('#chart-plan');
+    const r = prep(box, ['cx_plan']);
+    if (!r) return;
+    const rows = r[0];
+    const W = Math.max(280, box.clientWidth), H = 300, m = { t: 26, r: 10, b: 32, l: 30 };
+    const x = d3.scaleLinear([0.5, 5.5], [m.l, W - m.r]);
+    const y = d3.scaleLinear([0.5, 5.5], [H - m.b, m.t]);
+    const svg = newSvg(box, W, H);
+    svg.append('rect').attr('x', x(0.5)).attr('y', y(5.5)).attr('width', x(2.5) - x(0.5)).attr('height', y(3.5) - y(5.5)).attr('fill', CX_A).attr('opacity', 0.08);
+    axesGrid(svg, x, y, W, H, m, [1, 2, 3, 4, 5], 'Esfuerzo →', 'Impacto ↑');
+    const tip = tipFor(box);
+    const cells = d3.group(rows, (d) => `${d.esfuerzo}|${d.impacto}`);
+    const pts = [];
+    cells.forEach((list) => {
+      const n = list.length, cols = n > 1 ? 2 : 1, nr = Math.ceil(n / cols), sp = 25;
+      list.forEach((d, i) => {
+        const cx = i % cols, cy = Math.floor(i / cols);
+        pts.push({ ...d, px: x(Number(d.esfuerzo)) + (cx - (cols - 1) / 2) * sp, py: y(Number(d.impacto)) + (cy - (nr - 1) / 2) * sp });
+      });
+    });
+    const col = (p) => (p === 'P1' ? CX_A : p === 'P2' ? CX_C : 'var(--cds-chart-muted)');
+    const g = svg.selectAll('g.pt').data(pts).join('g').attr('class', 'pt')
+      .on('mousemove', (ev, d) => tip.show(ev, [`${d.id} · ${d.prioridad} · ${d.frente}`, d.titulo, 'Frente a: ' + d.frente_a, d.plazo]))
+      .on('mouseleave', () => tip.hide());
+    g.append('circle').attr('cx', (d) => d.px).attr('cy', (d) => d.py).attr('r', 11.5).attr('fill', 'var(--color-panel)').attr('stroke', (d) => col(d.prioridad)).attr('stroke-width', 2);
+    g.append('text').attr('x', (d) => d.px).attr('y', (d) => d.py + 3.5).attr('text-anchor', 'middle').attr('font-size', 9.5).attr('fill', 'var(--color-fg)').text((d) => d.id);
+    $('#lg-p1').style.color = CX_A;
+    $('#lg-p2').style.color = CX_C;
+  }
+  function drawPlan() {
+    drawPlanChart();
+    const ul = $('#list-p1');
+    const r = prep(ul, ['cx_plan']);
+    if (r) ul.replaceChildren(...r[0].filter((d) => d.prioridad === 'P1').map((d) => {
+      const li = mk('li');
+      const b = mk('b', null, `${d.id} · ${d.titulo}`);
+      const s = mk('span', null, d.accion); setMark(s, 'cx_plan', 'accion', 'id=' + enc(d.id));
+      const k = mk('span', null, 'Frente a ' + d.frente_a + ' · ' + d.plazo);
+      li.append(b, s, k);
+      return li;
+    }));
+    const order = { P1: 1, P2: 2, P3: 3 };
+    fillTable('tbl-plan', 'cx_plan', ([p]) => [...p].sort((a, b) => order[a.prioridad] - order[b.prioridad] || b.impacto - a.impacto), [
+      { f: 'id' }, { f: 'prioridad' }, { f: 'frente' }, { f: 'titulo', cls: 'mid' }, { f: 'frente_a', cls: 'mid' }, { f: 'accion', cls: 'wide' },
+      { f: 'plazo' }, { f: 'kpi', cls: 'mid' }, { f: 'impacto', cls: 'num' }, { f: 'esfuerzo', cls: 'num' },
+    ]);
+  }
+
+  /* ---------- fuentes ---------- */
+  function drawFuentes() {
+    fillTable('tbl-confianza', 'cx_competidores', ([c]) => c, [
+      { f: 'empresa' }, { f: 'confianza', render: (td, r) => td.append(mk('span', 'rc-pill ' + ({ Alta: 'propia', Media: 'media', Baja: 'alta' }[r.confianza] || 'baja'), r.confianza)) }, { f: 'relevar', cls: 'wide' },
+    ]);
+    fillTable('tbl-fuentes', 'cx_fuentes', ([f]) => f, [
+      { f: 'id' },
+      { f: 'titulo', cls: 'wide', render: (td, r) => { const a = mk('a', null, r.titulo); a.href = r.url; a.target = '_blank'; a.rel = 'noopener'; td.append(a); } },
+      { f: 'usado_para' },
+    ]);
+  }
+
+  /* ---------- tabs ---------- */
+  const PAGES = { 'cx-resumen': drawResumen, 'cx-mercado': drawMercado, 'cx-competidores': drawCompetidores, 'cx-marketing': drawMarketing, 'cx-foda': drawFoda, 'cx-plan': drawPlan, 'cx-fuentes': drawFuentes };
+  let current = 'cx-resumen';
+  function show(page, link) {
+    if (!PAGES[page]) page = 'cx-resumen';
+    current = page;
+    document.querySelectorAll('.cx .rc-page').forEach((s) => { s.hidden = s.id !== page; });
+    document.querySelectorAll('.cx .rc-tab').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.page === page)));
+    render();
+  }
+  function render() { const panel = document.getElementById('competencia'); if (!panel || panel.hidden) return; drawHeader(); PAGES[current](); }
+  document.querySelectorAll('.cx .rc-tab').forEach((b) => b.addEventListener('click', () => show(b.dataset.page)));
+  document.querySelectorAll('.cx .rc-page').forEach((s) => { s.hidden = s.id !== current; });
+  document.querySelectorAll('.cx .rc-tab').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.page === current)));
+  dash.onData(render);
 })();
 </script>

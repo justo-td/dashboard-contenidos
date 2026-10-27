@@ -1,0 +1,83 @@
+[
+ {
+  "cuenta": "@nfm.agrosoluciones",
+  "empresa": "Nico Marcucci",
+  "empresa_id": "nfm",
+  "red": "Instagram",
+  "seguidores": 16000,
+  "posts": 765,
+  "nota": "Agricultura de precisión: drones, autopilotos, implementos"
+ },
+ {
+  "cuenta": "@tododrones.arg",
+  "empresa": "TodoDrones (cuenta madre)",
+  "empresa_id": "tododrones",
+  "red": "Instagram",
+  "seguidores": 15000,
+  "posts": null,
+  "nota": "Cuenta general: consumer + agro + enterprise"
+ },
+ {
+  "cuenta": "@azuradrones",
+  "empresa": "Azura Drones",
+  "empresa_id": "azura",
+  "red": "Instagram",
+  "seguidores": 2845,
+  "posts": 46,
+  "nota": "DJI Agriculture, DJI Academy, venta, servicio técnico, servicios"
+ },
+ {
+  "cuenta": "@tododronesagro",
+  "empresa": "TodoDrones Agro",
+  "empresa_id": "tododrones",
+  "red": "Instagram",
+  "seguidores": 1543,
+  "posts": 85,
+  "nota": "Cuenta específica agro"
+ },
+ {
+  "cuenta": "@camptechsas",
+  "empresa": "Camptech",
+  "empresa_id": "camptech",
+  "red": "Instagram",
+  "seguidores": 1455,
+  "posts": 145,
+  "nota": "Sigue a 841 cuentas"
+ },
+ {
+  "cuenta": "@dragonblackforce",
+  "empresa": "Dragon Black Force",
+  "empresa_id": "dbf",
+  "red": "Instagram / YouTube / TikTok",
+  "seguidores": null,
+  "posts": null,
+  "nota": "Cuentas enlazadas desde YouTube; cifras no indexadas"
+ },
+ {
+  "cuenta": "Alena Agritech",
+  "empresa": "Alena",
+  "empresa_id": "alena",
+  "red": "Instagram",
+  "seguidores": null,
+  "posts": null,
+  "nota": "No se encontró cuenta identificable"
+ },
+ {
+  "cuenta": "TecnoDrones Saladillo",
+  "empresa": "TDS",
+  "empresa_id": "tds",
+  "red": "LinkedIn",
+  "seguidores": null,
+  "posts": null,
+  "nota": "Comunica por LinkedIn (Fernando Cicaré) y prensa local"
+ },
+ {
+  "cuenta": "Agroband",
+  "empresa": "Agroband",
+  "empresa_id": "agroband",
+  "red": "—",
+  "seguidores": null,
+  "posts": null,
+  "nota": "No se encontró cuenta (el @agroband indexado es un programa de TV brasileño)"
+ }
+]

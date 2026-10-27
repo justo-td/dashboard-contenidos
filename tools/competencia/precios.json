@@ -1,0 +1,65 @@
+[
+ {
+  "modelo": "DJI Agras T100P",
+  "carga": "100 kg",
+  "precio_min": 47500,
+  "precio_max": 47500,
+  "condicion": "Nuevo",
+  "nota": "Aviso en Casilda (Santa Fe)",
+  "fuente": "Agrofy"
+ },
+ {
+  "modelo": "DJI Agras T100",
+  "carga": "100 L / 100 kg",
+  "precio_min": 41999,
+  "precio_max": 45000,
+  "condicion": "Nuevo",
+  "nota": "Varios avisos + IVA 10,5%. BLS Drones (Pehuajó): U$S 41.999 con 3 baterías y generador",
+  "fuente": "Agroads / Agrofy / BLS Drones"
+ },
+ {
+  "modelo": "DJI Agras T100 usado (2025)",
+  "carga": "100 L",
+  "precio_min": 36000,
+  "precio_max": 36000,
+  "condicion": "Usado",
+  "nota": "Referencia de recompra / usados",
+  "fuente": "Agroads"
+ },
+ {
+  "modelo": "DJI Agras T70P",
+  "carga": "70 kg",
+  "precio_min": 29750,
+  "precio_max": 35000,
+  "condicion": "Nuevo",
+  "nota": "Lista U$S 35.000; un vendedor ofrece 15% de descuento; financiación a 4 años",
+  "fuente": "Agroads"
+ },
+ {
+  "modelo": "DJI Agras T55",
+  "carga": "50 L / 55 kg",
+  "precio_min": 23040,
+  "precio_max": 24000,
+  "condicion": "Nuevo / preventa",
+  "nota": "Con 4% de descuento o 12 cheques sin interés",
+  "fuente": "Agroads"
+ },
+ {
+  "modelo": "DJI Agras T50 usado (2024)",
+  "carga": "40 L / 50 kg",
+  "precio_min": 22000,
+  "precio_max": 22000,
+  "condicion": "Usado",
+  "nota": "Publicado por Camptech en San Francisco",
+  "fuente": "Agrofy"
+ },
+ {
+  "modelo": "DJI Agras T25P",
+  "carga": "25 kg",
+  "precio_min": 17999,
+  "precio_max": 17999,
+  "condicion": "Nuevo",
+  "nota": "Un solo aviso (Alta Gracia)",
+  "fuente": "Agroads"
+ }
+]

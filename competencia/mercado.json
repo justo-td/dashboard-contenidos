@@ -1,0 +1,42 @@
+[
+ {
+  "anio": 2020,
+  "ventas_unidades": 20,
+  "parque_unidades": null,
+  "tipo": "Estimado",
+  "nota": "Ventas de drones agrícolas, todas las marcas",
+  "fuente": "Perfil / Agroempresario"
+ },
+ {
+  "anio": 2023,
+  "ventas_unidades": 90,
+  "parque_unidades": 100,
+  "tipo": "Estimado",
+  "nota": "Tekron declara 90 equipos vendidos; Maquinac habla de 100. Parque según Bidcom",
+  "fuente": "AIRE Agro / Maquinac / Bichos de Campo"
+ },
+ {
+  "anio": 2024,
+  "ventas_unidades": 600,
+  "parque_unidades": null,
+  "tipo": "Estimado",
+  "nota": "Maquinac: 600 unidades; Tekron declara 560 propias",
+  "fuente": "Maquinac / AIRE Agro"
+ },
+ {
+  "anio": 2025,
+  "ventas_unidades": 2000,
+  "parque_unidades": null,
+  "tipo": "Estimado",
+  "nota": "'Cerca de 2.000 unidades' tras la desregulación nacional",
+  "fuente": "Perfil / Agroempresario"
+ },
+ {
+  "anio": 2026,
+  "ventas_unidades": 2800,
+  "parque_unidades": 3000,
+  "tipo": "Proyección",
+  "nota": "Proyección solo DJI Agras. Parque ~3.000 (La Nación, Bidcom); iProfesional espera más de 3.500 a fin de año",
+  "fuente": "Maquinac / La Nación / iProfesional"
+ }
+]

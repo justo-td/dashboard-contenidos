@@ -13,3 +13,12 @@ python3 tools/parse_comercial.py <consumer proceso comercial> <agro proceso come
 python3 tools/build_site.py tools/dashboard_page.html /tmp/rows.json .
 ```
 `tools/dashboard_page.html` es la misma página que usa el dashboard de Claude.
+
+## Pestaña Competencia
+
+Análisis de competencia de drones agro (relevamiento web público del 27/10/2026): Azura Drones, Alena, TDS,
+Dragon Black Force, Camptech, Nico Marcucci (NFM) y Agroband frente a TodoDrones Agro.
+Los datos están en `tools/competencia/*.json` (en el dashboard de Claude son los datasets `cx_*`) y
+`build_site.py` los copia a `competencia/`. No cambian con la actualización semanal: para renovarlos,
+reemplazar esos archivos y volver a correr `build_site.py`.
+

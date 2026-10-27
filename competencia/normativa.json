@@ -1,0 +1,50 @@
+[
+ {
+  "id": "n1",
+  "anio": 2018,
+  "ambito": "Buenos Aires",
+  "norma": "Ley 10.699, Decreto 499/91 y Res. MDA 246/2018",
+  "cambio": "Rige el control de fitosanitarios; no hay norma bonaerense específica para drones",
+  "impacto": "Incertidumbre: hace falta acompañar al cliente en el cumplimiento"
+ },
+ {
+  "id": "n2",
+  "anio": 2024,
+  "ambito": "Córdoba",
+  "norma": "Ensayos de excepción",
+  "cambio": "Aplicaciones con drones en extensivos solo como ensayo",
+  "impacto": "Frenaba la adopción en Córdoba"
+ },
+ {
+  "id": "n3",
+  "anio": 2025,
+  "ambito": "Nacional (ANAC)",
+  "norma": "Resolución 550/2025",
+  "cambio": "Reemplaza a la 880/2019; operaciones por nivel de riesgo. Categoría abierta (<25 kg) en zona rural sin licencia; específica hasta 150 kg",
+  "impacto": "Desregulación: dispara las ventas de 2025"
+ },
+ {
+  "id": "n4",
+  "anio": 2026,
+  "ambito": "Nacional (ANAC)",
+  "norma": "Resoluciones 311, 312 y 313/2026 (RAAC 91, 100 y 137)",
+  "cambio": "Elimina el límite de 25 kg para ala rotativa en zona rural; unifica trabajo agroaéreo y exime del CETA al productor en su propio campo",
+  "impacto": "Habilita al productor a operar T70/T100 propios: amplía el mercado más allá del contratista"
+ },
+ {
+  "id": "n5",
+  "anio": 2026,
+  "ambito": "Córdoba",
+  "norma": "Resolución del Ministerio de Bioagroindustria",
+  "cambio": "Marco para aplicar productos químicos o biológicos con drones y distancias mínimas a zonas urbanas",
+  "impacto": "Ordena el mercado cordobés; favorece a quien capacita (Camptech)"
+ },
+ {
+  "id": "n6",
+  "anio": 2026,
+  "ambito": "Sector",
+  "norma": "Guía CASAFE + protocolo INTA / Univ. de Balcarce",
+  "cambio": "Buenas prácticas y primer protocolo de aplicación con drones",
+  "impacto": "Base para una academia con aval técnico"
+ }
+]

@@ -1,0 +1,102 @@
+[
+ {
+  "id": "tekron",
+  "actor": "Tekron (Grupo Akron)",
+  "rol": "Master dealer / importador oficial DJI Agras",
+  "base": "San Francisco, Córdoba",
+  "red": "30 a 34 distribuidores",
+  "dato": "Más de 45% del mercado (mayo 2025, dato de la empresa). 90 equipos en 2023 y 560 en 2024",
+  "competidores": "Camptech, TDS",
+  "marca": "DJI"
+ },
+ {
+  "id": "bidcom",
+  "actor": "Bidcom Agro",
+  "rol": "Master dealer DJI (Argentina, Uruguay, Bolivia) y Centro oficial DJI Academy",
+  "base": "Buenos Aires",
+  "red": "Córdoba, Buenos Aires, Santa Fe, Entre Ríos y La Pampa",
+  "dato": "Alianza con REM-Aapresid; lanzó T55 y T100 doble batería en 2026",
+  "competidores": "Azura, Alena, BLS Drones (Pehuajó)",
+  "marca": "DJI"
+ },
+ {
+  "id": "agronorte",
+  "actor": "Agronorte",
+  "rol": "Master dealer oficial DJI",
+  "base": "Norte del país",
+  "red": "16 puntos de venta",
+  "dato": "Ofrece T70P y T100",
+  "competidores": "—",
+  "marca": "DJI"
+ },
+ {
+  "id": "rconline",
+  "actor": "RC Online / DJI Store AR",
+  "rol": "Distribuidor oficial",
+  "base": "CABA",
+  "red": "Online + resellers",
+  "dato": "Vinculado a Alena según Estacion234",
+  "competidores": "Alena",
+  "marca": "DJI"
+ },
+ {
+  "id": "summit",
+  "actor": "Summit Agro",
+  "rol": "Distribuidor vía red de agroquímicos",
+  "base": "Nacional",
+  "red": "Red de distribuidores de insumos",
+  "dato": "T100 y Mavic 3 Multispectral",
+  "competidores": "—",
+  "marca": "DJI"
+ },
+ {
+  "id": "jacto",
+  "actor": "Jacto",
+  "rol": "Fabricante de pulverizadoras que vende DJI",
+  "base": "Nacional",
+  "red": "Concesionarios Jacto",
+  "dato": "Inserta DJI en nuevas franjas de usuarios",
+  "competidores": "—",
+  "marca": "DJI"
+ },
+ {
+  "id": "agrometal",
+  "actor": "Agrometal / Campo Aéreo",
+  "rol": "Distribuidores XAG",
+  "base": "Monte Maíz (Cba) / regional",
+  "red": "Concesionarios Agrometal",
+  "dato": "Drones XAG aéreos y terrestres",
+  "competidores": "—",
+  "marca": "XAG"
+ },
+ {
+  "id": "villanueva",
+  "actor": "Villa Nueva",
+  "rol": "Importador",
+  "base": "Argentina",
+  "red": "Propia",
+  "dato": "Drones GTEEX (Brasil) de hasta 100 L",
+  "competidores": "—",
+  "marca": "GTEEX"
+ },
+ {
+  "id": "cele",
+  "actor": "Cele",
+  "rol": "Fabricante de sembradoras que suma drones",
+  "base": "Armstrong, Santa Fe",
+  "red": "Concesionarios Cele",
+  "dato": "Vector AGR (Heilongjiang Huida), octubre 2026",
+  "competidores": "—",
+  "marca": "Vector AGR"
+ },
+ {
+  "id": "nextsiembra",
+  "actor": "Next Siembra",
+  "rol": "Importador con modelo de servicio integrado",
+  "base": "Argentina",
+  "red": "Propia",
+  "dato": "Marca EAVision, presentada en Expoagro",
+  "competidores": "—",
+  "marca": "EAVision"
+ }
+]

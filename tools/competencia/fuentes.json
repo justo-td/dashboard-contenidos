@@ -1,0 +1,266 @@
+[
+ {
+  "id": "f1",
+  "titulo": "TodoDrones en InnovaciónDigital360",
+  "url": "https://www.innovaciondigital360.com/agrotech/drones-en-el-agro-como-la-tecnologia-cambia-la-forma-de-producir-en-argentina/",
+  "usado_para": "TodoDrones, mercado"
+ },
+ {
+  "id": "f2",
+  "titulo": "TodoDrones Agricultura (sitio)",
+  "url": "https://www.agro.tododrones.com.ar/",
+  "usado_para": "TodoDrones"
+ },
+ {
+  "id": "f3",
+  "titulo": "@tododronesagro (Instagram)",
+  "url": "https://www.instagram.com/tododronesagro/",
+  "usado_para": "Redes"
+ },
+ {
+  "id": "f4",
+  "titulo": "Azura en Diario Textual",
+  "url": "https://diariotextual.com/inicio/index.php/2026/08/22/la-andria-fue-escenario-de-una-demostracion-tecnologica-de-azura-drones-y-dji/",
+  "usado_para": "Azura"
+ },
+ {
+  "id": "f5",
+  "titulo": "@azuradrones (Instagram)",
+  "url": "https://www.instagram.com/azuradrones/",
+  "usado_para": "Redes"
+ },
+ {
+  "id": "f6",
+  "titulo": "Bidcom Agro: red de resellers DJI",
+  "url": "https://dji.bidcomagro.com.ar/",
+  "usado_para": "Canal, Azura, Alena, BLS"
+ },
+ {
+  "id": "f7",
+  "titulo": "Alena Agritech (sitio)",
+  "url": "https://alenaagritech.com/",
+  "usado_para": "Alena"
+ },
+ {
+  "id": "f8",
+  "titulo": "Alena en Cultiva (SIMA)",
+  "url": "https://blog.sima.ag/2026/drones-agricolas-revolucionan-agro-argentino/",
+  "usado_para": "Alena"
+ },
+ {
+  "id": "f9",
+  "titulo": "Alena La Pampa en Ruralaldia",
+  "url": "https://ruralaldia.com/noticias/produccion/agricultura/31126/los-drones-como-un-complemento-en-el-agro-pampeano/",
+  "usado_para": "Alena"
+ },
+ {
+  "id": "f10",
+  "titulo": "Tecno Drones Saladillo (sitio)",
+  "url": "https://tecnodrones.com.ar/",
+  "usado_para": "TDS"
+ },
+ {
+  "id": "f11",
+  "titulo": "TDS en Qué Pasa en Bolívar",
+  "url": "https://quepasaenbolivar.com.ar/junto-a-tecnodrones-saladillo-antumapu-mostro-su-potencial-en-la-rural/",
+  "usado_para": "TDS"
+ },
+ {
+  "id": "f12",
+  "titulo": "TDS en ABC Saladillo",
+  "url": "https://www.abcsaladillo.com.ar/general/reunion-con-los-integrantes-de-tecno-drones-saladillo/",
+  "usado_para": "TDS"
+ },
+ {
+  "id": "f13",
+  "titulo": "GO Agrodrones en La Síntesis",
+  "url": "https://www.lasintesis.com.ar/nota-inauguracion-del-nuevo-local-de-go-agrodrones-252134",
+  "usado_para": "TDS (competencia local)"
+ },
+ {
+  "id": "f14",
+  "titulo": "Dragon Black Force (YouTube)",
+  "url": "https://www.youtube.com/@Dragonblackforce",
+  "usado_para": "Dragon Black Force"
+ },
+ {
+  "id": "f15",
+  "titulo": "BLS Drones (Pehuajó)",
+  "url": "https://www.blsdrones.com/",
+  "usado_para": "Dragon Black Force (competencia local)"
+ },
+ {
+  "id": "f16",
+  "titulo": "Camptech en Valor Agregado Agro",
+  "url": "https://www.valoragregadoagro.com/2026/02/24/camptech-drones-precision-y-un-equipo-joven-que-pisa-fuerte-en-el-agro-argentino/",
+  "usado_para": "Camptech"
+ },
+ {
+  "id": "f17",
+  "titulo": "Camptech en AgroActiva 2026",
+  "url": "https://www.valoragregadoagro.com/2026/06/05/drones-camptech-debuto-en-agroactiva-con-un-aluvion-de-consultas-tecnicas-y-productores-que-buscan-expandir-su-flota/",
+  "usado_para": "Camptech"
+ },
+ {
+  "id": "f18",
+  "titulo": "Camptech en La Voz de San Justo",
+  "url": "https://www.lavozdesanjusto.com.ar/camptech-innovacion-tecnologica-en-el-campo-argentino-a-traves-de-drones",
+  "usado_para": "Camptech"
+ },
+ {
+  "id": "f19",
+  "titulo": "@camptechsas (Instagram)",
+  "url": "https://www.instagram.com/camptechsas/",
+  "usado_para": "Redes"
+ },
+ {
+  "id": "f20",
+  "titulo": "Nicolás Marcucci en Todo Maní",
+  "url": "https://www.todomani.com.ar/drones-agricolas-nunca-una-herramienta-se-amortizo-tan-rapido/",
+  "usado_para": "Nico Marcucci"
+ },
+ {
+  "id": "f21",
+  "titulo": "@nfm.agrosoluciones (Instagram)",
+  "url": "https://www.instagram.com/nfm.agrosoluciones/",
+  "usado_para": "Redes"
+ },
+ {
+  "id": "f22",
+  "titulo": "NFM Agrosoluciones (ZoomInfo)",
+  "url": "https://www.zoominfo.com/c/nfm-agrosoluciones/1337276053",
+  "usado_para": "Nico Marcucci"
+ },
+ {
+  "id": "f23",
+  "titulo": "Drones en Mendoza (Mendoza Post)",
+  "url": "https://www.mendozapost.com/economia/los-drones-aterrizan-en-el-agro-mendocino-tecnologia-accesible-o-un-sueno-caro/",
+  "usado_para": "Cuyo"
+ },
+ {
+  "id": "f24",
+  "titulo": "Campaña lobesia 2026 (AgAir Update)",
+  "url": "https://agairupdate.com/2026/10/19/mendoza-launches-90000-hectare-aerial-and-drone-insecticide-campaign-against-grapevine-moth/",
+  "usado_para": "Cuyo"
+ },
+ {
+  "id": "f25",
+  "titulo": "Ucodrone en Diario de Cuyo",
+  "url": "https://www.diariodecuyo.com.ar/suplementos/Se-incrementa-el-uso-de-drones-entre-los-servicios-agricolas-20230210-0017.html",
+  "usado_para": "Cuyo"
+ },
+ {
+  "id": "f26",
+  "titulo": "Tekron lidera el mercado (Expoagro)",
+  "url": "https://www.expoagro.com.ar/drones-agricolas-en-alza-tekron-lidera-el-mercado-y-acompana-la-expansion-de-la-tecnologia-aerea-en-el-campo/",
+  "usado_para": "Canal, mercado"
+ },
+ {
+  "id": "f27",
+  "titulo": "Tekron en AIRE de Santa Fe",
+  "url": "https://www.airedesantafe.com.ar/aire-agro/tekron-asombro-sus-drones-la-expoagro-2025-tecnologia-agropecuaria-y-un-crecimiento-exponencial-n611142",
+  "usado_para": "Mercado"
+ },
+ {
+  "id": "f28",
+  "titulo": "Bidcom Agro en Bichos de Campo",
+  "url": "https://bichosdecampo.com/bidcom-agro-impulsa-el-uso-de-drones-agricolas-dji-en-argentina-con-una-red-agtech-y-capacitacion-tecnica/",
+  "usado_para": "Canal, mercado"
+ },
+ {
+  "id": "f29",
+  "titulo": "La Nación: crecimiento explosivo",
+  "url": "https://www.lanacion.com.ar/economia/campo/drones-agricolas-el-explosivo-crecimiento-de-un-negocio-que-revoluciona-el-campo-nid14032026/",
+  "usado_para": "Mercado, precios"
+ },
+ {
+  "id": "f30",
+  "titulo": "Maquinac: un 2026 al rojo vivo",
+  "url": "https://maquinac.com/2026/01/drones-agricolas-en-argentina-un-2026-al-rojo-vivo/",
+  "usado_para": "Mercado"
+ },
+ {
+  "id": "f31",
+  "titulo": "Maquinac: más vetas de negocio",
+  "url": "https://maquinac.com/2026/09/los-drones-agricolas-abren-mas-vetas-de-negocios-en-argentina/",
+  "usado_para": "Mercado"
+ },
+ {
+  "id": "f32",
+  "titulo": "Maquinac: Cele y Vector AGR",
+  "url": "https://maquinac.com/2026/10/cele-se-subio-a-la-ola-de-los-drones-agricolas-en-argentina/",
+  "usado_para": "Canal"
+ },
+ {
+  "id": "f33",
+  "titulo": "Agroempresario: competencia 2026",
+  "url": "https://agroempresario.com/publicacion/115456/drones-agricolas-en-argentina-2026-arranca-con-fuerte-competencia-y-expansion-del-mercado/",
+  "usado_para": "Mercado, canal"
+ },
+ {
+  "id": "f34",
+  "titulo": "Agroads: drones en venta",
+  "url": "https://www.agroads.com.ar/seccion.asp?subcat=497",
+  "usado_para": "Precios"
+ },
+ {
+  "id": "f35",
+  "titulo": "Agrofy: drones agrícolas",
+  "url": "https://www.agrofy.com.ar/drones",
+  "usado_para": "Precios"
+ },
+ {
+  "id": "f36",
+  "titulo": "Agropix: cuánto cobra un drone (2026)",
+  "url": "https://agropix.com.ar/2026/01/06/cuanto-cobra-un-drone-para-fumigar-la-guia-completa-de-precios-2026/",
+  "usado_para": "Tarifas"
+ },
+ {
+  "id": "f37",
+  "titulo": "Costo INTA US$ 3,34/ha (Primicias Rurales)",
+  "url": "https://www.ruralprimicias.com.ar/drones-agricolas-por-que-el-costo-de-us-334-por-hectarea-no-alcanza-para-definir-una-tarifa/",
+  "usado_para": "Economía del contratista"
+ },
+ {
+  "id": "f38",
+  "titulo": "Vida útil de 36 meses (Bichos de Campo)",
+  "url": "https://bichosdecampo.com/giuliano-roatta-es-un-agronomo-apasionado-por-los-drones-y-se-la-pasa-convenciendo-a-todos-que-no-son-juguetes-sino-herramientas-de-trabajo-son-maquinas-del-agro-afirma",
+  "usado_para": "Economía del contratista"
+ },
+ {
+  "id": "f39",
+  "titulo": "ANAC 2026 (Aviacionline)",
+  "url": "https://www.aviacionline.com/espanol/aviacion-comercial/latinoamerica-y-el-caribe/argentina/argentina-modifica-la-normativa-y-elimina-trabas-operativas-para-drones-y-aviones-agricolas_a6a10585d0a3ce39269cd3c4e",
+  "usado_para": "Normativa"
+ },
+ {
+  "id": "f40",
+  "titulo": "Marco regulatorio (abogados.com.ar)",
+  "url": "https://abogados.com.ar/marco-regulatorio-para-el-uso-de-vehiculos-aereos-no-tripulados-en-la-actividad-agropecuaria-desafios-y-oportunidades/39128",
+  "usado_para": "Normativa"
+ },
+ {
+  "id": "f41",
+  "titulo": "Córdoba regula drones",
+  "url": "https://prensa.cba.gov.ar/informacion-general/cordoba-regula-las-aplicaciones-con-drones-en-la-produccion-agropecuaria/",
+  "usado_para": "Normativa"
+ },
+ {
+  "id": "f42",
+  "titulo": "El Niño 75% (Ámbito)",
+  "url": "https://www.ambito.com/el-nino-la-probabilidad-un-fenomeno-historico-trepo-al-75-y-crece-la-alerta-inundaciones-argentina-n6334193",
+  "usado_para": "Oportunidades"
+ },
+ {
+  "id": "f43",
+  "titulo": "Drones y lotes anegados (Agrositio)",
+  "url": "https://www.agrositio.com.ar/noticia/248701-ano-nino-y-drones-una-herramienta-para-llegar-al-lote-cuando-el-piso-no-permite-entrar.html",
+  "usado_para": "Oportunidades"
+ },
+ {
+  "id": "f44",
+  "titulo": "Boom de pilotos (Perfil)",
+  "url": "https://www.perfil.com/noticias/reperfilar/boom-de-drones-en-el-agro-crece-la-demanda-de-pilotos-que-ganan-hasta-5-millones-por-mes.phtml",
+  "usado_para": "Mercado"
+ }
+]

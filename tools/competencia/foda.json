@@ -1,0 +1,506 @@
+[
+ {
+  "id": "tododrones-f1",
+  "empresa_id": "tododrones",
+  "tipo": "Fortaleza",
+  "texto": "Marca nacional desde 2014 con tres unidades (Consumer, Agro, Enterprise) y cuenta madre de unos 15.000 seguidores"
+ },
+ {
+  "id": "tododrones-f2",
+  "empresa_id": "tododrones",
+  "tipo": "Fortaleza",
+  "texto": "Showroom en Martínez, punto agro con servicio técnico propio en San Antonio de Areco y Junín en apertura"
+ },
+ {
+  "id": "tododrones-f3",
+  "empresa_id": "tododrones",
+  "tipo": "Fortaleza",
+  "texto": "Prueba social única: 419.360 ha trabajadas con sus drones en 2026"
+ },
+ {
+  "id": "tododrones-f4",
+  "empresa_id": "tododrones",
+  "tipo": "Fortaleza",
+  "texto": "Catálogo amplio (27 productos DJI agro) y kits con capacitación incluida y envío gratis"
+ },
+ {
+  "id": "tododrones-d1",
+  "empresa_id": "tododrones",
+  "tipo": "Debilidad",
+  "texto": "Cuenta agro chica: 1.543 seguidores y 85 posts, por debajo de Azura y lejos de NFM"
+ },
+ {
+  "id": "tododrones-d2",
+  "empresa_id": "tododrones",
+  "tipo": "Debilidad",
+  "texto": "Casi sin presencia en prensa agro, ferias y marketplaces frente a Camptech o TDS"
+ },
+ {
+  "id": "tododrones-d3",
+  "empresa_id": "tododrones",
+  "tipo": "Debilidad",
+  "texto": "Figura de 'reseller autorizado' en directorios, mientras rivales comunican 'representante oficial'"
+ },
+ {
+  "id": "tododrones-d4",
+  "empresa_id": "tododrones",
+  "tipo": "Debilidad",
+  "texto": "Percepción de marca tecnológica y urbana (AMBA) frente a rivales 'del campo' que también prestan servicios"
+ },
+ {
+  "id": "tododrones-o1",
+  "empresa_id": "tododrones",
+  "tipo": "Oportunidad",
+  "texto": "El Niño 2026/27: lotes anegados en la Cuenca del Salado y el oeste bonaerense"
+ },
+ {
+  "id": "tododrones-o2",
+  "empresa_id": "tododrones",
+  "tipo": "Oportunidad",
+  "texto": "Corredor norte-noroeste bonaerense con la apertura de Junín"
+ },
+ {
+  "id": "tododrones-o3",
+  "empresa_id": "tododrones",
+  "tipo": "Oportunidad",
+  "texto": "Cuyo sin distribuidor oficial DJI visible"
+ },
+ {
+  "id": "tododrones-o4",
+  "empresa_id": "tododrones",
+  "tipo": "Oportunidad",
+  "texto": "Renovación de equipos cada uno o dos años: programa de recompra"
+ },
+ {
+  "id": "tododrones-o5",
+  "empresa_id": "tododrones",
+  "tipo": "Oportunidad",
+  "texto": "Accesorios y ecosistema (trailers, mixers, generadores) y Enterprise para municipios"
+ },
+ {
+  "id": "tododrones-a1",
+  "empresa_id": "tododrones",
+  "tipo": "Amenaza",
+  "texto": "Tekron con más de 45% declarado y sponsoreo de Expoagro y AgroActiva"
+ },
+ {
+  "id": "tododrones-a2",
+  "empresa_id": "tododrones",
+  "tipo": "Amenaza",
+  "texto": "Alena operando en el mismo corredor"
+ },
+ {
+  "id": "tododrones-a3",
+  "empresa_id": "tododrones",
+  "tipo": "Amenaza",
+  "texto": "Marcas nuevas más baratas (XAG, GTEEX, Vector AGR, EAVision)"
+ },
+ {
+  "id": "tododrones-a4",
+  "empresa_id": "tododrones",
+  "tipo": "Amenaza",
+  "texto": "Posible saturación del mercado en dos o tres temporadas"
+ },
+ {
+  "id": "azura-f1",
+  "empresa_id": "azura",
+  "tipo": "Fortaleza",
+  "texto": "Nació prestando servicios: credibilidad técnica a campo y socios agrónomos (AgroPampa)"
+ },
+ {
+  "id": "azura-f2",
+  "empresa_id": "azura",
+  "tipo": "Fortaleza",
+  "texto": "Comunica representación oficial DJI para La Pampa, certificada por DJI China, y DJI Academy"
+ },
+ {
+  "id": "azura-f3",
+  "empresa_id": "azura",
+  "tipo": "Fortaleza",
+  "texto": "Buena comunicación de eventos: demo T55/T100 en La Andría y stand en la 100ª Expo Rural de Santa Rosa"
+ },
+ {
+  "id": "azura-f4",
+  "empresa_id": "azura",
+  "tipo": "Fortaleza",
+  "texto": "2.845 seguidores con solo 46 posts: alta tracción por publicación"
+ },
+ {
+  "id": "azura-d1",
+  "empresa_id": "azura",
+  "tipo": "Debilidad",
+  "texto": "Empresa joven (unos 2 años) con un solo local"
+ },
+ {
+  "id": "azura-d2",
+  "empresa_id": "azura",
+  "tipo": "Debilidad",
+  "texto": "Territorio amplio y poco denso: postventa a distancia"
+ },
+ {
+  "id": "azura-d3",
+  "empresa_id": "azura",
+  "tipo": "Debilidad",
+  "texto": "Sin sitio web propio identificado"
+ },
+ {
+  "id": "azura-o1",
+  "empresa_id": "azura",
+  "tipo": "Oportunidad",
+  "texto": "Avanzar sobre el oeste bonaerense y el sur de Córdoba"
+ },
+ {
+  "id": "azura-o2",
+  "empresa_id": "azura",
+  "tipo": "Oportunidad",
+  "texto": "Sumar a prestadores pampeanos como sub-agentes"
+ },
+ {
+  "id": "azura-a1",
+  "empresa_id": "azura",
+  "tipo": "Amenaza",
+  "texto": "Alena La Pampa en el mismo territorio"
+ },
+ {
+  "id": "azura-a2",
+  "empresa_id": "azura",
+  "tipo": "Amenaza",
+  "texto": "Distribuidores Tekron en el sur de Córdoba"
+ },
+ {
+  "id": "alena-f1",
+  "empresa_id": "alena",
+  "tipo": "Fortaleza",
+  "texto": "Red de cinco puntos en Buenos Aires más marca hermana en La Pampa"
+ },
+ {
+  "id": "alena-f2",
+  "empresa_id": "alena",
+  "tipo": "Fortaleza",
+  "texto": "Modelo integral: servicio de aplicación, teledetección, formación de pilotos, venta de drones y software"
+ },
+ {
+  "id": "alena-f3",
+  "empresa_id": "alena",
+  "tipo": "Fortaleza",
+  "texto": "Mensaje claro: 'el dron es tecnología, no maquinaria'"
+ },
+ {
+  "id": "alena-f4",
+  "empresa_id": "alena",
+  "tipo": "Fortaleza",
+  "texto": "Doble vínculo de canal (Bidcom Agro y RC Online)"
+ },
+ {
+  "id": "alena-d1",
+  "empresa_id": "alena",
+  "tipo": "Debilidad",
+  "texto": "Presencia digital casi nula: sin Instagram identificable"
+ },
+ {
+  "id": "alena-d2",
+  "empresa_id": "alena",
+  "tipo": "Debilidad",
+  "texto": "Marca fragmentada: cada sede con contacto propio, sin modelo claro de franquicia"
+ },
+ {
+  "id": "alena-d3",
+  "empresa_id": "alena",
+  "tipo": "Debilidad",
+  "texto": "Poca cobertura de prensa"
+ },
+ {
+  "id": "alena-o1",
+  "empresa_id": "alena",
+  "tipo": "Oportunidad",
+  "texto": "Cuenca del Salado (Chascomús) en un año Niño"
+ },
+ {
+  "id": "alena-o2",
+  "empresa_id": "alena",
+  "tipo": "Oportunidad",
+  "texto": "Vínculo con INTA Balcarce y su protocolo de aplicación"
+ },
+ {
+  "id": "alena-a1",
+  "empresa_id": "alena",
+  "tipo": "Amenaza",
+  "texto": "TodoDrones en Areco y Junín"
+ },
+ {
+  "id": "alena-a2",
+  "empresa_id": "alena",
+  "tipo": "Amenaza",
+  "texto": "GO Agrodrones, BLS y TDS en zonas vecinas"
+ },
+ {
+  "id": "tds-f1",
+  "empresa_id": "tds",
+  "tipo": "Fortaleza",
+  "texto": "Red Tekron: la mayor red DJI del país y stock de repuestos del importador"
+ },
+ {
+  "id": "tds-f2",
+  "empresa_id": "tds",
+  "tipo": "Fortaleza",
+  "texto": "Vínculo institucional: convenio con el Municipio de Saladillo y capacitaciones con Tekron y HDT"
+ },
+ {
+  "id": "tds-f3",
+  "empresa_id": "tds",
+  "tipo": "Fortaleza",
+  "texto": "Línea completa Agras (T25 a T100) más Enterprise"
+ },
+ {
+  "id": "tds-f4",
+  "empresa_id": "tds",
+  "tipo": "Fortaleza",
+  "texto": "Acompaña las primeras aplicaciones de cada cliente y publica ensayos a campo"
+ },
+ {
+  "id": "tds-d1",
+  "empresa_id": "tds",
+  "tipo": "Debilidad",
+  "texto": "Sin Instagram identificable; comunica por LinkedIn y prensa local"
+ },
+ {
+  "id": "tds-d2",
+  "empresa_id": "tds",
+  "tipo": "Debilidad",
+  "texto": "Escala local"
+ },
+ {
+  "id": "tds-d3",
+  "empresa_id": "tds",
+  "tipo": "Debilidad",
+  "texto": "Foco disperso en muchos verticales"
+ },
+ {
+  "id": "tds-o1",
+  "empresa_id": "tds",
+  "tipo": "Oportunidad",
+  "texto": "Ganadería de la Cuenca del Salado y anegamientos"
+ },
+ {
+  "id": "tds-o2",
+  "empresa_id": "tds",
+  "tipo": "Oportunidad",
+  "texto": "Ventas a municipios"
+ },
+ {
+  "id": "tds-a1",
+  "empresa_id": "tds",
+  "tipo": "Amenaza",
+  "texto": "GO Agrodrones abrió local DJI en Saladillo"
+ },
+ {
+  "id": "tds-a2",
+  "empresa_id": "tds",
+  "tipo": "Amenaza",
+  "texto": "Alena Cuenca del Salado (Chascomús)"
+ },
+ {
+  "id": "dbf-f1",
+  "empresa_id": "dbf",
+  "tipo": "Fortaleza",
+  "texto": "Contenido audiovisual propio (YouTube, TikTok, Instagram) con narrativa 'ingeniería en movimiento'"
+ },
+ {
+  "id": "dbf-f2",
+  "empresa_id": "dbf",
+  "tipo": "Fortaleza",
+  "texto": "Comunidad por grupo de WhatsApp"
+ },
+ {
+  "id": "dbf-f3",
+  "empresa_id": "dbf",
+  "tipo": "Fortaleza",
+  "texto": "Base en Pehuajó, zona mixta agrícola-ganadera"
+ },
+ {
+  "id": "dbf-d1",
+  "empresa_id": "dbf",
+  "tipo": "Debilidad",
+  "texto": "Sin web, sin prensa y fuera de los listados oficiales de resellers DJI"
+ },
+ {
+  "id": "dbf-d2",
+  "empresa_id": "dbf",
+  "tipo": "Debilidad",
+  "texto": "Marca y canal no verificables"
+ },
+ {
+  "id": "dbf-o1",
+  "empresa_id": "dbf",
+  "tipo": "Oportunidad",
+  "texto": "Demanda del oeste bonaerense en un año de anegamientos"
+ },
+ {
+  "id": "dbf-a1",
+  "empresa_id": "dbf",
+  "tipo": "Amenaza",
+  "texto": "BLS Drones, distribuidor oficial Bidcom en Pehuajó, con T100 a U$S 41.999"
+ },
+ {
+  "id": "dbf-a2",
+  "empresa_id": "dbf",
+  "tipo": "Amenaza",
+  "texto": "Lanzamientos de Vuelagro y Bidcom en Pehuajó"
+ },
+ {
+  "id": "camptech-f1",
+  "empresa_id": "camptech",
+  "tipo": "Fortaleza",
+  "texto": "Taller electrónico y laboratorio en Río Cuarto"
+ },
+ {
+  "id": "camptech-f2",
+  "empresa_id": "camptech",
+  "tipo": "Fortaleza",
+  "texto": "Academia de operadores y prácticas para el carnet fitosanitario con el Gobierno de Córdoba"
+ },
+ {
+  "id": "camptech-f3",
+  "empresa_id": "camptech",
+  "tipo": "Fortaleza",
+  "texto": "Presta servicios agronómicos (aplicación, siembra, mapeo multiespectral)"
+ },
+ {
+  "id": "camptech-f4",
+  "empresa_id": "camptech",
+  "tipo": "Fortaleza",
+  "texto": "PR muy activo: Expoagro 2025, AgroActiva 2026, MECA 2026 y varias notas regionales"
+ },
+ {
+  "id": "camptech-d1",
+  "empresa_id": "camptech",
+  "tipo": "Debilidad",
+  "texto": "Instagram chico (1.455 seguidores, sigue a 841)"
+ },
+ {
+  "id": "camptech-d2",
+  "empresa_id": "camptech",
+  "tipo": "Debilidad",
+  "texto": "Concentrado en Córdoba"
+ },
+ {
+  "id": "camptech-d3",
+  "empresa_id": "camptech",
+  "tipo": "Debilidad",
+  "texto": "Un socio difunde que la vida útil es de unos 36 meses: mensaje de doble filo"
+ },
+ {
+  "id": "camptech-o1",
+  "empresa_id": "camptech",
+  "tipo": "Oportunidad",
+  "texto": "Expandirse al norte del país y a otras provincias"
+ },
+ {
+  "id": "camptech-o2",
+  "empresa_id": "camptech",
+  "tipo": "Oportunidad",
+  "texto": "Nueva norma cordobesa que premia la capacitación"
+ },
+ {
+  "id": "camptech-a1",
+  "empresa_id": "camptech",
+  "tipo": "Amenaza",
+  "texto": "Plaza cordobesa saturada de vendedores DJI"
+ },
+ {
+  "id": "camptech-a2",
+  "empresa_id": "camptech",
+  "tipo": "Amenaza",
+  "texto": "Tekron y NFM en la misma ciudad"
+ },
+ {
+  "id": "nfm-f1",
+  "empresa_id": "nfm",
+  "tipo": "Fortaleza",
+  "texto": "Mayor audiencia social del grupo: unos 16.000 seguidores y 765 posts"
+ },
+ {
+  "id": "nfm-f2",
+  "empresa_id": "nfm",
+  "tipo": "Fortaleza",
+  "texto": "Portafolio de precisión más amplio: drones, autopilotos e implementos"
+ },
+ {
+  "id": "nfm-f3",
+  "empresa_id": "nfm",
+  "tipo": "Fortaleza",
+  "texto": "Mensaje de retorno de inversión en prensa especializada"
+ },
+ {
+  "id": "nfm-d1",
+  "empresa_id": "nfm",
+  "tipo": "Debilidad",
+  "texto": "Estatus DJI no confirmado"
+ },
+ {
+  "id": "nfm-d2",
+  "empresa_id": "nfm",
+  "tipo": "Debilidad",
+  "texto": "Estructura de 1 a 10 empleados: postventa limitada en volumen"
+ },
+ {
+  "id": "nfm-d3",
+  "empresa_id": "nfm",
+  "tipo": "Debilidad",
+  "texto": "Depende de la figura del fundador"
+ },
+ {
+  "id": "nfm-o1",
+  "empresa_id": "nfm",
+  "tipo": "Oportunidad",
+  "texto": "Maní y cultivos del sur de Córdoba"
+ },
+ {
+  "id": "nfm-o2",
+  "empresa_id": "nfm",
+  "tipo": "Oportunidad",
+  "texto": "Venta cruzada a clientes de autopilotos"
+ },
+ {
+  "id": "nfm-a1",
+  "empresa_id": "nfm",
+  "tipo": "Amenaza",
+  "texto": "Tekron y Camptech en su propia ciudad"
+ },
+ {
+  "id": "agroband-f1",
+  "empresa_id": "agroband",
+  "tipo": "Fortaleza",
+  "texto": "Si opera en Cuyo, tiene poca competencia directa de distribuidores oficiales"
+ },
+ {
+  "id": "agroband-d1",
+  "empresa_id": "agroband",
+  "tipo": "Debilidad",
+  "texto": "Sin huella pública verificable: web, redes, prensa o listados DJI"
+ },
+ {
+  "id": "agroband-o1",
+  "empresa_id": "agroband",
+  "tipo": "Oportunidad",
+  "texto": "Campaña provincial contra lobesia: 90.000 ha, 10.000 con drones"
+ },
+ {
+  "id": "agroband-o2",
+  "empresa_id": "agroband",
+  "tipo": "Oportunidad",
+  "texto": "Tarifas de U$S 35 a 40 por hectárea y productores que prefieren contratar servicio"
+ },
+ {
+  "id": "agroband-a1",
+  "empresa_id": "agroband",
+  "tipo": "Amenaza",
+  "texto": "Prestadores locales: Ucodrone, Agro Vants, Drone Mendoza, Black Hornet (San Juan)"
+ },
+ {
+  "id": "agroband-a2",
+  "empresa_id": "agroband",
+  "tipo": "Amenaza",
+  "texto": "Tecnoplant San Luis, reseller Bidcom"
+ }
+]
