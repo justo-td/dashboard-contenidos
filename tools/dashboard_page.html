@@ -1252,7 +1252,7 @@ dash.calc('kpis', {
       const ws = semanal.filter((w) => w.linea + '|' + w.canal === bloque && Number(w.gasto) > 0).sort((a, b) => a.inicio.localeCompare(b.inicio));
       const cur = ws[ws.length - 1], prev = ws[ws.length - 2];
       if (!cur || !prev) continue;
-      const val = (w, k) => k === 'roi' ? Number(w.margen) / Number(w.gasto) : (w[k] == null ? null : Number(w[k]));
+      const val = (w, k) => k === 'roi' ? (w.margen == null ? null : Number(w.margen) / Number(w.gasto)) : (w[k] == null ? null : Number(w[k]));
       DEF[bloque].forEach(([k, etiqueta, t, dir, hero], orden) => {
         const a = val(cur, k), b = val(prev, k);
         let delta_fmt = 's/d', d = null;
@@ -1300,10 +1300,11 @@ dash.calc('total', {
     const by = {};
     for (const w of semanal) if (Number(w.gasto) > 0) (by[w.linea + '|' + w.canal] ||= []).push(w);
     const pairs = Object.values(by).map((ws) => ws.sort((a, b) => a.inicio.localeCompare(b.inicio)).slice(-2));
-    const sum = (i, k) => pairs.reduce((s, p) => s + (Number(p[i] && p[i][k]) || 0), 0);
+    // A total is "s/d" when any unit has not loaded that value yet (a partial sum would read as a drop).
+    const sum = (i, k) => pairs.some((p) => p[i] && p[i][k] == null) ? null : pairs.reduce((s, p) => s + (Number(p[i] && p[i][k]) || 0), 0);
     return [['gasto', 'Inversión publicitaria', 'neutral'], ['facturacion', 'Facturación', 'up'], ['margen', 'Margen', 'up']].map(([k, etiqueta, dir]) => {
-      const a = sum(1, k), b = sum(0, k), d = b ? (a - b) / Math.abs(b) * 100 : null;
-      return { id: k, etiqueta, actual_fmt: money(a), anterior_fmt: money(b), delta_fmt: d == null ? 's/d' : (d > 0.5 ? '+' : d < -0.5 ? '−' : '±') + Math.round(Math.abs(d)) + '%', tono: d == null || dir === 'neutral' || Math.abs(d) < 1 ? 'neutral' : (d > 0) === (dir === 'up') ? 'good' : 'bad' };
+      const a = sum(1, k), b = sum(0, k), d = a != null && b ? (a - b) / Math.abs(b) * 100 : null;
+      return { id: k, etiqueta, actual_fmt: a == null ? 's/d' : money(a), anterior_fmt: b == null ? 's/d' : money(b), delta_fmt: d == null ? (a == null ? 'en carga' : 's/d') : (d > 0.5 ? '+' : d < -0.5 ? '−' : '±') + Math.round(Math.abs(d)) + '%', tono: d == null || dir === 'neutral' || Math.abs(d) < 1 ? 'neutral' : (d > 0) === (dir === 'up') ? 'good' : 'bad' };
     });
   },
 });

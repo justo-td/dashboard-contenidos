@@ -123,6 +123,15 @@ def parse(path, name, linea, canal, year):
         if not a: continue
         rec = {f: num(r[j]) for j, f in cols.items()}
         if not rec.get("gasto"): continue   # week without data yet
+        # Sales not loaded yet (no sales count, or sales without billing): money columns are
+        # "sin dato", not zero, so the week does not read as a 100% drop.
+        if rec.get("ventas") is None or (rec.get("ventas") and not rec.get("facturacion") and not rec.get("facturacion_usd")):
+            for k in ("facturacion", "facturacion_usd", "margen", "margen_usd", "ticket", "margen_unidad"):
+                if k in rec: rec[k] = None
+            if rec.get("ventas") is None:
+                for k in ("cpa", "cvr"):
+                    if k in rec: rec[k] = None
+            rec["sin_cargar"] = True
         rec.update(linea=linea, canal=canal, mes=f"{year}-{cur:02d}", semana=str(r[i_fecha]).strip(),
                    inicio=a.isoformat(), fin=b.isoformat(), id=f"{linea}|{canal}|{a.isoformat()}")
         weeks.append(rec)
